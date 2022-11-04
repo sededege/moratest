@@ -87,7 +87,7 @@ const Dashboard = () => {
 
                 </div>
                 <div className=' flex '>
-                    <TablaListados ventas={orders} newitem={modal} data={category == 'todos' || category == null ? products : products.filter(n => n.category === category)} filter={category} />
+                    <TablaListados ventas={orders.map(a => a.items)} newitem={modal} data={category == 'todos' || category == null ? products : products.filter(n => n.category === category)} filter={category} />
                 </div>
             </div>
             {/*   <div className='flex h-full w-full py-8'>

@@ -74,7 +74,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`${dondeestoy === 'Detalle' ? 'w-[100vw]  px-20 ' : 'w-[80vw] ml-[16vw] '} ' px-4 top-0 h-[10vh] fixed bg-white z-[3] '  `}>
+    <header className={`md:w-[80vw] md:ml-[16vw] w-[100vw] px-5  md:px-4 top-0 h-[10vh] fixed bg-white z-[3] '  `}>
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <></>
@@ -86,9 +86,9 @@ const Header = () => {
           <HiMenuAlt2 className="font-bold text-2xl text-textColor" />
         </motion.div> */}
         {
-          dondeestoy === 'Detalle' ? <Link to={"/"} className="flex items-center ml-6">
+          <Link to={"/"} className="flex items-center">
             <img src={Logo} className="w-2 object-cover" alt="logo" />
-          </Link> : <></>
+          </Link>
         }
         {
           dondeestoy !== 'Detalle' ? <div className="flex flex-col justify-center">
@@ -204,7 +204,7 @@ const Header = () => {
         </motion.div>
 
         <Link to={"/Home"} className="flex items-center gap-2">
-          <img src={Logo} className="w-20 object-cover" alt="logo" />
+          <img src={Logo} className="w-20 object-cover ml-8" alt="logo" />
         </Link>
 
         <div className="flex gap-4 relative">
@@ -212,9 +212,10 @@ const Header = () => {
             className="relative flex items-center justify-center"
             onClick={showCart}
           >
+            <FiShoppingCart onClick={showCart} className="text-booty text-2xl  cursor-pointer" />
 
             {cartItems && cartItems.length > 0 && (
-              <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
+              <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-booty flex items-center justify-center">
                 <p className="text-xs text-white font-semibold">
                   {cartItems.length}
                 </p>
@@ -280,9 +281,9 @@ const Header = () => {
           )}
         </div>
 
-        <div className="fixed bottom-5 right-5 bg-white p-3 drop-shadow-lg items-center flex rounded-full ">
+        {/*  <div className="fixed bottom-5 right-5 bg-white p-3 drop-shadow-lg items-center flex rounded-full ">
           <FiShoppingCart onClick={showCart} className="text-black text-2xl  cursor-pointer" />
-        </div>
+        </div> */}
       </div>
     </header>
   );

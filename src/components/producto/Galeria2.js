@@ -114,7 +114,7 @@ const Galeria = (a) => {
                 showPlayButton={false}
                 showFullscreenButton={false}
                 showIndex={false}
-                thumbnailPosition='right'
+                thumbnailPosition='bottom'
                 stopPropagation={true}
                 lazyLoad={true}
                 disableThumbnailScroll={true}

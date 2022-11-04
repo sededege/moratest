@@ -57,13 +57,13 @@ const MainContainer = () => {
             {
                 products ?
 
-                    <div className='gap-6 flex flex-col w-[88vw] ml-[12vw] h-[100vh] '>
+                    <div className='gap-6 flex flex-col w-[100vw] p-5 md:w-[88vw] md:ml-[12vw] h-[100vh] '>
                         <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
                         {/*                         <Promos />
  */}
 
-                        <FiltrosHome />
-                        <Products className='flex' />
+{/*                         <FiltrosHome />
+ */}                        <Products className='flex' />
                     </div> :
                     <div className='fixed flex w-[88vw] ml-[12vw] h-[80vh] items-center justify-center'>
                         <p>Cargando datos </p><Loader />

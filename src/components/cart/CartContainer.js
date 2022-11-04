@@ -51,37 +51,49 @@ const CartContainer = () => {
 
   }, [tot, flag, user, users, cartItems]);
 
+  const tallasfiltro = (a,b,c) => {
+    console.log(a)
+    console.log(b)
+    console.log(c)
+    return {
+      id: c,
+      size: a,
+      unidades: b
+    }
 
+  }
   const mercadopago = () => {
 
-/*      console.log(cartItems)
- */ 
- 
-    const producto = cartItems.map(item =>
-        ({
-          id: item[0].item.id,
-          title: item[0].item.name,
-          description: item[0].item.descripcion,
-          category_id: item[0].item.categoria,
-          quantity: parseInt(item[0].unidades),
-          currency_id: 'UYU',
-          unit_price: parseInt(item[0].item.precio),
-          size: item[0].size,
-          color: item[0].colorselected,
-          idorden: `${Date.now()}`,
-        })
-      )
-    
+    /*      console.log(cartItems)
+     */
 
-      const dataa = {
-        id: `${Date.now()}`,
-        creado: `${new Date()}`,
-        items: producto,
-        status: 'pendiente',
-        total: tot,
-        email: user.email,
-    } 
-  
+    const producto = cartItems.map(item =>
+    ({
+      id: item[0].item.id,
+      title: item[0].item.name,
+      description: item[0].item.descripcion,
+      category_id: item[0].item.categoria,
+      quantity: parseInt(item[0].unidades),
+      currency_id: 'UYU',
+      unit_price: parseInt(item[0].item.precio),
+      tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades),item[0].item.id ),
+      size: item[0].size,
+      color: item[0].colorselected,
+      idorden: `${Date.now()
+        }`,
+    })
+    )
+
+
+    const dataa = {
+      id: `${Date.now()} `,
+      creado: `${new Date()} `,
+      items: producto,
+      status: 'pendiente',
+      total: tot,
+      email: user.email,
+    }
+
     saveOrder(dataa)
     console.log(producto)
 
@@ -91,19 +103,19 @@ const CartContainer = () => {
       body: JSON.stringify(producto),
       headers: new Headers({ 'content-type': 'application/json' }),
     };
-  
-    fetch("http://localhost:3000/checkout", options)
+
+    fetch("https://node-mora.vercel.app/checkout", options)
       .then(response => response.text())
       .then(data => {
-                window.location.assign(data);
-         
-      });   
-   /*  fetch("http://localhost:3000/feedback", options2)
-      .then(response => response.text())
-      .then(data => {
-              console.log(data)
-         
-      }); */
+        window.location.assign(data);
+
+      });
+    /*  fetch("http://localhost:3000/feedback", options2)
+       .then(response => response.text())
+       .then(data => {
+               console.log(data)
+          
+       }); */
 
 
   }
