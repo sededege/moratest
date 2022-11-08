@@ -7,6 +7,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useStateValue } from '../context/StateProvider';
 import { Favorite } from '@mui/icons-material';
+import zIndex from '@mui/material/styles/zIndex';
 
 const Carrousel = (c) => {
     const [{ favoritos }, dispatch] = useStateValue();
@@ -21,6 +22,10 @@ const Carrousel = (c) => {
     }, [favoritos])
 
 
+    const agregar = (a) => {
+        console.log(a)
+        console.log('asd')
+    }
     const [selected, setSelected] = React.useState('')
     const navegar = (a) => {
         history(`/detalle/${a}`)
@@ -62,8 +67,8 @@ const Carrousel = (c) => {
                     height: '20px',
                     borderRadius: '50%',
                     marginTop: 5,
-                    border: '1px solid white'
-
+                    border: '1px solid white',
+              
                     //borderColor: colores(color[index])
                 }
                 const style = isSelected
@@ -95,13 +100,7 @@ const Carrousel = (c) => {
                         key={index}
                         className='h-[300px] hover:opacity-70 cursor-pointer ' onClick={() => navegar(c.id)}>
                         <img className='rounded-lg w-full h-full object-cover   ' src={a.images[0]} />
-                        <div className='bg-white p-2 rounded-full absolute bottom-2 cursor-pointer  right-2'>
-                            {
-
-                        prueba != "" ? prueba[0].indexOf(c.id) !== -1 ? <AiFillHeart className='text-[1rem] text-booty ' /> : <AiOutlineHeart className='text-[1rem] text-booty ' /> : <AiOutlineHeart className='text-[1rem] text-booty ' />
-
-                            }
-                        </div>
+                       
                     </div>
                 ) : <></>
             }

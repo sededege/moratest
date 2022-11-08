@@ -14,14 +14,12 @@ const Favoritos = () => {
     console.log(users)
  */
 
-  
+
 
     React.useEffect(() => {
+        console.log(favoritos)
         if (favoritos) {
-          
             setExisteUsuario(favoritos)
-
-       
         }
     }, [favoritos])
 
@@ -60,10 +58,10 @@ const Favoritos = () => {
             <p className='text-white bg-booty items-center justify-center w-[100px] text-center font-bold p-2 rounded-lg ' >Favoritos</p>
             <div className=' grid grid-cols-2 md:grid-cols-5 gap-8'>
                 {
-                    existeuser && existeuser.length > 0 ? existeuser.map(a => (
-                        a.favoritos.map(b =>
+                    existeuser && existeuser != null ? existeuser.map(a => (
+                      a.favoritos != "" && (  a.favoritos.map(b =>
                             productos(b)
-                        )
+                        ))
 
 
 

@@ -12,6 +12,7 @@ export const initialState = {
     users: null,
     selecteddetail: null,
     headerShow:true,
+    loginShow:false,
     detalleShow: false,
     editar: null,
     userLogged: null,

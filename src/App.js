@@ -26,9 +26,10 @@ import Feedback from "./components/cart/Feedback";
 import Ordenes from "./components/producto/Ordenes";
 import Pre from "./components/utils/Pre";
 import ScrollToTop from "./components/utils/scrolltotop";
+import ShowLogin from "./components/home/login";
 
 function App() {
-  const [{ headerShow, cartShow, editShow, products, user, users, foodItems }, dispatch] = useStateValue();
+  const [{ headerShow, cartShow, editShow,loginShow, products, user, users, foodItems }, dispatch] = useStateValue();
   //const [existeuser, setExisteUsuario] = React.useState(null)
   const [load, upadateLoad] = React.useState(true);
   const [existeuser, setExisteUsuario] = React.useState(null)
@@ -51,7 +52,7 @@ function App() {
       })
     })
   }
-
+console.log(loginShow)
   const fetchUsers = async () => {
     await getAllUsuarios().then((data) => {
       dispatch({
@@ -62,11 +63,15 @@ function App() {
         dispatch({
           type: actionType.SET_FAVORITOS,
           favoritos: data.filter(a => a.user === user.email)
-        });
-      } 
+        }); 
+      } else {
+        dispatch({
+          type: actionType.SET_FAVORITOS,
+          favoritos: ""
+        }); 
+      }
      
     })
-
 
 
     /*   const existeusuario = users.filter(a => a.user === user.email);
@@ -107,6 +112,9 @@ function App() {
 
 
         <main className=" ">
+          {
+           loginShow ? <ShowLogin/> : <></>
+          }
           {
             editShow ? <SetAddres /> : <></>
           }

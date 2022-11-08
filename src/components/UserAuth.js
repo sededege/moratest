@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 /* import { MdOutlineHome, MdOutlineChat, MdFavoriteBorder, MdHistory, MdSettings, MdLogout } from "react-icons/md";
  */
 import * as MaterialDesign from 'react-icons/md';
@@ -32,7 +32,7 @@ const UserAuth = () => {
     }
 
     const login = async () => {
-        if (!user) {
+        /* if (!user) {
             const {
                 user: { refreshToken, providerData },
             } = await signInWithPopup(firebaseAuth, provider);
@@ -43,7 +43,8 @@ const UserAuth = () => {
             localStorage.setItem("user", JSON.stringify(providerData[0]));
         } else {
             setIsMenu(!isMenu);
-        }
+        } */
+        
     };
 
     const logout = () => {

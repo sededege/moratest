@@ -97,7 +97,7 @@ const Headerleft = () => {
 
             {/* mobile */}
             <motion.div
-                key='2'
+                key='1'
                 exit={{ opacity: 0, x: -200 }}
                 initial={{ opacity: 0, x: -200 }}
                 animate={{ opacity: 1, x: 0 }}

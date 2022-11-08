@@ -20,6 +20,8 @@ const Header = () => {
   const [{ user, cartShow, cartItems, dondeestoy }, dispatch] = useStateValue();
 
   const [isMenu, setIsMenu] = useState(false);
+
+  console.log(user)
   /* React.useEffect(() => {
    console.log(headerShow)
   }, [headerShow]) */
@@ -42,7 +44,7 @@ const Header = () => {
   }
 
   const login = async () => {
-    if (!user) {
+ /*    if (!user) {
       const {
         user: { refreshToken, providerData },
       } = await signInWithPopup(firebaseAuth, provider);
@@ -53,7 +55,15 @@ const Header = () => {
       localStorage.setItem("user", JSON.stringify(providerData[0]));
     } else {
       setIsMenu(!isMenu);
-    }
+    }  */
+    if (!user) {
+    dispatch({
+      type: actionType.SET_LOGIN_SHOW,
+      loginShow: true,
+    }); } else {
+      setIsMenu(!isMenu);
+    } 
+
   };
 
   const logout = () => {
@@ -148,10 +158,11 @@ const Header = () => {
             )}
           </div>
 
-          <div className="relative">
+          <div className="relative flex items-center gap-6">
+           { user && (<p>Hola {user.displayName}</p> )}
             <motion.img
               whileTap={{ scale: 0.6 }}
-              src={user ? user.photoURL : Avatar}
+              src={user && user.photoURL != null ? user.photoURL : Avatar}
               className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
               alt="userprofile"
               onClick={login}
@@ -224,7 +235,7 @@ const Header = () => {
           </div>
           <motion.img
             whileTap={{ scale: 0.6 }}
-            src={user ? user.photoURL : Avatar}
+            src={user && user.photoURL != null ? user.photoURL : Avatar}
             className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
             alt="userprofile"
             onClick={login}

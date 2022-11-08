@@ -51,7 +51,7 @@ const CartContainer = () => {
 
   }, [tot, flag, user, users, cartItems]);
 
-  const tallasfiltro = (a,b,c) => {
+  const tallasfiltro = (a, b, c) => {
     console.log(a)
     console.log(b)
     console.log(c)
@@ -76,7 +76,7 @@ const CartContainer = () => {
       quantity: parseInt(item[0].unidades),
       currency_id: 'UYU',
       unit_price: parseInt(item[0].item.precio),
-      tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades),item[0].item.id ),
+      tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
       size: item[0].size,
       color: item[0].colorselected,
       idorden: `${Date.now()
@@ -119,6 +119,17 @@ const CartContainer = () => {
 
 
   }
+
+
+  const comprar = async () => {
+       if (!user) {
+       dispatch({
+         type: actionType.SET_LOGIN_SHOW,
+         loginShow: true,
+       }); } else {
+       } 
+   
+     };
 
   const getUsuario = () => {
     if (users && user) {
@@ -185,7 +196,7 @@ const CartContainer = () => {
             </div>
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Delivery</p>
-              <p className="text-gray-400 text-lg">$ 2.5</p>
+              <p className="text-gray-400 text-lg">$ 200</p>
             </div>
 
             <div className="w-full border-b border-gray-600 my-2"></div>
@@ -201,7 +212,7 @@ const CartContainer = () => {
               <p className="text-gray-400 text-lg">Dirección</p>
             </div>
             {
-              user ? datos && datos.length > 0 ? datos.map(a =>
+              user ? datos  && datos.length > 0 ? datos.map(a =>
                 <div className="w-full flex items-center justify-between">
 
                   <div className=" w-full">
@@ -238,8 +249,9 @@ const CartContainer = () => {
                 whileTap={{ scale: 0.8 }}
                 type="button"
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-purple-400 to-purple-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                onClick={comprar}
               >
-                Login to check out
+                Ingresa para comprar!
               </motion.button>
             )}
           </div>
