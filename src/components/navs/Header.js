@@ -12,13 +12,15 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { useNavigate } from 'react-router-dom'
+import { BsInstagram } from "react-icons/bs";
+import { width } from "@mui/system";
 
 const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const history = useNavigate();
   const [{ user, cartShow, cartItems, dondeestoy }, dispatch] = useStateValue();
-
+  const [isOpen, setIsOpen] = useState(false)
   const [isMenu, setIsMenu] = useState(false);
 
   console.log(user)
@@ -44,25 +46,26 @@ const Header = () => {
   }
 
   const login = async () => {
- /*    if (!user) {
-      const {
-        user: { refreshToken, providerData },
-      } = await signInWithPopup(firebaseAuth, provider);
+    /*    if (!user) {
+         const {
+           user: { refreshToken, providerData },
+         } = await signInWithPopup(firebaseAuth, provider);
+         dispatch({
+           type: actionType.SET_USER,
+           user: providerData[0],
+         });
+         localStorage.setItem("user", JSON.stringify(providerData[0]));
+       } else {
+         setIsMenu(!isMenu);
+       }  */
+    if (!user) {
       dispatch({
-        type: actionType.SET_USER,
-        user: providerData[0],
+        type: actionType.SET_LOGIN_SHOW,
+        loginShow: true,
       });
-      localStorage.setItem("user", JSON.stringify(providerData[0]));
     } else {
       setIsMenu(!isMenu);
-    }  */
-    if (!user) {
-    dispatch({
-      type: actionType.SET_LOGIN_SHOW,
-      loginShow: true,
-    }); } else {
-      setIsMenu(!isMenu);
-    } 
+    }
 
   };
 
@@ -83,8 +86,13 @@ const Header = () => {
     });
   };
 
+  const variants = {
+    open: { width: 300, marginLeft:40 },
+    closed: { width: 0,  },
+  }
+
   return (
-    <header className={`md:w-[80vw] md:ml-[16vw] w-[100vw] px-5  md:px-4 top-0 h-[10vh] fixed bg-white z-[3] '  `}>
+    <header className={`md:w-[80vw] md:ml-[16vw] w-[100vw] px-5  top-0 h-[10vh] fixed bg-white z-[3] '  `}>
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <></>
@@ -95,22 +103,26 @@ const Header = () => {
         >
           <HiMenuAlt2 className="font-bold text-2xl text-textColor" />
         </motion.div> */}
+
         {
-          <Link to={"/"} className="flex items-center">
-            <img src={Logo} className="w-2 object-cover" alt="logo" />
-          </Link>
+          dondeestoy !== 'Detalle' ?
+            <div className="flex flex-col justify-center items-center  ">
+              <label className="relative block">
+                <span className="absolute flex mt-1 items-center pl-2 p-2 shadow-lg rounded-full  cursor-pointer">
+                  <HiSearch onClick={() => setIsOpen(!isOpen)} className="text-booty text-2xl  cursor-pointer" />
+                </span>
+                <motion.input
+                  animate={isOpen ? "open" : "closed"}
+                  transition={{ ease: "easeIn", duration: 0.4 }}
+                  variants={variants}
+
+                  className="placeholder:italic p-5 block h-11 rounded-full  shadow-lg   focus:outline-none focus:border-gray-400 focus:ring-gray-100 focus:ring-1 sm:text-sm" placeholder="Buscador..." type="text" name="search" />
+              </label>
+            </div> : <div></div>
         }
-        {
-          dondeestoy !== 'Detalle' ? <div className="flex flex-col justify-center">
-            <label className="relative block">
-              <span className="sr-only">Search</span>
-              <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                <HiSearch className="text-booty text-2xl  cursor-pointer" />
-              </span>
-              <input className=" placeholder:italic p-5   block  w-[300px] h-12  rounded-md py-2 pl-9 pr-3 shadow-sm border-gray-600 focus:outline-none focus:border-gray-100 focus:ring-gray-100 focus:ring-1 sm:text-sm" placeholder="Buscador..." type="text" name="search" />
-            </label>
-          </div> : <></>
-        }
+        {/*  <div className="flex gap-2 items-center">
+          Seguinos en <BsInstagram />
+        </div> */}
 
 
 
@@ -158,8 +170,8 @@ const Header = () => {
             )}
           </div>
 
-          <div className="relative flex items-center gap-6">
-           { user && (<p>Hola {user.displayName}</p> )}
+          <div className="relative flex items-center gap-2">
+            {user && (<p>Hola <span className="font-semibold">{user.displayName}</span>!</p>)}
             <motion.img
               whileTap={{ scale: 0.6 }}
               src={user && user.photoURL != null ? user.photoURL : Avatar}

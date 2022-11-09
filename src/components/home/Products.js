@@ -45,7 +45,7 @@ const Products = () => {
 
 /*     console.log(products)
  */    return (
-        <div className=' grid grid-cols-2 md:grid-cols-5  gap-10 mb-10'>
+        <div className=' grid grid-cols-2 md:grid-cols-5  gap-5 mb-10'>
             {
                 products && products.length > 0 ?
                     products.map(a => (
@@ -70,19 +70,25 @@ const Products = () => {
                                     <div className='flex justify-between items-center'>
                                         <p className='font-regular text-textColor w-[200px] text-[1.rem]'>{a.name}</p>
 
-                                        {
+                                      {/*   {
 
                                             prueba && prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' />
 
-                                        }
+                                        } */}
                                     </div>
 
-                                    <div className='flex mt-2 h-full justify-between  items-center '>
+                                    <div className='flex h-full justify-between  items-center '>
                                         <p className='font-bold text-[1.2rem] text-black'>$ {a.precio}</p>
                                         {/*                                         <MdArrowForwardIos className='text-[2rem] text-booty bg-bghome p-2 rounded-full ' />
  */}
-                                        <FiShoppingCart className='text-[1.4rem] text-booty  ' />
-                                    </div>
+
+                                        {
+
+                                            prueba && prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[25px] text-booty ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[25px] text-booty' />
+
+                                        }
+                                        {/*                                         <FiShoppingCart className='text-[1.4rem] text-booty  ' />
+ */}                                    </div>
 
                                 </div>
                             </div>

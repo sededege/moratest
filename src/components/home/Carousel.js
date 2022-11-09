@@ -96,7 +96,7 @@ const Carrousel = (c) => {
                 c.imagenes.length > 0 && (c.imagenes.map((a, index) =>
                     <motion.div
                         key={index}
-                        className='h-[300px] hover:opacity-70 cursor-pointer ' onClick={() => navegar(c.id)}>
+                        className='h-[300px] hover:opacity-70 z-[10] cursor-pointer ' onClick={() => navegar(c.id)}>
                         <img className='rounded-lg w-full h-full object-cover   ' src={a.images[0]} />
 
                     </motion.div>

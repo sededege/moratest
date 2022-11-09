@@ -4,7 +4,7 @@ import { menu, dashboard } from '../utils/data'
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import { BsArrowRight } from 'react-icons/bs'
+import { BsArrowRight, BsInstagram } from 'react-icons/bs'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Logo from "../img/logo.png";
 
@@ -59,20 +59,22 @@ const Headerleft = () => {
                 initial={{ opacity: 0, x: -200 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className='h-screen top-0 fixed z-[100] md:w-[14vw] hidden border-2 bg-white  drop-shadow-lg items-center   md:flex flex-col  '>
+                className='h-screen top-0 fixed z-[100] md:w-[14vw] hidden border-2 bg-white  drop-shadow-lg items-center  md:flex flex-col  '>
                 {/*  {
                     dondeestoy === 'Dashboard' ? <></> : <div onClick={headerOff} className='p-1 absolute mt-10 first-line:rounded-full'>
                         <BsArrowRight style={{ fontSize: 22 }} />
                     </div>
                 }
  */}
+                
 
-                <div className='flex-col  mt-60 flex gap-8 md:items-center py-6  cursor-pointer'>
 
-                    <Link to={"/Home"} className="flex  items-center gap-2">
+                <div className='flex-col  mt-60 flex gap-5 md:items-center py-6  cursor-pointer'>
+                <Link to={"/Home"} className="flex  items-center gap-2">
                         <img src={Logo} className="w-20 object-cover" alt="ß" />
                     </Link>
 
+               
                     {
                         dondeestoy === "Dashboard" ?
                             dashboard.map(a => (
@@ -82,7 +84,7 @@ const Headerleft = () => {
                                 </motion.div>
                             )) : menu.map(a => (
                                 <motion.div key={a.id}
-                                    whileHover={{ scale: 1.1}}
+                                    whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => enviar(a.name)} className={` ${selected === a.name ? 'bg-booty px-4 ' : 'bg-transparent hover:text-white '} : p-1 rounded-lg hover:shadow-lg transition duration-100 ease-in-out`}>
                                     <div className={` ${selected === a.name ? 'text-white' : 'text-gray-400 '} :  py-1 rounded-full flex gap-2 justify-center items-center `} style={{ fontSize: 22 }}>{React.createElement(MaterialDesign[a.icon])}

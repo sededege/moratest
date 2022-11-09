@@ -8,6 +8,7 @@ import Loader from '../utils/Loader'
 import Feedback from '../cart/Feedback'
 import Banner from '../img/banner.jpg'
 import FiltrosHome from './FiltrosHome'
+import Footer from './Footer'
 const MainContainer = () => {
     const [{ cartShow, products }, dispatch] = useStateValue();
     const refContainer = React.useRef();
@@ -54,21 +55,17 @@ const MainContainer = () => {
                 </div>
             </div> */}
 
-            {
-                products ?
 
-                    <div className='gap-6 flex flex-col w-[100vw] p-5 md:w-[88vw] md:ml-[12vw] h-[100vh] '>
-                        <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
-                        {/*                         <Promos />
+            <div className='gap-6 flex flex-col w-[100vw] md:w-full md:ml-[12vw] h-[100vh]  px-5 md:px-0'>
+                <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
+                {/*                         <Promos />
  */}
 
-{/*                         <FiltrosHome />
- */}                        <Products className='flex' />
-                    </div> :
-                    <div className='fixed flex w-[88vw] ml-[12vw] h-[80vh] items-center justify-center'>
-                        <p>Cargando datos </p><Loader />
-                    </div>
-            }
+                <FiltrosHome />
+                <Products className='flex' />
+                <Footer />
+            </div>
+
         </div>
     )
 }
