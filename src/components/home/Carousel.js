@@ -2,7 +2,7 @@ import React from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiShoppingCart } from 'react-icons/fi';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useStateValue } from '../context/StateProvider';
@@ -55,7 +55,6 @@ const Carrousel = (c) => {
 
     return (
         <Carousel
-
             showStatus={false}
             showThumbs={false}
             renderIndicator={(onClickHandler, isSelected, index, label) => {
@@ -68,7 +67,7 @@ const Carrousel = (c) => {
                     borderRadius: '50%',
                     marginTop: 5,
                     border: '1px solid white',
-              
+
                     //borderColor: colores(color[index])
                 }
                 const style = isSelected
@@ -92,18 +91,18 @@ const Carrousel = (c) => {
                 );
             }}
         >
+
             {
-                c.imagenes.length > 0 ? c.imagenes.map((a, index) =>
-                    <div
-
-
+                c.imagenes.length > 0 && (c.imagenes.map((a, index) =>
+                    <motion.div
                         key={index}
                         className='h-[300px] hover:opacity-70 cursor-pointer ' onClick={() => navegar(c.id)}>
                         <img className='rounded-lg w-full h-full object-cover   ' src={a.images[0]} />
-                       
-                    </div>
-                ) : <></>
+
+                    </motion.div>
+                ))
             }
+
 
 
         </Carousel>

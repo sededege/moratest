@@ -6,7 +6,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { useStateValue } from "./components/context/StateProvider";
 import { getAllFoodItems } from "./components/utils/firebaseFunctions";
 import { getAllProductsItems } from "./components/utils/firebaseFunctions";
@@ -27,9 +27,10 @@ import Ordenes from "./components/producto/Ordenes";
 import Pre from "./components/utils/Pre";
 import ScrollToTop from "./components/utils/scrolltotop";
 import ShowLogin from "./components/home/login";
+import { motion } from "framer-motion";
 
 function App() {
-  const [{ headerShow, cartShow, editShow,loginShow, products, user, users, foodItems }, dispatch] = useStateValue();
+  const [{ headerShow, cartShow, editShow, loginShow, products, user, users, foodItems }, dispatch] = useStateValue();
   //const [existeuser, setExisteUsuario] = React.useState(null)
   const [load, upadateLoad] = React.useState(true);
   const [existeuser, setExisteUsuario] = React.useState(null)
@@ -47,30 +48,30 @@ function App() {
     await getAllProductsItems().then((data) => {
 /*       console.log(data)
  */      dispatch({
-        type: actionType.SET_PRODUCTS,
-        products: data
-      })
+      type: actionType.SET_PRODUCTS,
+      products: data
+    })
     })
   }
-console.log(loginShow)
+  console.log(loginShow)
   const fetchUsers = async () => {
     await getAllUsuarios().then((data) => {
       dispatch({
         type: actionType.SET_USERS,
         users: data
       })
-       if (user && user != null){
+      if (user && user != null) {
         dispatch({
           type: actionType.SET_FAVORITOS,
           favoritos: data.filter(a => a.user === user.email)
-        }); 
+        });
       } else {
         dispatch({
           type: actionType.SET_FAVORITOS,
           favoritos: ""
-        }); 
+        });
       }
-     
+
     })
 
 
@@ -88,7 +89,7 @@ console.log(loginShow)
 
     const timer = setTimeout(() => {
       upadateLoad(false);
-    }, 3000);
+    }, 2000);
 
     fetchData();
     fetchUsers();
@@ -106,41 +107,44 @@ console.log(loginShow)
   }, [user])
 
   return (
-    <AnimatePresence exitBeforeEnter initial={false}>
-      <div className='w-screen h-screen bg-white'>
+    <div className='w-screen h-screen bg-white'>
 
 
 
-        <main className=" ">
-          {
-           loginShow ? <ShowLogin/> : <></>
-          }
-          {
-            editShow ? <SetAddres /> : <></>
-          }
-          {
-            cartShow ? <CartContainer className='z-20 fixed' /> : <></>
-          }
+      <main className=" ">
+        {
+          loginShow && (<ShowLogin />)
+        }
+        {
+          editShow && (<SetAddres />)
+        }
 
-          <Header />
-          {
-            headerShow ? <Headerleft /> : <></>
-          }
-          <Pre load={load} />
-          <ScrollToTop />
-          <Routes location={location} key={location.pathname}>
-            <Route path='/*' element={<MainContainer />} />
-            <Route path="/detalle/:productId" element={<Detalle />} />
-            <Route path='/Favoritos' element={<Favoritos />} />
-            <Route path='/Dashboard' element={<Dashboard />} />
-            <Route path='/Nuevoproducto' element={<CreateContainer />} />
-            <Route path='/edititem' element={<EditItem />} />
-            <Route path='/Catalogo' element={<Catalogo />} />
-            <Route path='/Ordenes' element={<Ordenes />} />
-          </Routes>
-        </main>
-      </div>
-    </AnimatePresence>
+        <AnimatePresence>
+          {cartShow && (
+              <CartContainer />
+          )}
+        </AnimatePresence>
+
+
+
+        <Header />
+        {
+          headerShow && (<Headerleft />)
+        }
+        <Pre load={load} />
+        <ScrollToTop />
+        <Routes location={location} key={location.pathname}>
+          <Route path='/*' element={<MainContainer />} />
+          <Route path="/detalle/:productId" element={<Detalle />} />
+          <Route path='/Favoritos' element={<Favoritos />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
+          <Route path='/Nuevoproducto' element={<CreateContainer />} />
+          <Route path='/edititem' element={<EditItem />} />
+          <Route path='/Catalogo' element={<Catalogo />} />
+          <Route path='/Ordenes' element={<Ordenes />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 

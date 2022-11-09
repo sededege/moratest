@@ -64,9 +64,6 @@ const CartContainer = () => {
   }
   const mercadopago = () => {
 
-    /*      console.log(cartItems)
-     */
-
     const producto = cartItems.map(item =>
     ({
       id: item[0].item.id,
@@ -122,14 +119,15 @@ const CartContainer = () => {
 
 
   const comprar = async () => {
-       if (!user) {
-       dispatch({
-         type: actionType.SET_LOGIN_SHOW,
-         loginShow: true,
-       }); } else {
-       } 
-   
-     };
+    if (!user) {
+      dispatch({
+        type: actionType.SET_LOGIN_SHOW,
+        loginShow: true,
+      });
+    } else {
+    }
+
+  };
 
   const getUsuario = () => {
     if (users && user) {
@@ -150,12 +148,21 @@ const CartContainer = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 200 }}
+      key="1"
+      initial={{ opacity: 0, x: 400 }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 200 }}
-      className="fixed z-[5] top-0 right-0 w-[86vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
+      exit={{ opacity: 0, x: 400 }}
+      transition= {{
+       
+        type: "spring",
+        stiffness: 400,
+        damping: 40
+      }}
+
+
+      className="fixed z-[10] top-0 right-0 w-[86vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
     >
-      <div className="w-full flex items-center justify-between p-4 cursor-pointer">
+      <div className="w-full  z-[10] flex items-center justify-between p-4 cursor-pointer">
         <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>
           <MdOutlineKeyboardBackspace className="text-textColor text-3xl" />
         </motion.div>
@@ -212,7 +219,7 @@ const CartContainer = () => {
               <p className="text-gray-400 text-lg">Dirección</p>
             </div>
             {
-              user ? datos  && datos.length > 0 ? datos.map(a =>
+              user ? datos && datos.length > 0 ? datos.map(a =>
                 <div className="w-full flex items-center justify-between">
 
                   <div className=" w-full">

@@ -9,7 +9,7 @@ import { actionType } from '.././context/reducer'
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Carrousel from './Carousel'
 import { updateFavoritos } from '../utils/firebaseFunctions';
-
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 const Products = () => {
     const [{ products, favoritos, user }, dispatch] = useStateValue()
     const history = useNavigate();
@@ -25,7 +25,7 @@ const Products = () => {
 
     const agregar = (a) => {
         console.log(a)
-       
+
         console.log(favoritos)
         const data = {
             id: favoritos[0].id,
@@ -35,11 +35,11 @@ const Products = () => {
                 ]
         }
         console.log(data)
-        updateFavoritos(data) 
+        updateFavoritos(data)
 
         console.log('prueba')
         console.log(prueba)
-       /*  setPrueba([ ...prueba[0], a]) */
+        /*  setPrueba([ ...prueba[0], a]) */
         console.log(prueba)
     }
 
@@ -52,7 +52,18 @@ const Products = () => {
                         <div key={a.id} className='h-full relative '>
                             <div className='gap-2 flex flex-col mb-5'>
                                 <div>
-                                    <Carrousel imagenes={a.color} id={a.id} />
+                                    <AnimatePresence>
+                                        <motion.div
+                                            key={a.id}
+                                            whileHover={{
+                                                scale: 1.05,
+                                                transition: { duration: 0.3 },
+                                            }}
+                                        >
+                                            <Carrousel imagenes={a.color} id={a.id} />
+                                        </motion.div>
+                                    </AnimatePresence>
+
                                 </div>
 
                                 <div className='p-2 rounded-b-lg relative '>
@@ -61,7 +72,7 @@ const Products = () => {
 
                                         {
 
-                                       prueba &&  prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' /> 
+                                            prueba && prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' />
 
                                         }
                                     </div>

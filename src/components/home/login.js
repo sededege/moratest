@@ -156,7 +156,7 @@ const ShowLogin = () => {
                 localStorage.setItem("user", JSON.stringify(user.providerData[0]));
                 /*                 cerrarEdit()
                  */                /*                 console.log(user)
-                         */                // ...
+                    */                // ...
 
                 setTimeout(() => {
                     setFields(false)
@@ -299,14 +299,26 @@ const ShowLogin = () => {
     };
 
 
-
+    const variants = {
+        open: { opacity: 1, x: 0 },
+        closed: { opacity: 0, x: "-100%" },
+      }
 
 
     return (
-        <div className='w-full h-full items-center flex justify-center fixed z-[120] top-0 bg-black bg-opacity-25 '>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className='w-full h-full items-center flex justify-center fixed z-[120] top-0 bg-black bg-opacity-25 '>
             {
                 registrar ?
-                    <form className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg">
+                    <motion.form
+                        key={registrar}
+                        animate={registrar ? "open" : "closed"}
+                        variants={variants}
+                        className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg">
                         <div className="flex  flex-wrap -mx-3 mb-6">
                             {
                                 fields && (
@@ -381,7 +393,13 @@ const ShowLogin = () => {
                             </div>
                         </div>
 
-                    </form> : <form className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg">
+                    </motion.form> : <motion.form
+                        key={registrar}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg">
                         <div className="flex  flex-wrap -mx-3 mb-6">
 
                             <div className="w-full px-3 mb-6 md:mb-0">
@@ -448,10 +466,10 @@ const ShowLogin = () => {
                             </div>
                         </div>
 
-                    </form>
+                    </motion.form>
             }
 
-        </div>
+        </motion.div>
     )
 }
 
