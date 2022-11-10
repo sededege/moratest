@@ -9,6 +9,8 @@ import Feedback from '../cart/Feedback'
 import Banner from '../img/banner.jpg'
 import FiltrosHome from './FiltrosHome'
 import Footer from './Footer'
+import { AnimatePresence, motion } from 'framer-motion'
+
 const MainContainer = () => {
     const [{ cartShow, products }, dispatch] = useStateValue();
     const refContainer = React.useRef();
@@ -62,9 +64,16 @@ const MainContainer = () => {
  */}
 
                 <FiltrosHome />
-                <Products className='flex' />
-                <Footer />
-            </div>
+                <AnimatePresence>
+                    <motion.div
+                
+
+                    >
+                        <Products className='flex' />
+                    </motion.div>
+                </AnimatePresence>
+{/*                 <Footer />
+ */}            </div>
 
         </div>
     )

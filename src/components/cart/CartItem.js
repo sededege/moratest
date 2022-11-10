@@ -7,7 +7,6 @@ import { actionType } from "../context/reducer";
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {
-  console.log(item)
   const [{ cartItems }, dispatch] = useStateValue();
   const [qty, setQty] = useState(item[0].unidades);
   const cartDispatch = () => {

@@ -10,46 +10,78 @@ import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Carrousel from './Carousel'
 import { updateFavoritos } from '../utils/firebaseFunctions';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+
 const Products = () => {
     const [{ products, favoritos, user }, dispatch] = useStateValue()
     const history = useNavigate();
     const [prueba, setPrueba] = React.useState("")
 
     React.useEffect(() => {
-        if (favoritos) {
+        if (favoritos && prueba === "") {
             setPrueba(favoritos.map(a => a.favoritos))
         }
-        console.log(favoritos)
-    }, [favoritos])
-    console.log(prueba)
+
+        if (prueba) {
+
+            const data = {
+                id: favoritos[0].id,
+                favoritosadd: prueba[0]
+            }
+            updateFavoritos(data)
+
+           
+
+        }
+
+
+
+        console.log(prueba[0])
+    }, [favoritos, prueba])
+
+
 
     const agregar = (a) => {
-        console.log(a)
 
-        console.log(favoritos)
         const data = {
             id: favoritos[0].id,
-            favoritosadd:
-                [
-                    ...favoritos[0].favoritos, a
-                ]
+            favoritosadd: prueba[0]
         }
-        console.log(data)
-        updateFavoritos(data)
 
-        console.log('prueba')
-        console.log(prueba)
-        /*  setPrueba([ ...prueba[0], a]) */
-        console.log(prueba)
+        if (prueba[0].indexOf(a) !== -1) {
+            console.log('toy')
+
+            const eliminar = prueba[0].filter(b => b !== a)
+            setPrueba([eliminar])
+
+            /* setPrueba(eliminar) */
+
+
+            /*  updateFavoritos(data) */
+
+        } else {
+            const aber = prueba[0]
+            aber.push(a)
+            setPrueba([aber])
+
+
+        }
+
+        return console.log(prueba[0])
+
     }
 
 /*     console.log(products)
  */    return (
         <div className=' grid grid-cols-2 md:grid-cols-5  gap-5 mb-10'>
             {
-                products && products.length > 0 ?
-                    products.map(a => (
-                        <div key={a.id} className='h-full relative '>
+                products && products.length > 0 && (
+                    products.map((a, index) => (
+                        <motion.div
+                            initial={{ opacity: 0, x: 100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + index / 10 }}
+
+                            key={a.id} className='h-full relative '>
                             <div className='gap-2 flex flex-col mb-5'>
                                 <div>
                                     <AnimatePresence>
@@ -70,7 +102,7 @@ const Products = () => {
                                     <div className='flex justify-between items-center'>
                                         <p className='font-regular text-textColor w-[200px] text-[1.rem]'>{a.name}</p>
 
-                                      {/*   {
+                                        {/*   {
 
                                             prueba && prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' />
 
@@ -92,9 +124,9 @@ const Products = () => {
 
                                 </div>
                             </div>
-                        </div>
-                    ))
-                    : <div className='flex w-[60vw] h-[70vh] items-center justify-center'><p>No hay datos con estas caracteristicas</p></div>
+                        </motion.div>
+                    )))
+
             }
         </div>
 

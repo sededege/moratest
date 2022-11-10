@@ -36,24 +36,15 @@ function App() {
   const [existeuser, setExisteUsuario] = React.useState(null)
 
   const fetchData = async () => {
-    /*  await getAllFoodItems().then((data) => {
-       console.log(data)
-       dispatch({
-         type: actionType.SET_PRODUCTS,
-         products: data
-       })
-     }) */
 
 
-    await getAllProductsItems().then((data) => {
-/*       console.log(data)
- */      dispatch({
-      type: actionType.SET_PRODUCTS,
-      products: data
-    })
+  await getAllProductsItems().then((data) => {
+      dispatch({
+        type: actionType.SET_PRODUCTS,
+        products: data
+      })
     })
   }
-  console.log(loginShow)
   const fetchUsers = async () => {
     await getAllUsuarios().then((data) => {
       dispatch({
@@ -89,7 +80,7 @@ function App() {
 
     const timer = setTimeout(() => {
       upadateLoad(false);
-    }, 2000);
+    }, 1000);
 
     fetchData();
     fetchUsers();
@@ -121,7 +112,7 @@ function App() {
 
         <AnimatePresence>
           {cartShow && (
-              <CartContainer />
+            <CartContainer />
           )}
         </AnimatePresence>
 

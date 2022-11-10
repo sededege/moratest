@@ -23,7 +23,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isMenu, setIsMenu] = useState(false);
 
-  console.log(user)
+
   /* React.useEffect(() => {
    console.log(headerShow)
   }, [headerShow]) */

@@ -17,7 +17,10 @@ const CartContainer = () => {
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
   const [datos, setDatos] = useState(true)
+  const [checkbox, setCheckbox] = useState('efectivo')
+  const [pickup, setPickUp] = useState('efectivo')
   const [productopagar, setProductosPagar] = useState([])
+
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -37,6 +40,8 @@ const CartContainer = () => {
     setTot(totalPrice);
     getUsuario()
 
+    console.log(checkbox)
+
     /*  setProductosPagar(prevState => [...prevState, {
        id: '1234',
        title: 'Lightweight Paper Table',
@@ -46,10 +51,9 @@ const CartContainer = () => {
        currency_id: 'UYU',
        unit_price: 55.41
      }]) */
-    console.log(cartItems)
-    console.log(users)
 
-  }, [tot, flag, user, users, cartItems]);
+
+  }, [tot, flag, user, users, cartItems, checkbox]);
 
   const tallasfiltro = (a, b, c) => {
     console.log(a)
@@ -129,6 +133,8 @@ const CartContainer = () => {
 
   };
 
+ 
+
   const getUsuario = () => {
     if (users && user) {
       setDatos(users.filter(a => a.user === user.email))
@@ -152,8 +158,7 @@ const CartContainer = () => {
       initial={{ opacity: 0, x: 400 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 400 }}
-      transition= {{
-       
+      transition={{
         type: "spring",
         stiffness: 400,
         damping: 40
@@ -181,7 +186,7 @@ const CartContainer = () => {
       {cartItems && cartItems.length > 0 ? (
         <div className="w-full h-full bg-white rounded-t-[2rem] flex flex-col">
           {/* cart Items section */}
-          <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
+          <div className="w-full h-[30vh] md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
             {/* cart Item */}
             {cartItems &&
               cartItems.length > 0 &&
@@ -197,13 +202,41 @@ const CartContainer = () => {
 
           {/* cart total section */}
           <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
-            <div className="w-full flex items-center justify-between">
-              <p className="text-gray-400 text-lg">Sub Total</p>
-              <p className="text-gray-400 text-lg">$ {tot}</p>
+
+            <div className="w-full  flex  flex-col">
+              <p className="text-gray-400 text-lg">Medio de pago</p>
+              <div class="flex items-center rounded">
+                <input id="bordered-radio-1" type="radio" value="efectivo" selected onClick={() => setCheckbox('efectivo')} name="bordered-radio" className="w-4 h-4 text-booty bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="bordered-radio-1" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Efectivo</label>
+              </div>
+              <div class="flex items-center rounded">
+                <input id="bordered-radio-2" type="radio" value="asdd" onClick={() => setCheckbox('mercadopago')} name="bordered-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="bordered-radio-2" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Mercado pago </label>
+              </div>
+              <div class="flex items-center rounded">
+                <input id="bordered-radio-3" type="radio" value="asdd" onClick={() => setCheckbox('transferencia')} name="bordered-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="bordered-radio-3" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Transferencia Bancaria</label>
+              </div>
             </div>
-            <div className="w-full flex items-center justify-between">
+
+            {/* <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Delivery</p>
               <p className="text-gray-400 text-lg">$ 200</p>
+            </div> */}
+            <div className="w-full  flex  flex-col">
+              <p className="text-gray-400 text-lg">Pick Up</p>
+              <div class="flex items-center rounded">
+                <input id="bordered-radio-4" type="radio" value="efectivo" selected onClick={() => setPickUp('trescruces')} name="bordered-radio1" className="w-4 h-4 text-booty bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="bordered-radio-4" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Retiro en Tres Cruces</label>
+              </div>
+              <div class="flex items-center rounded">
+                <input id="bordered-radio-5" type="radio" value="asdd" onClick={() => setPickUp('malvin')} name="bordered-radio1" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="bordered-radio-5" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Retiro en Malvin</label>
+              </div>
+              <div class="flex items-center rounded">
+                <input id="bordered-radio-6" type="radio" value="asdd" onClick={() => setPickUp('envio')} name="bordered-radio1" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra Ver zonas)</label>
+              </div>
             </div>
 
             <div className="w-full border-b border-gray-600 my-2"></div>
@@ -211,25 +244,28 @@ const CartContainer = () => {
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-200 text-xl font-semibold">Total</p>
               <p className="text-gray-200 text-xl font-semibold">
-                ${tot + 2.5}
+                
+                ${tot}
               </p>
 
             </div>
-            <div className="w-full flex items-center justify-between">
+
+            {pickup === 'envio' && (<div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Dirección</p>
-            </div>
+            </div>)}
             {
               user ? datos && datos.length > 0 ? datos.map(a =>
-                <div className="w-full flex items-center justify-between">
+                pickup === 'envio' && (
+                  <div className="w-full flex items-center justify-between">
 
-                  <div className=" w-full">
-                    <p className='text-gray-400 font-bold'>{a.alias}</p>
-                    <p className="text-gray-400 text-lg">{a.dire} {a.puerta}, {a.apto}, {a.barrio}</p>
-                  </div>
-                  <div >
-                    <div className='bg-yellow-200 p-2 rounded-full cursor-pointer  shadow-md'> <MdModeEdit onClick={() => abrirEdit()} className=' text-textColor ' /></div>
-                  </div>
-                </div>
+                    <div className=" w-full">
+                      <p className='text-gray-400 font-bold'>{a.alias}</p>
+                      <p className="text-gray-400 text-lg">{a.dire} {a.puerta}, {a.apto}, {a.barrio}</p>
+                    </div>
+                    <div >
+                      <div className='bg-yellow-200 p-2 rounded-full cursor-pointer  shadow-md'> <MdModeEdit onClick={() => abrirEdit()} className=' text-textColor ' /></div>
+                    </div>
+                  </div>)
               )
 
                 : (
