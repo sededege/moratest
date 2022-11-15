@@ -4,13 +4,12 @@ import { menu, dashboard } from '../utils/data'
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import { BsArrowRight, BsInstagram } from 'react-icons/bs'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { BsArrowRight} from 'react-icons/bs'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from "../img/logo.png";
 
 const Headerleft = () => {
-    const [{ headerShow, dondeestoy }, dispatch] = useStateValue()
-    const beer = React.createElement(MaterialDesign['MdHome'])
+    const [{  dondeestoy }, dispatch] = useStateValue()
     const history = useNavigate();
     const [selected, setSelected] = React.useState("")
 
@@ -46,7 +45,7 @@ const Headerleft = () => {
             history(`/Dashboard`)
         }
         else if (a === 'Ordenes') {
-            history(`/Ordenes`)
+            history(`/Ordenes/ver`)
         }
     }
 

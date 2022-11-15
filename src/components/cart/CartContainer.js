@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
-import { MdDelete, MdModeEdit, MdOutlineSearch } from 'react-icons/md'
+import { MdModeEdit } from 'react-icons/md'
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import EmptyCart from "../img/emptyCart.svg";
 import CartItem from "./CartItem";
-import { useNavigate, useParams } from 'react-router-dom'
 import { saveOrder } from "../utils/firebaseFunctions";
+import { useNavigate } from "react-router-dom";
 
 const CartContainer = () => {
-  const history = useNavigate();
-
-  const [{ cartShow, cartItems, user, editShow, users }, dispatch] = useStateValue();
+  const [{ cartShow, cartItems, user, users }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
   const [datos, setDatos] = useState(true)
   const [checkbox, setCheckbox] = useState('efectivo')
   const [pickup, setPickUp] = useState('efectivo')
-  const [productopagar, setProductosPagar] = useState([])
+  const navigate = useNavigate();
 
+ 
+  
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -34,27 +34,72 @@ const CartContainer = () => {
     });
   }
   useEffect(() => {
+   /* 
+      dispatch({
+        type: actionType.SET_CARTITEMS,
+        cartItems: [],
+      });
+  
+      localStorage.setItem("cartItems", JSON.stringify([])); */
+    
+
     let totalPrice = cartItems.reduce(function (accumulator, item) {
       return accumulator + item[0].unidades * item[0].item.precio;
     }, 0);
     setTot(totalPrice);
-    getUsuario()
 
-    console.log(checkbox)
 
-    /*  setProductosPagar(prevState => [...prevState, {
-       id: '1234',
-       title: 'Lightweight Paper Table',
-       description: 'Inspired by the classic foldable art of origami',
-       category_id: 'home',
-       quantity: 3,
-       currency_id: 'UYU',
-       unit_price: 55.41
-     }]) */
+
+
+    if (users && user) {
+      setDatos(users.filter(a => a.user === user.email))
+    }
 
 
   }, [tot, flag, user, users, cartItems, checkbox]);
 
+  const checkout = () => {
+    if (checkbox === 'mercadopago') {
+      mercadopago()
+    } else {
+      efectivo()
+    }
+  }
+
+  const efectivo = () => {
+    
+    const producto = cartItems.map(item =>
+    ({
+      id: item[0].item.id,
+      title: item[0].item.name,
+      description: item[0].item.descripcion,
+      category_id: item[0].item.categoria,
+      quantity: parseInt(item[0].unidades),
+      currency_id: 'UYU',
+      unit_price: parseInt(item[0].item.precio),
+      tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
+      size: item[0].size,
+      color: item[0].colorselected,
+      idorden: `${Date.now()
+        }`,
+    })
+    )
+    const dataa = {
+      id: `${Date.now()} `,
+      creado: `${new Date()} `,
+      items: producto,
+      status: 'pendiente',
+      metodo: checkbox,
+      pickup: pickup,
+      total: tot,
+      email: user.email,
+      name: user.displayName
+    }
+
+    saveOrder(dataa)
+    navigate("/ordenes/gracias");
+
+  }
   const tallasfiltro = (a, b, c) => {
     console.log(a)
     console.log(b)
@@ -109,14 +154,7 @@ const CartContainer = () => {
       .then(response => response.text())
       .then(data => {
         window.location.assign(data);
-
       });
-    /*  fetch("http://localhost:3000/feedback", options2)
-       .then(response => response.text())
-       .then(data => {
-               console.log(data)
-          
-       }); */
 
 
   }
@@ -133,15 +171,9 @@ const CartContainer = () => {
 
   };
 
- 
-
-  const getUsuario = () => {
-    if (users && user) {
-      setDatos(users.filter(a => a.user === user.email))
-    }
 
 
-  }
+
 
   const clearCart = () => {
     dispatch({
@@ -235,7 +267,7 @@ const CartContainer = () => {
               </div>
               <div class="flex items-center rounded">
                 <input id="bordered-radio-6" type="radio" value="asdd" onClick={() => setPickUp('envio')} name="bordered-radio1" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra Ver zonas)</label>
+                <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra <span className='underline cursor-pointer'>Ver zonas</span>)</label>
               </div>
             </div>
 
@@ -244,7 +276,7 @@ const CartContainer = () => {
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-200 text-xl font-semibold">Total</p>
               <p className="text-gray-200 text-xl font-semibold">
-                
+
                 ${tot}
               </p>
 
@@ -280,7 +312,7 @@ const CartContainer = () => {
                 ) : <></>}
             {user ? (
               <motion.button
-                onClick={() => mercadopago()}
+                onClick={() => checkout()}
                 whileTap={{ scale: 0.8 }}
                 type="button"
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-purple-400 to-purple-600 text-gray-50 text-lg my-2 hover:shadow-lg"

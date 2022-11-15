@@ -1,39 +1,22 @@
 import React from 'react'
 import { useStateValue } from '.././context/StateProvider'
-import { MdDelete, MdModeEdit, MdOutlineSearch, MdAdd } from 'react-icons/md'
-import { RiMoneyDollarCircleFill, RiBarChart2Fill, RiInboxUnarchiveFill, RiBoxingFill } from 'react-icons/ri'
+import { MdOutlineSearch } from 'react-icons/md'
+import { RiMoneyDollarCircleFill, RiBarChart2Fill, RiInboxUnarchiveFill } from 'react-icons/ri'
 import { categories } from '../utils/data'
-import { getAllFoodItems, getAllOrders } from '../utils/firebaseFunctions'
+import { getAllOrders } from '../utils/firebaseFunctions'
 import { actionType } from '.././context/reducer'
 import TablaListados from './TablaListados'
-import CreateContainer from './createContainer'
-import EditItem from './editItem'
-import { useNavigate, useParams } from 'react-router-dom'
+
 
 const Dashboard = () => {
     const [category, setCategory] = React.useState(null);
-    const [{ products, editShow, editar }, dispatch] = useStateValue()
-    const [data, setData] = React.useState(products)
-    const [selectvalue, setSelectValue] = React.useState(false)
-    const [modal, setModal] = React.useState(false)
-    const [newItem, setNewItem] = React.useState(true)
+    const [{ products}, dispatch] = useStateValue()
+    const [modal ] = React.useState(false)
     const [orders, setOrders] = React.useState([])
-    const { home } = useParams()
-    const filter = () => {
-        /*  setData(foodItems?.filter(n => n.category === filter)) */
-    }
-    const filtro = (e) => {
-        /*  console.log(e.target.value) */
-        alert('asd')
-    }
+ 
+   
 
-    const mostrarNewItem = () => {
-        dispatch({
-            type: actionType.SET_EDITAR,
-            editar: null
-        })
-    }
-
+ 
     React.useEffect(() => {
         dispatch({
             type: actionType.SET_DONDE_ESTOY,
@@ -45,7 +28,7 @@ const Dashboard = () => {
         })
 
 
-    }, [])
+    }, [dispatch])
 
 
     return (
@@ -87,15 +70,10 @@ const Dashboard = () => {
 
                 </div>
                 <div className=' flex '>
-                    <TablaListados ventas={orders.map(a => a.items)} newitem={modal} data={category == 'todos' || category == null ? products : products.filter(n => n.category === category)} filter={category} />
+                    <TablaListados ventas={orders.map(a => a.items)} newitem={modal} data={category === 'todos' || category == null ? products : products.filter(n => n.category === category)} filter={category} />
                 </div>
             </div>
-            {/*   <div className='flex h-full w-full py-8'>
-                {
-
-                    editar && editar != null ? <EditItem edit={editar} /> : <CreateContainer />
-                }
-            </div> */}
+           
         </div>
     )
 }

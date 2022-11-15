@@ -19,5 +19,5 @@ export const initialState = {
     dondeestoy: null,
     categoryselect: null,
     orders: null,
-    favoritos: null,
+    favorite: null,
 };

@@ -7,30 +7,12 @@ import { getAllFoodItems, getAllProductsItems } from '.././utils/firebaseFunctio
 import { actionType } from '.././context/reducer'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AssistantDirection } from '@mui/icons-material';
-const arrayprueba = [
-    {
-        id: '1666902384278',
-        talles: [
-            {
-                id: 0,
-                size: 'S',
-                unidades: 3,
-            },
-            {
-                id: 1,
-                size: 'M',
-                unidades: 0,
-            },
-            {
-                id: 2,
-                size: 'L',
-                unidades: 1,
-            },
-        ]
 
-    },
+const arrayprueba = [
+
     {
-        id: '1666902384278',
+        id: 0,
+        idorden: '16669023842783',
         talles: [
             {
                 id: 0,
@@ -51,7 +33,52 @@ const arrayprueba = [
 
     },
     {
-        id: '1666902460934',
+        id: 0,
+        idorden: '16669023842783',
+        talles: [
+            {
+                id: 0,
+                size: 'S',
+                unidades: 4,
+            },
+            {
+                id: 1,
+                size: 'M',
+                unidades: 0,
+            },
+            {
+                id: 2,
+                size: 'L',
+                unidades: 0,
+            },
+        ]
+
+    },
+    {
+        id: 4,
+        idorden: '16669023842783',
+        talles: [
+            {
+                id: 0,
+                size: 'S',
+                unidades: 4,
+            },
+            {
+                id: 1,
+                size: 'M',
+                unidades: 0,
+            },
+            {
+                id: 2,
+                size: 'L',
+                unidades: 0,
+            },
+        ]
+
+    },
+    {
+        id: 2,
+        idorden: '1666902460934',
         talles: [
             {
                 id: 0,
@@ -84,7 +111,7 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
     const [ideliminar, setIdEliminar] = React.useState(null)
     const [newItem, setNewItem] = React.useState(true)
     const [newArr1, setNewArr1] = React.useState([])
-
+    const [asd, setAsd] = React.useState("")
 
     const history = useNavigate();
 
@@ -95,87 +122,31 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
 
 
     React.useEffect(() => {
-        /* console.log('ventaa') */
-        /*         console.log(ventas)
-         */
-
-        console.log('data')
-        console.log(data)
-        let newArr = []
-        for (var i = 0; i < ventas.length; i++) {
-            for (var j = 0; j < ventas[i].length; j++) {
-                newArr.push(ventas[i][j])
-            }
-        }
-        setNewArr1(newArr)
-        /*  console.log('Array nuevo');
-        console.log(newArr); */
-        console.log('tallas')
-        console.log(newArr1.map(a => a.tallas))
 
 
 
         console.log('arrayprueba')
         console.log(arrayprueba)
 
-        const cambiar = (array) => {
-            console.log('array')
-
-            const filtro = array.filter(a => a.id.indexOf('1666902384278') !== -1)
-            console.log('filtro')
-            console.log(filtro[0].talles)
-
-            const newArr3 = []
-
-            for (var i = 0; i < filtro.length; i++) {
-                newArr3.push(filtro[i].talles)
-
-            }
-            console.log('newarr2')
-            console.log(newArr3)
-
-            let personas = [
-                { id: 1, name: 'Darinel', edad: 24, lastName: 'Cigarroa', ciudad: 'CDMX' },
-                { id: 2, name: 'Darwin', edad: 24, lastName: 'De jesus', ciudad: 'CDMX' },
-                { id: 3, name: 'Vera', edad: 24, lastName: 'Dominguez', ciudad: 'CDMX' },
-                { id: 4, name: 'Emiliano', edad: 24, lastName: 'Silva', ciudad: 'CDMX' },
-                { id: 5, name: 'Derky', edad: 24, lastName: 'Wilner', ciudad: 'CDMX' },
-                { id: 6, name: 'Juan', edad: 24, lastName: 'De La Cruz', ciudad: 'CDMX' },
-            ];
 
 
-            let reduce = personas.reduce((acumulador, actual) => acumulador + actual.edad, 0);
-            console.log(reduce)
-            console.log('asd')
-            console.log(filtro[0].talles)
+        const arrayHashmap = arrayprueba.reduce((obj, item) => {
+            obj[item.idorden] ? obj[item.idorden].talles.push(...item.talles) : (obj[item.idorden] = { ...item });
+            return obj;
+        }, {});
 
-            const data = {
-                id: filtro[0].id,
-                tallas: [
-                    {
-                        id: 0,
-                        name: 'S',
-                        stock: 0,
-                    },
-                    {
-                        id: 1,
-                        name: 'M',
-                        stock: 1,
+        const mergedArray = Object.values(arrayHashmap);
 
-                    },
-                    {
-                        id: 2,
-                        name: 'L',
-                        stock: 1,
-                    },
+        console.log(mergedArray);
 
-                ],
-            }
-            return console.log(data)
-        }
+        const prueba = mergedArray.map(a =>
+            a.talles.filter(b => b.size === 'S').reduce((acc, item) => acc + item.unidades, 0)
+        )
 
+        console.log(prueba)
 
-        cambiar(arrayprueba)
+        setAsd(mergedArray)
+
 
     }, [ventas])
 
@@ -290,17 +261,17 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
                                             )}</td>
                                         <td className='text-textColor text-md font-semibold'>
                                             {
-                                                arrayprueba.map((b, index) =>
-                                                    b.id === a.id && (
-                                                        <p key={index}>{b.talles[1].unidades}</p>)
-
+                                                asd.map(a =>
+                                                    a.talles.filter(b => b.size === 'S').reduce((acc, item) => acc + item.unidades, 0)
                                                 )
+
+                                                
                                             }
 
                                         </td>
                                         <td className='text-textColor text-md font-semibold'>
                                             {
-                                                arrayprueba.map((b, index) =>
+                                                asd.map((b, index) =>
                                                     b.id === a.id && (
                                                         <p key={index}>{b.talles[2].unidades}</p>)
 
@@ -310,7 +281,7 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
                                         </td>
                                         <td className='text-textColor text-md font-semibold'>
                                             {
-                                                arrayprueba.map((b, index) =>
+                                                asd.map((b, index) =>
                                                     b.id === a.id && (
                                                         <p key={index}>{b.talles[0].unidades}</p>)
 

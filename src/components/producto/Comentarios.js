@@ -1,6 +1,6 @@
 import React from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
+
 import Avatar from '../../components/img/avatar.png'
 import Slider from 'react-carousel-responsive';
 import 'react-carousel-responsive/dist/styles.css';
@@ -9,26 +9,12 @@ import Rating from '@mui/material/Rating';
 
 const Comentarios = (c) => {
     const comentarios = c.comentarios
-    const history = useNavigate();
+  
 
-    const navegar = (a) => {
-        console.log(a)
-        history(`/detalle/${a}`)
-    }
+  
 
-    const colores = (a) => {
-        if (a === 'Negro') {
-            return 'black'
-        } if (a === 'Blanco') {
-            return '#F6f6f6'
-        } if (a === 'Verde Menta') {
-            return '#ADDED9'
-        } if (a === 'Morado') {
-            return '#c7acbf'
-        } if (a === 'Azul Petróleo') {
-            return '#47527F'
-        }
-    }
+    
+
 
     return (
         <div className='py-5'>
@@ -41,7 +27,7 @@ const Comentarios = (c) => {
                     >
                         {comentarios.map(a =>
                             <div key={a.id} className='flex items-center justify-center gap-4'>
-                                <img className='flex object-contain h-10' src={Avatar} />
+                                <img className='flex object-contain h-10' alt='avatar' src={Avatar} />
                                 <div className='flex flex-col'>
                                     <p>{a.nombre}</p>
                                     <Rating

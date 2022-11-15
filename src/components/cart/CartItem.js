@@ -9,6 +9,7 @@ let items = [];
 const CartItem = ({ item, setFlag, flag }) => {
   const [{ cartItems }, dispatch] = useStateValue();
   const [qty, setQty] = useState(item[0].unidades);
+  
   const cartDispatch = () => {
     localStorage.setItem("cartItems", JSON.stringify(items));
     dispatch({
@@ -16,6 +17,7 @@ const CartItem = ({ item, setFlag, flag }) => {
       cartItems: items,
     });
   };
+
   const updateQty = (action, id) => {
     if (action == "add") {
       setQty(qty + 1);
@@ -29,7 +31,7 @@ const CartItem = ({ item, setFlag, flag }) => {
     } else {
       // initial state value is one so you need to check if 1 then remove it
       if (qty == 1) {
-        items = cartItems.filter((item) => item[0].item.id !== id);
+        items = cartItems.filter((item) => item[0].item.id != id);
         setFlag(flag + 1);
         cartDispatch();
       } else {
@@ -53,10 +55,10 @@ const CartItem = ({ item, setFlag, flag }) => {
   return (
     <div className="w-full p-4 px-2 rounded-lg shadow-md flex items-center gap-2">
        <img
-        src={item[0].item.color.filter(a => a.name === item[0].colorselected)[0].images[0]}
+        src={item && (item[0].item.color.filter(a => a.name === item[0].colorselected)[0].images[0])}
         className="w-20 h-20 max-w-[60px]  object-contain"
-        alt={item[0].item.name}
-      />
+        alt={item && (item[0].item.name)}
+      /> 
 
       {/* name section */}
       <div className="flex flex-col gap-2">

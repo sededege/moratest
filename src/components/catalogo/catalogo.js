@@ -1,30 +1,31 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useStateValue } from '../context/StateProvider'
 import { actionType } from '.././context/reducer'
-import { databooty } from '.././utils/databooty'
 import Filtros from '../filtros/Filtros'
 import Products2 from './catalogoproducts'
 
 const Catalogo = () => {
-    const [{ cartShow }, dispatch] = useStateValue();
-/*     const [scrollValue, setScrollValue] = React.useState(0)
- */
-    React.useEffect(() => {
-        headerOff()
+    const [  dispatch] = useStateValue();
+
+    useCallback( () => {
+        dispatch({
+            type: actionType.SET_HEADER_SHOW,
+            headerShow: false,
+        })
+
         dispatch({
             type: actionType.SET_DONDE_ESTOY,
             dondeestoy: 'Catalogo'
         })
-    }, []);
+     }, [dispatch]);
 
-
-    const headerOff = () => {
-        dispatch({
-            type: actionType.SET_HEADER_SHOW,
-            headerShow: false,
-        });
-
-    }
+    /* React.useEffect(() => {
+        headerOff()
+       
+    }, [dispatch,headerOff]);
+ */
+    
+  
     return (
         <div>
             <div className='w-full flex h-screen md:px-20 '>

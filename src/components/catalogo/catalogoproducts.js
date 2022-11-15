@@ -1,19 +1,13 @@
 import React from 'react'
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
-import { BsInfoCircleFill } from 'react-icons/bs'
-import { MdArrowForwardIos } from 'react-icons/md'
+
 import { FiShoppingCart } from "react-icons/fi";
 
 import { useStateValue } from '.././context/StateProvider'
-import { actionType } from '.././context/reducer'
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Carrousel from '../home/Carousel'
 
 const Products2 = () => {
-    const [{ products }, dispatch] = useStateValue()
-    const history = useNavigate();
-    const [filtrocolorselect, setFiltroColor] = React.useState("Negro")
-   
+    const [{ products }] = useStateValue()
+  
 
 
     return (

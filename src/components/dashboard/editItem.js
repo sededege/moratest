@@ -1,28 +1,22 @@
 import React, { useState } from 'react'
 import { useStateValue } from '.././context/StateProvider';
 import { motion } from 'framer-motion'
-import { MdFastfood, MdDelete, MdCloudUpload, MdFoodBank, MdAttachMoney } from 'react-icons/md';
-import { categories } from '.././utils/data';
+import {  MdDelete, MdCloudUpload, MdAttachMoney } from 'react-icons/md';
 import Loader from '../utils/Loader';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '../../firebase.config';
 import { actionType } from ".././context/reducer";
-import { deleteImg, getAllProductsItems } from ".././utils/firebaseFunctions";
+import { getAllProductsItems } from ".././utils/firebaseFunctions";
 import { updateItem } from '.././utils/firebaseFunctions';
-import { deleteDataUpdate } from '.././utils/firebaseFunctions';
 import { colors } from '.././utils/data';
 import { categorias } from '.././utils/databooty';
-import { saveItem } from '.././utils/firebaseFunctions';
-import { ChangeCircle } from '@mui/icons-material';
 
 
 const EditItem = ({ titlee }) => {
     const [title, setTitle] = useState("");
-    const [calories, setCalories] = useState("");
     const [fields, setFields] = useState(false);
     const [alertStatus, setAlertStatus] = useState("false");
     const [msg, setMsg] = useState(null);
-    const [subirdata, setSubirData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoading1, setIsLoading1] = useState(false);
     const [isLoading2, setIsLoading2] = useState(false);
@@ -42,8 +36,7 @@ const EditItem = ({ titlee }) => {
     const [colores, setColores] = useState([]);
     const [colorselect, setColorSelect] = useState(null);
     const [{ products, editar }, dispatch] = useStateValue();
-    /* console.log(editar)
-    console.log(products.filter(a => a.id === editar)[0].name) */
+  
 
     React.useEffect(() => {
         setTitle(products.filter(a => a.id === editar)[0].name)
@@ -62,9 +55,7 @@ const EditItem = ({ titlee }) => {
         setS(products.filter(a => a.id === editar)[0].color[0].tallas[0].stock)
         setM(products.filter(a => a.id === editar)[0].color[0].tallas[1].stock)
         setL(products.filter(a => a.id === editar)[0].color[0].tallas[2].stock)
-        /*      setImg(products.filter(a => a.id === editar)[0].imageURL)
-             setId(products.filter(a => a.id === editar)[0].id)  */
-    }, [editar])
+    }, [editar,products])
 
 
     const change = (index) => {
@@ -143,8 +134,6 @@ const EditItem = ({ titlee }) => {
         })
     }
 
-    /*     const myArray = [{ id: 1, name: 'John' }, { id: 2, name: 'Rick' }, { id: 3, name: 'Anna' }];
-     */
 
     const newArr = colores.map(obj => {
         if (obj.name === colorselect) {
@@ -194,7 +183,6 @@ const EditItem = ({ titlee }) => {
         const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`)
         const uploadTask = uploadBytesResumable(storageRef, imageFile)
         uploadTask.on('state_changed', (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             setFields(true)
             setMsg('Error while uploading: Try again')
@@ -223,7 +211,6 @@ const EditItem = ({ titlee }) => {
         const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`)
         const uploadTask = uploadBytesResumable(storageRef, imageFile)
         uploadTask.on('state_changed', (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             setFields(true)
             setMsg('Error while uploading: Try again')
@@ -251,7 +238,6 @@ const EditItem = ({ titlee }) => {
         const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`)
         const uploadTask = uploadBytesResumable(storageRef, imageFile)
         uploadTask.on('state_changed', (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             setFields(true)
             setMsg('Error while uploading: Try again')
@@ -280,7 +266,7 @@ const EditItem = ({ titlee }) => {
     }
     const push = () => {
         setColorSelect(color)
-        if (colores.filter(a => a.name === color) == "") {
+        if (colores.filter(a => a.name === color) === "") {
             setColores(prevState => [...prevState, {
                 id: Date.now(),
                 name: color,
@@ -397,7 +383,6 @@ const EditItem = ({ titlee }) => {
     const clearData = () => {
         setTitle("");
         setImageAsset(null);
-        setCalories("");
         setPrice("");
         setCategory("Select Category");
     };
@@ -506,13 +491,7 @@ const EditItem = ({ titlee }) => {
                                             className={`w-full p-2 rounded-lg text-center text-lg text-semibold ${alertStatus === 'danger' ? 'bg-red-400 text-red-800' : 'bg-emerald-400 text-emerald-800'} `}>{msg}</motion.p>
                                     )
                                 }                </div>
-
-
-                            {/*   <div>
-                    <ReactFirebaseFileUpload/>
-                </div> */}
                             <div className='grid grid-cols-3 gap-4'>
-
                                 <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[20vh] md:h-200 cursor-pointer rounded-lg">
                                     {isLoading ? (
                                         <Loader />
@@ -543,7 +522,7 @@ const EditItem = ({ titlee }) => {
                                                     <div className="relative h-full">
                                                         <img
                                                             src={imageAsset}
-                                                            alt="uploaded image"
+                                                            alt="uploaded"
                                                             className="w-full h-full object-contain"
                                                         />
                                                         <button
@@ -588,7 +567,7 @@ const EditItem = ({ titlee }) => {
                                                     <div className="relative h-full">
                                                         <img
                                                             src={imageAsset1}
-                                                            alt="uploaded image"
+                                                            alt="uploaded"
                                                             className="w-full h-full object-contain"
                                                         />
                                                         <button
@@ -633,7 +612,7 @@ const EditItem = ({ titlee }) => {
                                                     <div className="relative h-full">
                                                         <img
                                                             src={imageAsset2}
-                                                            alt="uploaded image"
+                                                            alt="uploaded"
                                                             className="w-full h-full object-contain"
                                                         />
                                                         <button

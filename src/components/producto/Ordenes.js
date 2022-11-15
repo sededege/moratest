@@ -9,11 +9,15 @@ import { useStateValue } from '../context/StateProvider';
 import { getAllOrders, updatePayment } from '../utils/firebaseFunctions';
 import { useNavigate, useParams } from 'react-router';
 import { FiEye } from 'react-icons/fi';
+import Swal from 'sweetalert2'
 
 const Ordenes = () => {
     const history = useNavigate();
-
+    const type = useParams()
+    const Swal = require('sweetalert2')
     const [{ orders, user }, dispatch] = useStateValue()
+    console.log(orders)
+
     const [expanded, setExpanded] = React.useState(false);
     const [ordenesuser, setOrdenesUser] = React.useState([]);
     const [dataa, setData] = React.useState("");
@@ -41,6 +45,14 @@ const Ordenes = () => {
     };
 
     React.useEffect(() => {
+        if (type.type === 'gracias') {
+            Swal.fire(
+                'Gracias por tu compra!',
+                'Nos comunicaremos contigo a la brevedad para coordinar el retiro!',
+                'success'
+            )
+        }
+
         const options = {
             method: "GET",
             headers: new Headers({ 'content-type': 'application/json' }),
@@ -103,7 +115,7 @@ const Ordenes = () => {
 
 
     return (
-        <div className='gap-6 flex mt-[10vh] flex-col px-20 md:w-[88vw] md:ml-[12vw] '>
+        <div className='gap-6 flex mt-[10vh] px-5 flex-col md:px-20 md:w-[88vw] md:ml-[12vw] '>
             {
 
                 orders != null ? orders.map((a, index) =>
@@ -115,6 +127,7 @@ const Ordenes = () => {
                             paddingRight: 4,
 
                         }}
+                        className='justify-between'
                         expanded={expanded === a.id} onChange={handleChange(a.id)}>
                         <AccordionSummary
 
@@ -134,7 +147,7 @@ const Ordenes = () => {
                                 fontSize: 'bold'
 
                             }}>
-                                Orden {index}
+                                Id {index}
                             </Typography>
                             <Typography sx={{
 
@@ -143,13 +156,15 @@ const Ordenes = () => {
                                 fontSize: 'bold',
 
                             }}>
-                                Estado: <span className={colores(a.status)}>{a.status}</span>
+                                <span className={colores(a.status)}>{a.status}</span>
                             </Typography>
-                            <Typography sx={{
+
+                            <Typography className='hidden md:flex' sx={{
 
                                 width: '55%',
                                 fontFamily: 'Poppins',
-                                fontSize: 'bold'
+                                fontSize: 'bold',
+
 
                             }}>
                                 Total: <span className='font-bold'>{a.total}</span>
@@ -161,7 +176,7 @@ const Ordenes = () => {
                                 fontSize: 'bold'
 
                             }}>
-                                {new Date(a.creado).toLocaleDateString()}
+                                {new Date(a.creado).toLocaleDateString().split("/", 2).join('/')}  {new Date(a.creado).toLocaleTimeString().split(":", 2).join(':')}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -173,7 +188,7 @@ const Ordenes = () => {
                             }}>
 
 
-                                <table className='w-full text-center'>
+                                <table className='w-full text-center text-[0.6rem] md:text-[1rem]'>
                                     <thead>
                                         <tr>
                                             <th>Producto</th>
@@ -210,7 +225,34 @@ const Ordenes = () => {
                                 <p className='font-light text-gray-400'>
                                     Status: {a.status}
                                 </p> */}
+                                <Typography sx={{
 
+                                    width: '55%',
+                                    fontFamily: 'Poppins',
+                                    fontSize: 'bold',
+                                    marginTop: '10px'
+                                }}>
+                                    Pick up: <span className='font-bold'>{a.pickup}</span>
+                                </Typography>
+                                <Typography sx={{
+
+                                    width: '55%',
+                                    fontFamily: 'Poppins',
+                                    fontSize: 'bold',
+
+                                }}>
+                                    Metodo: <span className='font-bold'>{a.metodo}</span>
+                                </Typography>
+                                <Typography  sx={{
+
+                                    width: '55%',
+                                    fontFamily: 'Poppins',
+                                    fontSize: 'bold',
+
+
+                                }}>
+                                    Total: <span className='font-bold'>{a.total}</span>
+                                </Typography>
                             </div>
                         </AccordionDetails>
                     </Accordion>

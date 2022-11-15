@@ -1,30 +1,24 @@
 import React, { useState } from 'react'
 import { useStateValue } from '.././context/StateProvider';
 import { motion } from 'framer-motion'
-import { MdFastfood, MdDelete, MdCloudUpload, MdFoodBank, MdAttachMoney } from 'react-icons/md';
+import {  MdDelete, MdCloudUpload, MdAttachMoney } from 'react-icons/md';
 import { colors } from '.././utils/data';
 import { categorias } from '.././utils/databooty';
-
 import Loader from '../utils/Loader';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '../../firebase.config';
 import { saveItem } from '.././utils/firebaseFunctions';
 import { actionType } from "../../components/context/reducer";
 import { getAllFoodItems } from ".././utils/firebaseFunctions";
-import { data } from 'autoprefixer';
 const CreateContainer = () => {
 
     const [title, setTitle] = useState("");
-    const [calories, setCalories] = useState("");
     const [fields, setFields] = useState(false);
     const [alertStatus, setAlertStatus] = useState("false");
     const [msg, setMsg] = useState(null);
-    const [subirdata, setSubirData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoading1, setIsLoading1] = useState(false);
     const [isLoading2, setIsLoading2] = useState(false);
-
-    const [name, setName] = useState("")
     const [descripcion, setDescription] = useState('Escribe aqui la descripcion');
     const [caracteristicas, setCaracteristicas] = useState('Escribe aqui las caracteristicas');
     const [price, setPrice] = useState("");
@@ -33,7 +27,6 @@ const CreateContainer = () => {
     const [imageAsset1, setImageAsset1] = useState(null);
     const [imageAsset2, setImageAsset2] = useState(null);
     const [color, setColor] = useState("Negro");
-    const [talles, setTalles] = useState("");
     const [qtyS, setS] = useState("");
     const [qtyM, setM] = useState("");
     const [qtyL, setL] = useState("");
@@ -41,10 +34,8 @@ const CreateContainer = () => {
     const [video, setVideo] = useState("");
     const [colores, setColores] = useState([]);
 
-    const [comentarios, setComentarios] = useState("");
 
-
-    const [{ foodItems }, dispatch] = useStateValue();
+    const [ dispatch] = useStateValue();
     const fetchData = async () => {
         await getAllFoodItems().then((data) => {
             dispatch({
@@ -78,7 +69,6 @@ const CreateContainer = () => {
         const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`)
         const uploadTask = uploadBytesResumable(storageRef, imageFile)
         uploadTask.on('state_changed', (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             setFields(true)
             setMsg('Error while uploading: Try again')
@@ -106,7 +96,6 @@ const CreateContainer = () => {
         const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`)
         const uploadTask = uploadBytesResumable(storageRef, imageFile)
         uploadTask.on('state_changed', (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             setFields(true)
             setMsg('Error while uploading: Try again')
@@ -134,7 +123,6 @@ const CreateContainer = () => {
         const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`)
         const uploadTask = uploadBytesResumable(storageRef, imageFile)
         uploadTask.on('state_changed', (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             setFields(true)
             setMsg('Error while uploading: Try again')
@@ -163,7 +151,7 @@ const CreateContainer = () => {
     }
     const push = () => {
 
-        if (colores.filter(a => a.name === color) == "") {
+        if (colores.filter(a => a.name === color) === "") {
             setColores(prevState => [...prevState, {
                 id: Date.now(),
                 name: color,
@@ -309,7 +297,6 @@ const CreateContainer = () => {
     const clearData = () => {
         setTitle("");
         setImageAsset(null);
-        setCalories("");
         setPrice("");
         setCategory("Select Category");
     };
@@ -317,7 +304,6 @@ const CreateContainer = () => {
     return (
         <div className='gap-4 grid grid-cols-4 border h-[90vh] fixed mt-[10vh] ml-[10vw] w-[90vw] px-20 rounded-lg py-10  '>
             <div className='col-span-2 px-10 py-5 flex flex-col justify-between'>
-
                 <div className='grid grid-cols-2 gap-4'>
                     <div className='col-span-2'>
                         <p className='font-semibold text-[14px] text-booty'>Nombre</p>
@@ -450,7 +436,7 @@ const CreateContainer = () => {
                                         <div className="relative h-full">
                                             <img
                                                 src={imageAsset}
-                                                alt="uploaded image"
+                                                alt="uploaded"
                                                 className="w-full h-full object-contain"
                                             />
                                             <button
@@ -495,7 +481,7 @@ const CreateContainer = () => {
                                         <div className="relative h-full">
                                             <img
                                                 src={imageAsset1}
-                                                alt="uploaded image"
+                                                alt="uploaded"
                                                 className="w-full h-full object-contain"
                                             />
                                             <button
@@ -540,7 +526,7 @@ const CreateContainer = () => {
                                         <div className="relative h-full">
                                             <img
                                                 src={imageAsset2}
-                                                alt="uploaded image"
+                                                alt="uploaded"
                                                 className="w-full h-full object-contain"
                                             />
                                             <button

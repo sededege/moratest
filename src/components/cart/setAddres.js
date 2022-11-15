@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useStateValue } from '.././context/StateProvider';
 import { actionType } from '.././context/reducer';
 import { getAllUsuarios } from '../utils/firebaseFunctions';
 import { saveAddres } from '.././utils/firebaseFunctions';
-import { getAllFoodItems } from '../utils/firebaseFunctions';
 import { updateAddres } from '.././utils/firebaseFunctions';
 import { motion } from 'framer-motion'
 
 const SetAddres = () => {
-    const [{ user, editShow, users }, dispatch] = useStateValue();
+    const [{ user, users }, dispatch] = useStateValue();
     const [alias, setAlias] = React.useState(null)
     const [dire, setDire] = React.useState(null)
     const [puerta, setPuerta] = React.useState(null)
@@ -19,14 +18,8 @@ const SetAddres = () => {
     const [fields, setFields] = useState(false);
     const [alertStatus, setAlertStatus] = useState("false");
     const [msg, setMsg] = useState(null);
-    React.useEffect(() => {
 
-        recargar()
-
-    }, [user, users])
-
-
-    const recargar = () => {
+    const recargar = useCallback( () => {
         if (users && user) {
             const existeusuario = users.filter(a => a.user === user.email);
             setExisteUsuario(users.filter(a => a.user === user.email))
@@ -42,7 +35,9 @@ const SetAddres = () => {
 
             }
         }
-    }
+     }, [ user, users]);
+    
+
 
     const cerrarEdit = () => {
         dispatch({
@@ -114,18 +109,7 @@ const SetAddres = () => {
             fetchUsers()
             recargar()
         }
-        /* if 
-        (user.email == users.user) {
-            const data = {
-                id: users.id,
-                alias: alias,
-                dire: dire,
-                puerta: puerta,
-                apto: apto,
-                barrio: barrio,
-                user: user.email,
-            }
-            updateAddres(data) */
+        
     }
 
 

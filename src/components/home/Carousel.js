@@ -1,14 +1,9 @@
 import React from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
-import { AnimatePresence, motion } from "framer-motion";
-import { FiShoppingCart } from 'react-icons/fi';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom'
+import { motion } from "framer-motion";
 import { useStateValue } from '../context/StateProvider';
-import { Favorite } from '@mui/icons-material';
-import zIndex from '@mui/material/styles/zIndex';
-
 const Carrousel = (c) => {
     const [{ favoritos }, dispatch] = useStateValue();
     const history = useNavigate();
@@ -22,11 +17,6 @@ const Carrousel = (c) => {
     }, [favoritos])
 
 
-    const agregar = (a) => {
-        console.log(a)
-        console.log('asd')
-    }
-    const [selected, setSelected] = React.useState('')
     const navegar = (a) => {
         history(`/detalle/${a}`)
 
@@ -68,14 +58,12 @@ const Carrousel = (c) => {
                     marginTop: 5,
                     border: '1px solid white',
 
-                    //borderColor: colores(color[index])
                 }
                 const style = isSelected
                     ? { ...defStyle, border: 'solid 2px white' }
                     : { ...defStyle };
 
-/*                    const prueba = isSelected ? console.log(c.imagenes[index].color) : <></>
- */                return (
+                return (
                     <div
                         style={style}
                         onClick={onClickHandler}

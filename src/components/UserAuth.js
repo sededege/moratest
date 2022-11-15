@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-/* import { MdOutlineHome, MdOutlineChat, MdFavoriteBorder, MdHistory, MdSettings, MdLogout } from "react-icons/md";
- */
-import * as MaterialDesign from 'react-icons/md';
-import * as BoxIcons from 'react-icons/';
-import { menu } from './utils/data'
+
 import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
 import { motion } from "framer-motion";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -31,22 +27,7 @@ const UserAuth = () => {
 
     }
 
-    const login = async () => {
-        /* if (!user) {
-            const {
-                user: { refreshToken, providerData },
-            } = await signInWithPopup(firebaseAuth, provider);
-            dispatch({
-                type: actionType.SET_USER,
-                user: providerData[0],
-            });
-            localStorage.setItem("user", JSON.stringify(providerData[0]));
-        } else {
-            setIsMenu(!isMenu);
-        } */
-        
-    };
-
+   
     const logout = () => {
         setIsMenu(false);
         localStorage.clear();

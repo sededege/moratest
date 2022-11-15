@@ -1,69 +1,52 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
-import { BsInfoCircleFill } from 'react-icons/bs'
-import { MdArrowForwardIos } from 'react-icons/md'
-import { FiShoppingCart } from "react-icons/fi";
-import { FiHeart } from 'react-icons/fi';
 import { useStateValue } from '.././context/StateProvider'
-import { actionType } from '.././context/reducer'
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Carrousel from './Carousel'
 import { updateFavoritos } from '../utils/firebaseFunctions';
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Products = () => {
-    const [{ products, favoritos, user }, dispatch] = useStateValue()
-    const history = useNavigate();
+    const [{ products, favorite }] = useStateValue()
     const [prueba, setPrueba] = React.useState("")
 
     React.useEffect(() => {
-        if (favoritos && prueba === "") {
-            setPrueba(favoritos.map(a => a.favoritos))
+        if (favorite && prueba === '') {
+
+            setPrueba(favorite.map(a => a.favoritos))
+ 
         }
 
-        if (prueba) {
+        if (prueba && favorite) {
 
             const data = {
-                id: favoritos[0].id,
+                id: favorite[0].id,
                 favoritosadd: prueba[0]
             }
-            updateFavoritos(data)
 
-           
+            updateFavoritos(data)
 
         }
 
 
+    }, [favorite])
 
-        console.log(prueba[0])
-    }, [favoritos, prueba])
+
+
+
 
 
 
     const agregar = (a) => {
-
-        const data = {
-            id: favoritos[0].id,
-            favoritosadd: prueba[0]
-        }
-
         if (prueba[0].indexOf(a) !== -1) {
             console.log('toy')
-
             const eliminar = prueba[0].filter(b => b !== a)
             setPrueba([eliminar])
 
-            /* setPrueba(eliminar) */
-
-
-            /*  updateFavoritos(data) */
 
         } else {
             const aber = prueba[0]
             aber.push(a)
             setPrueba([aber])
-
-
         }
 
         return console.log(prueba[0])

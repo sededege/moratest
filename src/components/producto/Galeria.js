@@ -4,13 +4,15 @@ import { MdOutlineArrowLeft, MdOutlineArrowRight } from 'react-icons/md'
 
 const Galeria = (a) => {
     const [images2, setImages2] = React.useState([])
+    
     React.useEffect(() => {
+console.log(a.filtrocolor)
          if (a.images && a.filtrocolor) {
             const colorgaleria = a.images.filter(d => d.name === a.filtrocolor)
             if (colorgaleria[0].images) {
                 setImages2("")
                 colorgaleria[0].images.forEach((el, index) => {
-                    el != null ? setImages2(prevState => [...prevState, { original: el, thumbnail: el }]) : console.log('no hago nada')
+                    el != null && (setImages2(prevState => [...prevState, { original: el, thumbnail: el }]))
 
                 })
             }  if (colorgaleria[0].video != ""){
@@ -23,15 +25,10 @@ const Galeria = (a) => {
        
 
     }, [a])
+
     const src =
         "https://i.imgur.com/AUhyLbb.mp4";
-    const rellenar = (colorgaleria) => {
-
-    }
-    /*     console.log(images2)
-     */
-    /*     { original: element, thumbnail: element }
-     */
+  
 
     const LeftNav = React.memo(({
         disabled,
@@ -68,10 +65,7 @@ const Galeria = (a) => {
 
 
     const renderVideo = (item) => {
-        const opts = {
-            height: '100%',
-            width: '100%'
-        };
+
         return (
             <div className='image-gallery-image video'>
                 <video controls width="100%" height='100%'>
@@ -81,31 +75,7 @@ const Galeria = (a) => {
         );
     }
 
-    const images = [
-        
-          {
-              original: 'https://img.ltwebstatic.com/images3_pi/2022/03/09/164682884147302453623aedc2a6c15657212f777b_thumbnail_900x.webp',
-              thumbnail: 'https://img.ltwebstatic.com/images3_pi/2022/03/09/164682884147302453623aedc2a6c15657212f777b_thumbnail_900x.webp',
-  
-          },
-         {
-             original: 'https://img.ltwebstatic.com/images3_pi/2022/03/09/164682884147302453623aedc2a6c15657212f777b_thumbnail_900x.webp',
-             thumbnail: 'https://img.ltwebstatic.com/images3_pi/2022/03/09/164682884147302453623aedc2a6c15657212f777b_thumbnail_900x.webp',
- 
-         }, 
-        {
-            /*             original: 'https://img.ltwebstatic.com/images3_pi/2022/03/09/164682884147302453623aedc2a6c15657212f777b_thumbnail_900x.webp',
-             */
-            thumbnail: 'https://i.imgur.com/7OfaNkD.jpeg',
-            renderItem: () => renderVideo(),
-        },
-        /*   {
-              original: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
-              thumbnail: 'https://img.ltwebstatic.com/images3_pi/2022/03/09/164682884147302453623aedc2a6c15657212f777b_thumbnail_900x.webp',
-  
-          }, */
-
-    ];
+    
 
 
     return (

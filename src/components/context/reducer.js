@@ -14,7 +14,7 @@ export const actionType = {
   SET_DONDE_ESTOY: 'SET_DONDE_ESTOY',
   SET_CATEGORY: 'SET_CATEGORY',
   SET_ORDERS: 'SET_ORDERS',
-  SET_FAVORITOS: 'SET_FAVORITOS',
+  SET_FAVORITE: 'SET_FAVORITE',
   SET_LOGIN_SHOW: 'SET_LOGIN_SHOW'
 };
 
@@ -101,10 +101,10 @@ const reducer = (state, action) => {
         ...state,
         orders: action.orders,
       };
-    case actionType.SET_FAVORITOS:
+    case actionType.SET_FAVORITE:
       return {
         ...state,
-       favoritos: action.favoritos,
+       favorite: action.favorite,
       };
     case actionType.SET_LOGIN_SHOW:
       return {

@@ -8,20 +8,18 @@ import { useNavigate } from 'react-router'
 
 const Favoritos = () => {
 
-    const [{ products, favoritos }, dispatch] = useStateValue()
+    const [{ products, favorite }, dispatch] = useStateValue()
     const [existeuser, setExisteUsuario] = React.useState(null)
-    /* console.log(user)
-    console.log(users)
- */
+   
 
 
 
     React.useEffect(() => {
-        console.log(favoritos)
-        if (favoritos) {
-            setExisteUsuario(favoritos)
+       
+        if (favorite && favorite != "") {
+            setExisteUsuario(favorite)
         }
-    }, [favoritos])
+    }, [favorite])
 
 
     const productos = (c) => {

@@ -3,8 +3,6 @@ import { MdAdd, MdLogout } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiFillHeart } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { app } from "../.././firebase.config";
 import { HiMenuAlt2, HiSearch } from 'react-icons/hi'
 import Logo from "../img/logo.png";
 import Avatar from "../img/avatar.png";
@@ -12,21 +10,16 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { useNavigate } from 'react-router-dom'
-import { BsInstagram } from "react-icons/bs";
-import { width } from "@mui/system";
 
 const Header = () => {
-  const firebaseAuth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+
   const history = useNavigate();
   const [{ user, cartShow, cartItems, dondeestoy }, dispatch] = useStateValue();
   const [isOpen, setIsOpen] = useState(false)
   const [isMenu, setIsMenu] = useState(false);
 
 
-  /* React.useEffect(() => {
-   console.log(headerShow)
-  }, [headerShow]) */
+
 
   const abrirEdit = () => {
 
@@ -46,18 +39,7 @@ const Header = () => {
   }
 
   const login = async () => {
-    /*    if (!user) {
-         const {
-           user: { refreshToken, providerData },
-         } = await signInWithPopup(firebaseAuth, provider);
-         dispatch({
-           type: actionType.SET_USER,
-           user: providerData[0],
-         });
-         localStorage.setItem("user", JSON.stringify(providerData[0]));
-       } else {
-         setIsMenu(!isMenu);
-       }  */
+   
     if (!user) {
       dispatch({
         type: actionType.SET_LOGIN_SHOW,
@@ -96,13 +78,7 @@ const Header = () => {
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <></>
-        {/*  <motion.div
-          whileTap={{ scale: 0.6 }}
-          onClick={headerShow}
-          className='flex gap-2 justify-center items-center  p-2 rounded-lg cursor-pointer'
-        >
-          <HiMenuAlt2 className="font-bold text-2xl text-textColor" />
-        </motion.div> */}
+        
 
         {
           dondeestoy !== 'Detalle' ?
@@ -120,10 +96,7 @@ const Header = () => {
               </label>
             </div> : <div></div>
         }
-        {/*  <div className="flex gap-2 items-center">
-          Seguinos en <BsInstagram />
-        </div> */}
-
+       
 
 
 

@@ -17,9 +17,9 @@ const FiltrosHome = () => {
 
     React.useEffect(() => {
 
-        getAllProductsItems().then((data) => {
+       getAllProductsItems().then((data) => {
             setProducts2(data)
-        })
+        }) 
 
         console.log(products2)
     }, [])
@@ -44,7 +44,7 @@ const FiltrosHome = () => {
                     type: actionType.SET_PRODUCTS,
                     products: b != 'todas' ? products2.filter(a => a.categoria === b).sort(() => Math.random() - 0.5) : products2.sort(() => Math.random() - 0.5),
                 });
-            }, 1000);
+            }, 100);
             
            
             
