@@ -56,6 +56,7 @@ module.exports = {
         cartTotal: "#343739",
         bghome: '#f9f9fb',
         booty: '#C297D3',
+       /*  booty: 'purple-500', */
         booty1: '#CDF0EA',
         booty2: '#F9F9F9',
         booty3: '#ECC5FB',

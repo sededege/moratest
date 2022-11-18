@@ -6,6 +6,7 @@ import Banner from '../img/banner.jpg'
 import FiltrosHome from './FiltrosHome'
 import Footer from './Footer'
 import { AnimatePresence, motion } from 'framer-motion'
+import CarrouselHome from './Carouselhome'
 
 const MainContainer = () => {
     const [{ cartShow }, dispatch] = useStateValue();
@@ -26,8 +27,9 @@ const MainContainer = () => {
 
     return (
         <div className='w-full flex h-screen md:px-20 mt-[10vh] '>
-            <div className='gap-6 flex flex-col w-[100vw] md:w-full md:ml-[12vw] h-[100vh]  px-5 md:px-0'>
-                <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
+            <div className='gap-6 flex flex-col w-[100vw] md:w-full  h-[100vh]  px-5 md:px-0'>
+{/*                 <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
+ */}                <CarrouselHome />
                 <FiltrosHome />
                 <AnimatePresence>
                     <motion.div>

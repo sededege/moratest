@@ -197,7 +197,7 @@ const CartContainer = () => {
       }}
 
 
-      className="fixed z-[10] top-0 right-0 w-[86vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
+      className="fixed z-[10] top-0 right-0 w-[100vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
     >
       <div className="w-full  z-[10] flex items-center justify-between p-4 cursor-pointer">
         <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>

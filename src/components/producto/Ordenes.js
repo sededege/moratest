@@ -115,7 +115,7 @@ const Ordenes = () => {
 
 
     return (
-        <div className='gap-6 flex mt-[10vh] px-5 flex-col md:px-20 md:w-[88vw] md:ml-[12vw] '>
+        <div className='gap-6 flex mt-[10vh] px-5 flex-col md:px-20  '>
             {
 
                 orders != null ? orders.map((a, index) =>

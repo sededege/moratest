@@ -1,7 +1,8 @@
 import React from 'react'
 import ImageGallery from 'react-image-gallery';
 import { MdOutlineArrowLeft, MdOutlineArrowRight } from 'react-icons/md'
-
+import { motion } from 'framer-motion';
+ 
 const Galeria = (a) => {
     const [images2, setImages2] = React.useState([])
     React.useEffect(() => {
@@ -77,7 +78,10 @@ const Galeria = (a) => {
 
 
     return (
-        <div className='md:w-[40vw] w-[100vw] md:items-center flex flex-col justify-center'>
+        <motion.div 
+        initial={{opacity: 0}}
+       animate={{opacity: 1}}
+       className='md:w-[40vw] w-[100vw] md:items-center flex flex-col justify-center'>
             <ImageGallery
                 showPlayButton={false}
                 showFullscreenButton={false}
@@ -96,7 +100,7 @@ const Galeria = (a) => {
             {/*  <video controls width="100%">
                 <source src={src} type="video/mp4" />
             </video>  */}
-        </div>
+        </motion.div>
     )
 }
 

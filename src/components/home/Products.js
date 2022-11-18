@@ -3,19 +3,19 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { useStateValue } from '.././context/StateProvider'
 import Carrousel from './Carousel'
 import { updateFavoritos } from '../utils/firebaseFunctions';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m, motion } from 'framer-motion';
+import { actionType } from '../context/reducer';
 
 const Products = () => {
-    const [{ products, favorite }] = useStateValue()
+    const [{ products, favorite }, dispatch] = useStateValue()
     const [prueba, setPrueba] = React.useState("")
 
     React.useEffect(() => {
         if (favorite && prueba === '') {
 
             setPrueba(favorite.map(a => a.favoritos))
- 
+           
         }
-
         if (prueba && favorite) {
 
             const data = {
@@ -24,11 +24,10 @@ const Products = () => {
             }
 
             updateFavoritos(data)
-
+          
         }
-
-
-    }, [favorite])
+      
+    }, [ products, prueba])
 
 
 
@@ -93,7 +92,7 @@ const Products = () => {
                                     </div>
 
                                     <div className='flex h-full justify-between  items-center '>
-                                        <p className='font-bold text-[1.2rem] text-black'>$ {a.precio}</p>
+                                        <p className='text-[1.2rem] text-black'>$ {a.precio}</p>
                                         {/*                                         <MdArrowForwardIos className='text-[2rem] text-booty bg-bghome p-2 rounded-full ' />
  */}
 

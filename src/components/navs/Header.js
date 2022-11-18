@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { useNavigate } from 'react-router-dom'
-
+import { GoListUnordered } from 'react-icons/go'
 const Header = () => {
 
   const history = useNavigate();
@@ -39,7 +39,7 @@ const Header = () => {
   }
 
   const login = async () => {
-   
+
     if (!user) {
       dispatch({
         type: actionType.SET_LOGIN_SHOW,
@@ -69,16 +69,16 @@ const Header = () => {
   };
 
   const variants = {
-    open: { width: 300, marginLeft:40 },
-    closed: { width: 0,  },
+    open: { width: 300, marginLeft: 40 },
+    closed: { width: 0, },
   }
 
   return (
-    <header className={`md:w-[80vw] md:ml-[16vw] w-[100vw] px-5  top-0 h-[10vh] fixed bg-white z-[3] '  `}>
+    <header className={`md:px-20 w-[100vw] px-5  top-0 h-[10vh] fixed bg-white z-[3] '  `}>
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
-        <></>
-        
+
+
 
         {
           dondeestoy !== 'Detalle' ?
@@ -96,43 +96,35 @@ const Header = () => {
               </label>
             </div> : <div></div>
         }
-       
 
 
+        <Link to={"/Home"} className="flex  items-center gap-2 fixed left-[calc(50%-40px)]">
+          <img src={Logo} className="w-20 object-cover" alt="ß" />
+        </Link>
 
 
         <div className="flex items-center gap-8">
-          <motion.ul
-            initial={{ opacity: 0, x: 200 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 200 }}
-            className="flex items-center gap-24 "
-          >
-            {/*  <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              Inicio
-            </li>
-            <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              Sobre Nosotros
-            </li> */}
-          </motion.ul>
 
-
-          <div
-            className="relative flex items-center justify-center  cursor-pointer"
-
-          >
-            {/*               <RiNotification4Line className="text-textColor text-2xl  cursor-pointer" />
- */}
-
+          <div className="relative flex items-center justify-center  cursor-pointer">
             {
-              dondeestoy === "Dashboard" ? <></> : <div className="flex gap-4">
-                <AiFillHeart onClick={() => history(`/Favoritos`)} className="text-booty text-2xl  cursor-pointer" />
-                <FiShoppingCart onClick={showCart} className="text-textColor text-2xl  cursor-pointer" />
-              </div>
+              dondeestoy === "Dashboard" ? <></> :
+                <div className="flex gap-4">
+                  <motion.span
+                    whileTap={{ scale: 0.75 }}>
+                    <GoListUnordered onClick={() => history(`/Ordenes/Ver`)} className="text-booty text-2xl  cursor-pointer" />
+
+                  </motion.span>
+                  <motion.span
+                    whileTap={{ scale: 0.75 }}>
+                    <AiFillHeart onClick={() => history(`/Favoritos`)} className="text-booty text-2xl  cursor-pointer" />
+
+                  </motion.span>
+                  <motion.span
+                    whileTap={{ scale: 0.75 }}>
+                    <FiShoppingCart onClick={showCart} className="text-textColor text-2xl  cursor-pointer" />
+                  </motion.span>
+                </div>
             }
-
-
-
 
             {cartItems && cartItems.length > 0 && (
               <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-booty flex items-center justify-center">
@@ -192,18 +184,27 @@ const Header = () => {
 
       {/* mobile */}
       <div className="flex items-center justify-between md:hidden w-full h-full ">
-        <motion.div
-          whileTap={{ scale: 0.6 }}
-          onClick={headerShow}
-        >
-          <HiMenuAlt2 className="font-bold text-2xl" />
-        </motion.div>
+      
 
         <Link to={"/Home"} className="flex items-center gap-2">
-          <img src={Logo} className="w-20 object-cover ml-8" alt="logo" />
+          <img src={Logo} className="w-20 object-cover" alt="logo" />
         </Link>
 
         <div className="flex gap-4 relative">
+
+          <div className="flex items-center gap-2">
+            <motion.span
+              whileTap={{ scale: 0.75 }}>
+              <GoListUnordered onClick={() => history(`/Ordenes/Ver`)} className="text-booty text-2xl  cursor-pointer" />
+
+            </motion.span>
+            <motion.span
+              whileTap={{ scale: 0.75 }}>
+              <AiFillHeart onClick={() => history(`/Favoritos`)} className="text-booty text-2xl  cursor-pointer" />
+
+            </motion.span>
+            
+          </div>
           <div
             className="relative flex items-center justify-center"
             onClick={showCart}

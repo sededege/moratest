@@ -13,7 +13,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import mp from '../../components/img/mp.webp'
 import efectivo from '../../components/img/efectivo.png'
-
+import { motion } from 'framer-motion';
 
 
 
@@ -48,13 +48,13 @@ const Detalle = () => {
         console.log(products)
         if (products && products.length > 0) {
             setThisProduct(products.find(prod => String(prod.id) === String(productId)))
-          
-    
+
+
         }
         if (items && items.length > 0) {
             addtocart();
         }
-     
+
         if (thisProduct != "") {
             setFiltroColor(thisProduct.color[0].name)
         }
@@ -140,8 +140,8 @@ const Detalle = () => {
             {/*     escritorio */}
 
             <div className='fixed'>
-                <div className='md:w-[80vw] md:flex hidden w-[100vw] md:ml-[10vw] md:px-20 justify-start mt-[10vh] overflow-hidden'>
-                    <nav className="flex p-2 ml-4" aria-label="Breadcrumb" >
+                <div className=' md:flex hidden w-[100vw]  md:px-20 justify-start mt-[9vh] overflow-hidden'>
+                    <nav className="flex p-2 " aria-label="Breadcrumb" >
                         <ol className="inline-flex items-center space-x-1 md:space-x-3">
                             <li className="inline-flex items-center">
                                 <div onClick={() => history(`/Home`)} className="inline-flex items-center text-sm font-regular text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
@@ -162,7 +162,7 @@ const Detalle = () => {
                 </div>
                 {
                     thisProduct ?
-                        <div className='md:flex hidden  md:w-[80vw] w-[100vw] h-full px-5 md:px-20 md:ml-[11vw]'>
+                        <div className='md:flex hidden   w-[100vw] h-full px-5 md:px-20 '>
                             <div className='flex '>
 
                                 <Galeria images={thisProduct.color} filtrocolor={filtrocolorselect} />
@@ -173,7 +173,7 @@ const Detalle = () => {
 
                                 {
                                     toggle === 'Info' ?
-                                        <div className=' md:w-[35vw]  p-5 h-full '>
+                                        <div className='   p-5 h-full '>
 
                                             <div className='flex flex-col gap-6'>
                                                 <div className='flex  gap-6'>
@@ -241,7 +241,7 @@ const Detalle = () => {
                                                             {
                                                                 thisProduct.color && filtrocolorselect ? thisProduct.color.filter(a => a.name === filtrocolorselect)[0].tallas.map(a => (
                                                                     a.stock > 0 ?
-                                                                        <div key={a.id} onClick={() => setSelectedSize(a.name)} className={` ${selectedsize === a.name ? 'text-white bg-booty' : 'bg-white border-2'}  flex cursor-pointer w-8 h-8 rounded-lg  items-center justify-center`}>
+                                                                        <div key={a.id} onClick={() => setSelectedSize(a.name)} className={` ${selectedsize === a.name ? 'text-white bg-booty' : 'bg-white border-2'}  flex cursor-pointer w-8 h-8 rounded-lg  items-center justify-center transition-all ease-in-out `}>
                                                                             <p className='cursor-pointer  '>{a.name}</p>
                                                                         </div> : <div key={a.id} className='bg-gray-200 border-2 flex cursor-pointer w-8 h-8 rounded-lg  items-center justify-center'>
                                                                             <p className='cursor-pointer text-gray-400'>{a.name}</p>
@@ -256,15 +256,19 @@ const Detalle = () => {
                                                     <div className='flex flex-col gap-4 '>
                                                         <p className='font-semibold text-textColor'>Unidades</p>
                                                         <div className='flex  gap-4'>
-                                                            <div onClick={cantidad > 1 && (() => setCantidad(cantidad - 1))} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
+                                                            <motion.div
+                                                                whileTap={{ scale: 0.75 }}
+                                                                onClick={cantidad > 1 && (() => setCantidad(cantidad - 1))} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
                                                                 <p className='cursor-pointer text-white font-bold'>-</p>
-                                                            </div>
-                                                            <div className='flex cursor-pointer w-8 h-8 rounded-lg border-2 items-center justify-center'>
+                                                            </motion.div>
+                                                            <motion.div className='flex cursor-pointer w-8 h-8 rounded-lg border-2 items-center justify-center'>
                                                                 <p className='cursor-pointer'>{cantidad}</p>
-                                                            </div>
-                                                            <div onClick={() => setCantidad(cantidad + 1)} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
+                                                            </motion.div>
+                                                            <motion.div
+                                                                whileTap={{ scale: 0.75 }}
+                                                                onClick={() => setCantidad(cantidad + 1)} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
                                                                 <p className='text-white font-bold'>+</p>
-                                                            </div>
+                                                            </motion.div>
                                                         </div>
                                                     </div>
 
@@ -417,12 +421,16 @@ const Detalle = () => {
                                                     </div>
 
 
-                                                    <div className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
+                                                    <motion.div
+                                                        whileTap={{ scale: 0.75 }}
+                                                        className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
                                                         <button className='text-gray-400 group-hover:text-white'>Añadir a deseados</button>
-                                                    </div>
-                                                    <div onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
+                                                    </motion.div>
+                                                    <motion.div
+                                                        whileTap={{ scale: 0.75 }}
+                                                        onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
                                                         <span className='text-white group-hover:text-booty'>Añadir al carro</span>
-                                                    </div>
+                                                    </motion.div>
 
                                                 </div>
                                             </div>
@@ -467,7 +475,7 @@ const Detalle = () => {
                 </div>
                 {
                     thisProduct ?
-                        <div className='flex flex-col md:hidden  w-[100vw] border-2 h-full px-5 '>
+                        <div className='flex flex-col md:hidden  w-[100vw] h-full '>
                             <div className='flex '>
 
                                 <Galeria2 images={thisProduct.color} filtrocolor={filtrocolorselect} />
@@ -745,14 +753,16 @@ const Detalle = () => {
                                                         <p className='text-purple-300 font-bold text-[1.5rem] w-[80px]'>$ {thisProduct.precio}</p>
                                                     </div>
 
-
-                                                    <div className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
-                                                        <button className='text-gray-400 group-hover:text-white font-semibold'>Añadir a deseados</button>
-                                                    </div>
-                                                    <div onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex hover:cursor-pointer rounded-lg hover:bg-white hover:border-booty hover:border-2 '>
-                                                        <span className='text-white group-hover:text-booty font-semibold align-center text-center'>Añadir al carro</span>
-                                                    </div>
-
+                                                    <motion.div
+                                                        whileTap={{ scale: 0.75 }}
+                                                        className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
+                                                        <button className='text-gray-400 group-hover:text-white'>Añadir a deseados</button>
+                                                    </motion.div>
+                                                    <motion.div
+                                                        whileTap={{ scale: 0.75 }}
+                                                        onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
+                                                        <span className='text-white group-hover:text-booty'>Añadir al carro</span>
+                                                    </motion.div>
                                                 </div>
                                             </div>
                                         </div> : <Comentarios comentarios={thisProduct.comentarios} />
