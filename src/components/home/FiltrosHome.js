@@ -19,11 +19,11 @@ const FiltrosHome = () => {
     const [colores, setColores2] = useState([])
 
     const variants = {
-        open: { width: '100%', height: 400 },
-        closed: { width: 0, height: 0, opacity: 0 },
+        open: { width: '100%', height: 400, opacity: 1 },
+        closed: { width: 0, height: 0, fontSize: '2px', opacity: 0 },
     }
     const variants2 = {
-        open: { width: 300, height: 400 },
+        open: { width: 300, height: 400, opacity: 1  },
         closed: { width: 0, height: 0, opacity: 0 },
     }
 
@@ -116,7 +116,7 @@ const FiltrosHome = () => {
                         categorias.map((a, index) =>
                             <motion.li
                                 whileTap={{ scale: 0.3 }}
-                                key={index} onClick={() => categoria(a.param)} className={` ${filtros === a.param ? 'text-white bg-booty text-semibold' : 'text-gray-400 cursor-pointer hover:border-2 bg-gray-100   hover:border-gray-200 box-border border-2 border-white'} : flex rounded-lg  md:w-[140px] opacity-70 items-center justify-center transition-all ease-in-out 2s`} >{a.name}</motion.li>
+                                key={index} onClick={() => categoria(a.param)} className={` ${filtros === a.param ? 'text-white bg-booty text-semibold' : 'text-gray-400 text-[1rem] cursor-pointer hover:border-2 bg-gray-100   hover:border-gray-200 box-border border-2 border-white'} : flex rounded-lg  md:w-[100px] opacity-70 items-center justify-center transition-all ease-in-out 2s`} >{a.name}</motion.li>
                         )
                     }
                 </ul>
@@ -128,14 +128,15 @@ const FiltrosHome = () => {
                     <RiFilter2Fill />
                 </motion.div>
                 <motion.div
+                    initial={{ opacity: 0 }}
                     animate={isOpen ? "open" : "closed"}
                     transition={{ ease: "easeIn", duration: 0.4 }}
-                    variants={variants}
-                    className='absolute shadow-lg w-[30vw] rounded-lg items-center p-5 bg-white h-[40vh] mt-[50px] z-20 right-0'>
+                    variants={variants2}
+                    className='absolute shadow-lg w-[30vw]  rounded-lg items-center p-5 bg-white  mt-[50px] z-20 right-0'>
                     <p>Color</p>
                     <ul>
                         {
-                            colores.map(a => <li onClick={() => filtrarcolor(a)}>{a}</li>)
+                            colores.map(a => <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
                         }
 
                     </ul>
@@ -156,34 +157,32 @@ const FiltrosHome = () => {
                         <RiFilter2Fill />
                     </motion.div>
                 </div>
-               
 
 
-                <motion.div
-                    animate={isOpen ? "open" : "closed"}
-                    transition={{ ease: "easeIn", duration: 0.4 }}
-                    variants={variants}
-                    className='absolute shadow-lg w-[100vw] rounded-lg items-center p-5 bg-white h-[40vh] mt-[50px] z-20 right-0'>
-                    <p className='font-bold'>Color</p>
-                    <ul>
-                        {
-                            colores.map(a => <li onClick={() => filtrarcolor(a)}>{a}</li>)
-                        }
+                {
 
-                    </ul>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={isOpen ? "open" : "closed"}
+                        exit={{ opacity: 0 }}
+                        transition={{ ease: "easeIn", duration: 0.2 }}
+                        variants={variants}
+                        className='absolute shadow-lg w-0 rounded-lg items-center p-5 bg-white h-[40vh] mt-[50px] z-20 right-0'>
+                        <p className='font-bold'>Color</p>
+                        <ul>
+                            {
+                                colores.map(a => <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
+                            }
 
-                    <p className='font-bold'>Price</p>
-                    <ul ref={titleRef} className='flex overflow-auto gap-2 cursor-pointer h-[50px]  '>
-                    {
-                        categorias.map((a, index) =>
-                            <motion.li
-                                whileTap={{ scale: 0.3 }}
-                                key={index} onClick={() => categoria(a.param)} className={` ${filtros === a.param ? 'text-white bg-booty text-semibold' : 'text-gray-400 cursor-pointer hover:border-2 bg-gray-100   hover:border-gray-200 box-border border-2 border-white'} : flex rounded-lg px-10 md:w-[100px] opacity-70 items-center justify-center transition-all ease-in-out 2s`} >{a.name}</motion.li>
-                        )
-                    }
-                </ul>
+                        </ul>
 
-                </motion.div>
+                        <p className='font-bold'>Price</p>
+
+
+                    </motion.div>
+
+                }
+
 
             </div >
         </>
