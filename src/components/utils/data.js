@@ -181,6 +181,10 @@ export const colors = [
     id: 7,
     name: "Blue",
   },
+  {
+    id: 8,
+    name: "Celeste",
+  },
 
   
 

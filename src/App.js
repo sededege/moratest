@@ -25,7 +25,7 @@ import ScrollToTop from "./components/utils/scrolltotop";
 import ShowLogin from "./components/home/login";
 
 function App() {
-  const [{ headerShow, cartShow, editShow,favorite, loginShow, user, products}, dispatch] = useStateValue();
+  const [{ headerShow,dondeestoy, cartShow, editShow,favorite, loginShow, user, products}, dispatch] = useStateValue();
   const [load, upadateLoad] = React.useState(true);
 
   const fetchData = useCallback(() => {
@@ -91,9 +91,9 @@ function App() {
           )}
         </AnimatePresence>
         <Header />
-        {/* {
-          headerShow && (<Headerleft />)
-        } */}
+         {
+          dondeestoy === 'Dashboard' && (<Headerleft />)
+        } 
         <Pre load={load} />
         <ScrollToTop />
         <Routes location={location} key={location.pathname}>

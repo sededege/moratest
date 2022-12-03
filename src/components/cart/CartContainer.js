@@ -85,8 +85,8 @@ const CartContainer = () => {
     })
     )
     const dataa = {
-      id: `${Date.now()} `,
-      creado: `${new Date()} `,
+      id: Date.now().toString(),
+      creado: `${new Date()}`,
       items: producto,
       status: 'pendiente',
       metodo: checkbox,
@@ -125,19 +125,19 @@ const CartContainer = () => {
       tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
       size: item[0].size,
       color: item[0].colorselected,
-      idorden: `${Date.now()
-        }`,
+      idorden: `${Date.now()}`,
     })
     )
 
-
     const dataa = {
-      id: `${Date.now()} `,
-      creado: `${new Date()} `,
+      id: Date.now().toString(),
+      creado: `${new Date()}`,
       items: producto,
       status: 'pendiente',
       total: tot,
       email: user.email,
+      metodo: checkbox,
+      pickup: pickup,
     }
 
     saveOrder(dataa)
@@ -150,7 +150,7 @@ const CartContainer = () => {
       headers: new Headers({ 'content-type': 'application/json' }),
     };
 
-    fetch("https://node-mora.vercel.app/checkout", options)
+    fetch("http://localhost:3000/checkout", options)
       .then(response => response.text())
       .then(data => {
         window.location.assign(data);

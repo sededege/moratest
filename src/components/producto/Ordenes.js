@@ -28,7 +28,7 @@ const Ordenes = () => {
         if (a === 'pendiente') {
             return 'text-yellow-400'
         }
-        if (a === 'pagado') {
+        if (a === 'Pagado') {
             return 'text-green-400'
         }
         if (a === 'error') {
@@ -51,8 +51,22 @@ const Ordenes = () => {
                 'Nos comunicaremos contigo a la brevedad para coordinar el retiro!',
                 'success'
             )
+          
         }
-
+        if (type.type === 'fail') {
+            Swal.fire(
+                'Tuvimos un problema!',
+                'Intenta realizar el pago denuevo o contactate con nosotros!',
+                'error'
+            )
+        }
+        if (type.type === 'pendiente') {
+            Swal.fire(
+                'Su pago esta pendiente!',
+                'Una vez que se acredite el pago nos comunicaremos contigo!',
+                'warning'
+            )
+        }
         const options = {
             method: "GET",
             headers: new Headers({ 'content-type': 'application/json' }),

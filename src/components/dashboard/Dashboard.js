@@ -6,6 +6,7 @@ import { categories } from '../utils/data'
 import { getAllOrders } from '../utils/firebaseFunctions'
 import { actionType } from '.././context/reducer'
 import TablaListados from './TablaListados'
+import Headerleft from '../navs/Headerleft'
 
 
 const Dashboard = () => {
@@ -33,6 +34,7 @@ const Dashboard = () => {
 
     return (
         <div className='px-8 h-[90vh] mt-[10vh] w-full flex fixed gap-4'>
+          
             <div className='flex flex-col w-[86vw] ml-[14vw]'>
                 <div className='flex gap-6 items-center justify-between'>
                     <div className='rounded-2xl drop-shadow-md h-[20vh] w-full items-center justify-center flex bg-[#937DC2] opacity-80'>

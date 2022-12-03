@@ -260,34 +260,34 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
 
                                             )}</td>
                                         <td className='text-textColor text-md font-semibold'>
-                                            {
+                                          {/*   {
                                                 asd.map(a =>
                                                     a.talles.filter(b => b.size === 'S').reduce((acc, item) => acc + item.unidades, 0)
                                                 )
 
                                                 
                                             }
-
+ */}
                                         </td>
                                         <td className='text-textColor text-md font-semibold'>
-                                            {
+                                         {/*    {
                                                 asd.map((b, index) =>
                                                     b.id === a.id && (
                                                         <p key={index}>{b.talles[2].unidades}</p>)
 
                                                 )
-                                            }
+                                            } */}
 
                                         </td>
                                         <td className='text-textColor text-md font-semibold'>
-                                            {
+                                          {/*   {
                                                 asd.map((b, index) =>
                                                     b.id === a.id && (
                                                         <p key={index}>{b.talles[0].unidades}</p>)
 
                                                 )
                                             }
-
+ */}
                                         </td>
                                         {/*  <td className='text-textColor text-md font-semibold'>
                                             {
