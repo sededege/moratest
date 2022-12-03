@@ -81,6 +81,7 @@ const Detalle = () => {
             colorselected: filtrocolorselect,
             size: selectedsize,
             unidades: cantidad,
+            precio: thisProduct.oferta != 0 ? Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100) : thisProduct.precio 
         }]
         setItems([...cartItems, itemselect])
 
@@ -108,11 +109,28 @@ const Detalle = () => {
             return 'bg-gray-400'
         }
         if (color === 'Purple') {
-            return 'bg-purple-300'
+            return 'bg-[#9c78a8]'
         }
         if (color === 'Blue') {
             return 'bg-blue-500'
         }
+        if (color === 'Rosado') {
+            return 'bg-[#da9bc1]'
+        }
+        if (color === 'Purpura') {
+            return 'bg-[#977baf]'
+        }
+        if (color === 'Camuflado') {
+            return 'bg-[#acbeaf]'
+        }
+        if (color === 'Turquesa') {
+            return 'bg-[#60ceb9]'
+        }
+        if (color === 'Verde-Fluor') {
+            return 'bg-[#d4e693]'
+        }
+
+       
     }
     const borderselect = (color) => {
         if (color === 'Negro') {
@@ -128,10 +146,25 @@ const Detalle = () => {
             return 'border-gray-400'
         }
         if (color === 'Purple') {
-            return 'border-purple-300'
+            return 'border-[#9c78a8]'
         }
         if (color === 'Blue') {
             return 'border-blue-500'
+        }
+        if (color === 'Rosado') {
+            return 'border-[#da9bc1]'
+        }
+        if (color === 'Purpura') {
+            return 'border-[#977baf]'
+        }
+        if (color === 'Camuflado') {
+            return 'border-[#acbeaf]'
+        }
+        if (color === 'Turquesa') {
+            return 'border-[#60ceb9]'
+        }
+        if (color === 'Verde-Fluor') {
+            return 'border-[#d4e693]'
         }
     }
 
@@ -181,8 +214,11 @@ const Detalle = () => {
                                                         <p className='font-semibold text-textColor text-[1.3rem]'>{thisProduct.name} </p>
 
                                                     </div>
+                                                    {
+                                            thisProduct.oferta != 0 && <div className='flex gap-4 items-center'><p className='text-[14px]  font-bold bg-booty px-2 rounded-lg text-white'>{thisProduct.oferta} % OFF</p></div>
 
-                                                    <div className='flex gap-4'>
+                                        }
+                                                    {/* <div className='flex gap-4'>
 
                                                         <Rating
 
@@ -198,7 +234,7 @@ const Detalle = () => {
                                                                 }
                                                             }}
                                                         /> <p className='font-light text-gray-400'>(5 reviews)</p>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className='flex flex-col gap-6 mr-10'>
                                                     <p className='font-normal text-[0.9rem] text-gray-400'>{thisProduct.descripcion}</p>
@@ -326,7 +362,7 @@ const Detalle = () => {
                                                         </AccordionDetails>
                                                     </Accordion>
                                                 </div>
-                                                <div className='flex flex-col gap-4'>
+                                               {/*  <div className='flex flex-col gap-4'>
                                                     <Accordion
                                                         sx={{
                                                             border: 'none',
@@ -362,7 +398,7 @@ const Detalle = () => {
                                                             </div>
                                                         </AccordionDetails>
                                                     </Accordion>
-                                                </div>
+                                                </div> */}
                                                 <div className='flex flex-col gap-4'>
                                                     <Accordion
                                                         sx={{
@@ -417,19 +453,29 @@ const Detalle = () => {
 
                                                 <div className='flex gap-8 mt-10  items-center'>
                                                     <div className=''>
-                                                        <p className='text-purple-300 font-bold text-[2rem]'>$ {thisProduct.precio}</p>
+
+                                                    {
+                                                        thisProduct.oferta != 0 ? <div className='flex gap-4 items-center'>
+                                                            <p className='text-black text-[2rem]'>$ {Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100)}</p>
+                                                            <p className='text-[1.2rem] text-gray-400 line-through		'>$ {thisProduct.precio}</p>
+
+                                                        </div>
+                                                        
+                                                        : <p className='text-purple-300 font-bold text-[2rem]'>$ {thisProduct.precio}</p>
+
+                                                    }
                                                     </div>
 
-
+{/* 
                                                     <motion.div
                                                         whileTap={{ scale: 0.75 }}
                                                         className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
                                                         <button className='text-gray-400 group-hover:text-white'>Añadir a deseados</button>
-                                                    </motion.div>
+                                                    </motion.div> */}
                                                     <motion.div
                                                         whileTap={{ scale: 0.75 }}
-                                                        onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
-                                                        <span className='text-white group-hover:text-booty'>Añadir al carro</span>
+                                                        onClick={() => pedido(thisProduct)} className=' group   bg-booty p-3 justify-end flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
+                                                        <span className='text-white group-hover:text-booty '>Añadir al carro</span>
                                                     </motion.div>
 
                                                 </div>
@@ -519,7 +565,7 @@ const Detalle = () => {
 
                                                     </div>
 
-                                                    <div className='flex gap-4'>
+                                                    {/* <div className='flex gap-4'>
 
                                                         <Rating
 
@@ -535,7 +581,7 @@ const Detalle = () => {
                                                                 }
                                                             }}
                                                         /> <p className='font-light text-gray-400'>(5 reviews)</p>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className='flex flex-col gap-6 mr-10'>
                                                     <p className='font-normal text-[0.9rem] text-gray-400'>{thisProduct.descripcion}</p>

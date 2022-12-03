@@ -21,25 +21,76 @@ const Carrousel = (c) => {
         history(`/detalle/${a}`)
 
     }
-    const colores = (a) => {
-        if (a === 'Negro') {
-            return 'black'
-        } if (a === 'Blanco') {
-            return '#F6f6f6'
-        } if (a === 'Verde Menta') {
-            return '#ADDED9'
-        } if (a === 'Morado') {
-            return '#c7acbf'
-        } if (a === 'Azul Petróleo') {
-            return '#47527F'
-        } if (a === 'Verde') {
-            return '#ADDED9'
+    const colores = (color) => {
+        if (color === 'Negro') {
+            return 'bg-black'
         }
-        if (a === 'Purple') {
-            return '#9c29a1'
+        if (color === 'Morado') {
+            return 'bg-[#c7acbf]'
         }
-        if (a === 'Blue') {
-            return '#4c94d6'
+        if (color === 'Verde') {
+            return 'bg-green-100'
+        }
+        if (color === 'Gris') {
+            return 'bg-gray-400'
+        }
+        if (color === 'Purple') {
+            return 'bg-[#9c78a8]'
+        }
+        if (color === 'Blue') {
+            return 'bg-blue-500'
+        }
+        if (color === 'Rosado') {
+            return 'bg-[#da9bc1]'
+        }
+        if (color === 'Purpura') {
+            return 'bg-[#977baf]'
+        }
+        if (color === 'Camuflado') {
+            return 'bg-[#acbeaf]'
+        }
+        if (color === 'Turquesa') {
+            return 'bg-[#60ceb9]'
+        }
+        if (color === 'Verde-Fluor') {
+            return 'bg-[#d4e693]'
+        }
+
+
+    }
+    const borderselect = (color) => {
+        if (color === 'Negro') {
+            return 'border-black'
+        }
+        if (color === 'Morado') {
+            return 'border-[#c7acbf]'
+        }
+        if (color === 'Verde') {
+            return 'border-green-100'
+        }
+        if (color === 'Gris') {
+            return 'border-gray-400'
+        }
+        if (color === 'Purple') {
+            return 'border-[#9c78a8]'
+        }
+        if (color === 'Blue') {
+            return 'border-blue-500'
+        }
+        if (color === 'Rosado') {
+            return 'border-[#da9bc1]'
+        }
+        if (color === 'Purpura') {
+            return 'border-[#977baf]'
+        }
+        if (color === 'Camuflado') {
+            return 'border-[#acbeaf]'
+        }
+        if (color === 'Turquesa') {
+            return 'border-[#60ceb9]'
+        }
+        if (color === 'Verde-Fluor') {
+            return 'border-[#d4e693]'
         }
     }
 
@@ -50,7 +101,7 @@ const Carrousel = (c) => {
             renderIndicator={(onClickHandler, isSelected, index, label) => {
                 const defStyle = {
                     marginLeft: 20,
-                    backgroundColor: c.imagenes.length > 0 ? colores(c.imagenes[index].name) : console.log('asd'),
+                    backgroundColor: c.imagenes.length > 0 && colores(c.imagenes[index].name) ,
                     cursor: "pointer",
                     width: '20px',
                     height: '20px',
@@ -64,22 +115,19 @@ const Carrousel = (c) => {
                     : { ...defStyle };
 
                 return (
-                    <>
-                        {
-                            index > 1 && <div
-                                style={style}
-                                onClick={onClickHandler}
-                                onKeyDown={onClickHandler}
-                                value={index}
-                                key={index}
-                                role="button"
-                                tabIndex={0}
-                                aria-label={`${label} ${index + 1}`}
-                            >
+                    <div
+                        style={style}
+                        onClick={onClickHandler}
+                        onKeyDown={onClickHandler}
+                        value={index}
+                        key={index}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`${label} ${index + 1}`}
+                    >
+                                                                        <div className={` ${colores('Negro')} h-4 w-4 rounded-full border-2`}></div>
+                    </div>
 
-                            </div>
-                        }
-                    </>
                 );
             }}
         >

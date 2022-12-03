@@ -94,7 +94,7 @@ const Products = () => {
                                     <div className='flex h-full justify-between  items-center '>
                                         {
                                             a.oferta != 0 ? <div className='flex gap-2 items-center'>
-                                                <p className='text-[1.2rem] text-black'>$ {(a.precio * (100 - (a.oferta))) / 100}</p>
+                                                <p className='text-[1.2rem] text-black'>$ {Math.round((a.precio * (100 - (a.oferta))) / 100)}</p>
                                                 <p className='text-[0.9rem] text-gray-400 line-through		'>$ {a.precio}</p>
 
                                             </div>

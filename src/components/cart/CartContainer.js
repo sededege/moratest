@@ -44,7 +44,7 @@ const CartContainer = () => {
     
 
     let totalPrice = cartItems.reduce(function (accumulator, item) {
-      return accumulator + item[0].unidades * item[0].item.precio;
+      return accumulator + item[0].unidades * item[0].precio;
     }, 0);
     setTot(totalPrice);
 
@@ -76,7 +76,7 @@ const CartContainer = () => {
       category_id: item[0].item.categoria,
       quantity: parseInt(item[0].unidades),
       currency_id: 'UYU',
-      unit_price: parseInt(item[0].item.precio),
+      unit_price: parseInt(item[0].precio),
       tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
       size: item[0].size,
       color: item[0].colorselected,
@@ -121,7 +121,7 @@ const CartContainer = () => {
       category_id: item[0].item.categoria,
       quantity: parseInt(item[0].unidades),
       currency_id: 'UYU',
-      unit_price: parseInt(item[0].item.precio),
+      unit_price: parseInt(item[0].precio),
       tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
       size: item[0].size,
       color: item[0].colorselected,
@@ -138,6 +138,7 @@ const CartContainer = () => {
       email: user.email,
       metodo: checkbox,
       pickup: pickup,
+
     }
 
     saveOrder(dataa)
