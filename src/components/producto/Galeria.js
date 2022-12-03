@@ -87,7 +87,7 @@ const Galeria = (a) => {
         <motion.div 
         initial={{opacity: 0}}
        animate={{opacity: 1}}
-        className='md:w-[50vw] w-[100vw] md:items-center flex flex-col justify-center'>
+        className='md:w-[50vw]  w-[100vw] md:items-center flex flex-col justify-center'>
             <ImageGallery
                 showPlayButton={false}
                 showFullscreenButton={false}

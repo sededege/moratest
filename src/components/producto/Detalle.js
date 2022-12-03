@@ -336,7 +336,7 @@ const Detalle = () => {
                                                                 fontSize: 'bold'
 
                                                             }}>
-                                                                Características
+                                                                Guía de talles
                                                             </Typography>
                                                         </AccordionSummary>
                                                         <AccordionDetails>
@@ -344,20 +344,15 @@ const Detalle = () => {
 
                                                                 width: '55%',
                                                                 fontFamily: 'Poppins',
-                                                                fontSize: 'bold'
+                                                                fontSize: 'bold',
+                                                                padding: 0
                                                             }}>
                                                                 <p className='font-light text-gray-400'>
-                                                                    {thisProduct.caracteristicas}
+                                                                Medidas sin estirar*
+                                                                <img src={thisProduct.caracteristicas} alt='guia de talles'/>
+                                                                  
                                                                 </p>
-                                                                {/*  <ul className='font-light text-gray-400'>
                                                                 
-                                                                <li className='font-light'>Tipo de estampado:<span> {thisProduct.estampado}</span></li>
-                                                                <li className='font-light'>Longitud:<span> {thisProduct.longitud}</span></li>
-                                                                <li className='font-light'>Material:<span> {thisProduct.material}</span></li>
-                                                                <li className='font-light'>Color:<span> {filtrocolorselect}</span></li>
-                                                                <li className='font-light'>Composicion:<span> {thisProduct.composicion}</span></li>
-                                                                <li className='font-light'>Actividad:<span> {thisProduct.actividad}</span></li>
-                                                            </ul> */}
                                                             </div>
                                                         </AccordionDetails>
                                                     </Accordion>
@@ -449,7 +444,7 @@ const Detalle = () => {
                                                 </ul>
                                             </div> */}
                                             </div>
-                                            <div className='flex items-center  '>
+                                            <div className='flex items-center  fixed right-20 bottom-20 '>
 
                                                 <div className='flex gap-8 mt-10  items-center'>
                                                     <div className=''>
@@ -461,7 +456,7 @@ const Detalle = () => {
 
                                                         </div>
                                                         
-                                                        : <p className='text-purple-300 font-bold text-[2rem]'>$ {thisProduct.precio}</p>
+                                                        : <p className='text-black text-[2rem]'>$ {thisProduct.precio}</p>
 
                                                     }
                                                     </div>
@@ -792,7 +787,7 @@ const Detalle = () => {
                                                 </ul>
                                             </div> */}
                                             </div>
-                                            <div className='flex items-center  '>
+                                            <div className='flex items-center '>
 
                                                 <div className='flex gap-8 mt-10  items-center'>
                                                     <div className=''>

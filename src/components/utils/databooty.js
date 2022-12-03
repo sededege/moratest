@@ -467,6 +467,11 @@ export const categorias = [
         name: "Todas",
         param: "todas",
     },
+    {
+        id: 6,
+        name: "Ofertas",
+        param: "ofertas",
+    },
 
     {
         id: 1,

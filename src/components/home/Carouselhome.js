@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useStateValue } from '../context/StateProvider';
 import banner1 from '../img/ban1.jpeg'
 import banner2 from '../img/ban2.jpeg'
-import banner3 from '../img/ban3.jpeg'
+import banner3 from '../img/banner1.png'
 const CarrouselHome = (c) => {
     const [{ favoritos }, dispatch] = useStateValue();
     const history = useNavigate();

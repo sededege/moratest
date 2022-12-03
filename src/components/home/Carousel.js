@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion";
 import { useStateValue } from '../context/StateProvider';
+import { HiCubeTransparent } from 'react-icons/hi';
 const Carrousel = (c) => {
     const [{ favoritos }, dispatch] = useStateValue();
     const history = useNavigate();
@@ -55,11 +56,15 @@ const Carrousel = (c) => {
         if (color === 'Verde-Fluor') {
             return 'bg-[#d4e693]'
         }
+        if (color === 'Celeste') {
+            return 'bg-[#52a1da]'
+        }
 
 
     }
     const borderselect = (color) => {
-        if (color === 'Negro') {
+        console.log(color)
+        if (color === 'NegroNegro') {
             return 'border-black'
         }
         if (color === 'Morado') {
@@ -74,7 +79,7 @@ const Carrousel = (c) => {
         if (color === 'Purple') {
             return 'border-[#9c78a8]'
         }
-        if (color === 'Blue') {
+        if (color === 'BlueBlue') {
             return 'border-blue-500'
         }
         if (color === 'Rosado') {
@@ -92,6 +97,9 @@ const Carrousel = (c) => {
         if (color === 'Verde-Fluor') {
             return 'border-[#d4e693]'
         }
+        if (color === 'Celeste') {
+            return 'border-[#52a1da]'
+        }
     }
 
     return (
@@ -99,39 +107,34 @@ const Carrousel = (c) => {
             showStatus={false}
             showThumbs={false}
             renderIndicator={(onClickHandler, isSelected, index, label) => {
-                const defStyle = {
-                    marginLeft: 20,
-                    backgroundColor: c.imagenes.length > 0 && colores(c.imagenes[index].name) ,
-                    cursor: "pointer",
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    marginTop: 5,
-                    border: '1px solid white',
 
-                }
-                const style = isSelected
-                    ? { ...defStyle, border: 'solid 2px white' }
-                    : { ...defStyle };
 
                 return (
-                    <div
-                        style={style}
-                        onClick={onClickHandler}
-                        onKeyDown={onClickHandler}
-                        value={index}
-                        key={index}
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`${label} ${index + 1}`}
-                    >
-                                                                        <div className={` ${colores('Negro')} h-4 w-4 rounded-full border-2`}></div>
-                    </div>
+                    <>
+                        {
+                            index + 1 > 0 &&
+                            <div
+                                onClick={onClickHandler}
+                                onKeyDown={onClickHandler}
+                                value={index}
+                                key={index}
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`${label} ${index + 1}`}
+                                className={`ml-4 mt-2 ${isSelected ? `border-2 border-white ` : `border-gray-400 border-1`} ${colores(c.imagenes[index].name)}  h-4 w-4 rounded-full border-1`}>
+
+                            </div>
+                        }
+
+
+
+                    </>
 
                 );
             }}
         >
-
+            {/*             ${borderselect(c.imagenes[index].name)}
+ */}
             {
                 c.imagenes.length > 0 && (c.imagenes.map((a, index) =>
                     <motion.div
@@ -145,7 +148,7 @@ const Carrousel = (c) => {
 
 
 
-        </Carousel>
+        </Carousel >
     )
 }
 
