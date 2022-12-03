@@ -14,7 +14,7 @@ const Products = () => {
         if (favorite && prueba === '') {
 
             setPrueba(favorite.map(a => a.favoritos))
-           
+
         }
         if (prueba && favorite) {
 
@@ -24,10 +24,10 @@ const Products = () => {
             }
 
             updateFavoritos(data)
-          
+
         }
-      
-    }, [ products, prueba])
+
+    }, [products, prueba])
 
 
 
@@ -92,13 +92,25 @@ const Products = () => {
                                     </div>
 
                                     <div className='flex h-full justify-between  items-center '>
-                                        <p className='text-[1.2rem] text-black'>$ {a.precio}</p>
+                                        {
+                                            a.oferta != 0 ? <div className='flex gap-2 items-center'>
+                                                <p className='text-[1.2rem] text-black'>$ {(a.precio * (100 - (a.oferta))) / 100}</p>
+                                                <p className='text-[0.9rem] text-gray-400 line-through		'>$ {a.precio}</p>
+
+                                            </div>
+                                                : <p className='text-[1.2rem] text-black'>$ {a.precio}</p>
+
+                                        }
                                         {/*                                         <MdArrowForwardIos className='text-[2rem] text-booty bg-bghome p-2 rounded-full ' />
  */}
 
-                                        {
+                                        {/*   {
 
                                             prueba && prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[25px] text-booty ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[25px] text-booty' />
+
+                                        } */}
+                                        {
+                                            a.oferta != 0 && <p className='text-[14px] font-bold bg-booty px-2 rounded-lg text-white'>{a.oferta} % OFF</p>
 
                                         }
                                         {/*                                         <FiShoppingCart className='text-[1.4rem] text-booty  ' />

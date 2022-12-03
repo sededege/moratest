@@ -23,6 +23,7 @@ import Ordenes from "./components/producto/Ordenes";
 import Pre from "./components/utils/Pre";
 import ScrollToTop from "./components/utils/scrolltotop";
 import ShowLogin from "./components/home/login";
+import Footer from "./components/home/Footer";
 
 function App() {
   const [{ headerShow,dondeestoy, cartShow, editShow,favorite, loginShow, user, products}, dispatch] = useStateValue();
@@ -94,6 +95,7 @@ function App() {
          {
           dondeestoy === 'Dashboard' && (<Headerleft />)
         } 
+        
         <Pre load={load} />
         <ScrollToTop />
         <Routes location={location} key={location.pathname}>
@@ -105,6 +107,8 @@ function App() {
           <Route path='/edititem' element={<EditItem />} />
           <Route path='/Ordenes/:type' element={<Ordenes />} />
         </Routes>
+        <Footer/>
+
       </main>
     </div>
   );

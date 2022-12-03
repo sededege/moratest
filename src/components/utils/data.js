@@ -197,6 +197,10 @@ export const colors = [
     id: 11,
     name: "Camuflado",
   },
+  {
+    id: 12,
+    name: "Purpura",
+  },
 
   
 

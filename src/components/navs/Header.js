@@ -114,14 +114,14 @@ const Header = () => {
                     <GoListUnordered onClick={() => history(`/Ordenes/Ver`)} className="text-booty text-2xl  cursor-pointer" />
 
                   </motion.span>
-                  <motion.span
+                  {/* <motion.span
                     whileTap={{ scale: 0.75 }}>
                     <AiFillHeart onClick={() => history(`/Favoritos`)} className="text-booty text-2xl  cursor-pointer" />
 
-                  </motion.span>
+                  </motion.span> */}
                   <motion.span
                     whileTap={{ scale: 0.75 }}>
-                    <FiShoppingCart onClick={showCart} className="text-textColor text-2xl  cursor-pointer" />
+                    <FiShoppingCart onClick={showCart} className="text-booty text-2xl  cursor-pointer" />
                   </motion.span>
                 </div>
             }
@@ -198,11 +198,11 @@ const Header = () => {
               <GoListUnordered onClick={() => history(`/Ordenes/Ver`)} className="text-booty text-2xl  cursor-pointer" />
 
             </motion.span>
-            <motion.span
+          {/*   <motion.span
               whileTap={{ scale: 0.75 }}>
               <AiFillHeart onClick={() => history(`/Favoritos`)} className="text-booty text-2xl  cursor-pointer" />
 
-            </motion.span>
+            </motion.span> */}
             
           </div>
           <div
