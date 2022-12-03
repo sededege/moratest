@@ -185,6 +185,18 @@ export const colors = [
     id: 8,
     name: "Celeste",
   },
+  {
+    id: 9,
+    name: "Turquesa",
+  },
+  {
+    id: 10,
+    name: "Verde-Fluor",
+  },
+  {
+    id: 11,
+    name: "Camuflado",
+  },
 
   
 

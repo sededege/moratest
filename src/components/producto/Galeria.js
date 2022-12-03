@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 
 const Galeria = (a) => {
     const [images2, setImages2] = React.useState([])
-
     React.useEffect(() => {
         console.log(a.filtrocolor)
         if (a.images && a.filtrocolor) {
@@ -70,7 +69,12 @@ const Galeria = (a) => {
         return (
             <div className='image-gallery-image video'>
                 <video controls width="100%" height='100%'>
-                    <source className=' video' src={src} type="video/mp4" />
+                    {
+  a.images[0].video != "" &&
+                 <source className='video' src={a.images[0].video} type="video/mp4" />
+
+
+                    }
                 </video>
             </div>
         );

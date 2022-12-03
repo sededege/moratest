@@ -151,7 +151,7 @@ const CreateContainer = () => {
     }
     const push = () => {
         console.log(colores)
-        if (colores.filter(a => a.name === color) === "") {
+        if (colores.filter(a => a.name === color) !== "") {
             setColores(prevState => [...prevState, {
                 id: Date.now(),
                 name: color,

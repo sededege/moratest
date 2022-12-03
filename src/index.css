@@ -44,7 +44,8 @@ body {
 /* ola */
 
 .video {
-  width: 60% !important;
+  width: 80% !important;
+  height: 100% !important;
   margin: auto;
 
 

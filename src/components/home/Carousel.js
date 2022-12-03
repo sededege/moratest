@@ -64,18 +64,22 @@ const Carrousel = (c) => {
                     : { ...defStyle };
 
                 return (
-                    <div
-                        style={style}
-                        onClick={onClickHandler}
-                        onKeyDown={onClickHandler}
-                        value={index}
-                        key={index}
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`${label} ${index + 1}`}
-                    >
+                    <>
+                        {
+                            index > 1 && <div
+                                style={style}
+                                onClick={onClickHandler}
+                                onKeyDown={onClickHandler}
+                                value={index}
+                                key={index}
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`${label} ${index + 1}`}
+                            >
 
-                    </div>
+                            </div>
+                        }
+                    </>
                 );
             }}
         >
