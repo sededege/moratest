@@ -35,7 +35,8 @@ export const updateItem = async (dataa) => {
     caracteristicas: dataa.caracteristicas,
     precio: dataa.precio,
     categoria: dataa.categoria,
-    color: dataa.color
+    color: dataa.color,
+    oferta: dataa.oferta
   });
 }
 

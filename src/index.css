@@ -167,3 +167,24 @@ display:none
 .fade-exit-active {
   transition: opacity 500ms;
 }
+
+
+@keyframes scroller {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-400%);
+  }
+}
+
+.scrollingContent {
+  white-space: nowrap;
+ 
+ 
+  animation-duration: 20s;
+  animation-name: scroller;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  
+}

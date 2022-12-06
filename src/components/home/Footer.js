@@ -1,5 +1,6 @@
 import React from 'react'
 import { RiInstagramLine } from 'react-icons/ri';
+import Ticker from 'react-ticker'
 
 const Footer = () => {
   return (
@@ -8,12 +9,21 @@ const Footer = () => {
         <p></p>
       </div>
       <div className='flex'>
-        <p className='text-[16px] text-gray-300'>Todos los derechos reservados © Morafit 2022 </p>
-      </div>
+    
+     
+        
+          <p className='ml-20 text-gray-300'>
+          *** Envío gratis en compras mayores a $3000! *** 
+          </p>
+        
+      
+    
+{/*         <p className='text-[16px] text-gray-300'>Todos los derechos reservados © Morafit 2022 </p>
+ */}      </div>
       <div className='flex gap-2'>
         <p className='text-gray-300'>Seguinos en</p>
         <a href='https://www.instagram.com/morafit.uy/'>
-         <RiInstagramLine className='text-[24px] text-booty' />
+          <RiInstagramLine className='text-[24px] text-booty' />
         </a>
       </div>
     </div>

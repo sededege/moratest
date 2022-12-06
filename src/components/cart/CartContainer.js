@@ -17,10 +17,13 @@ const CartContainer = () => {
   const [datos, setDatos] = useState(true)
   const [checkbox, setCheckbox] = useState('efectivo')
   const [pickup, setPickUp] = useState('efectivo')
+  const [codigo, setCodigo] = useState('')
+
+  const codigos = ['FIOMORA10','VITOMORA10']
   const navigate = useNavigate();
 
- 
-  
+
+
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -34,19 +37,23 @@ const CartContainer = () => {
     });
   }
   useEffect(() => {
-   /* 
-      dispatch({
-        type: actionType.SET_CARTITEMS,
-        cartItems: [],
-      });
-  
-      localStorage.setItem("cartItems", JSON.stringify([])); */
-    
+    /* 
+       dispatch({
+         type: actionType.SET_CARTITEMS,
+         cartItems: [],
+       });
+   
+       localStorage.setItem("cartItems", JSON.stringify([])); */
 
-    let totalPrice = cartItems.reduce(function (accumulator, item) {
-      return accumulator + item[0].unidades * item[0].precio;
-    }, 0);
-    setTot(totalPrice);
+
+       if (codigos.indexOf(codigo) === -1){
+       
+        let totalPrice = cartItems.reduce(function (accumulator, item) {
+          return accumulator + item[0].unidades * item[0].precio;
+        }, 0);
+        setTot(totalPrice);
+       }
+  
 
 
 
@@ -66,8 +73,16 @@ const CartContainer = () => {
     }
   }
 
+  const promo = (e) => {
+    setCodigo(e.target.value)
+    console.log(codigos.indexOf(e.target.value))
+    if (codigos.indexOf(e.target.value) != -1){
+      setTot(tot*0.9)
+    } 
+   }
+
   const efectivo = () => {
-    
+
     const producto = cartItems.map(item =>
     ({
       id: item[0].item.id,
@@ -271,7 +286,11 @@ const CartContainer = () => {
                 <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra <span className='underline cursor-pointer'>Ver zonas</span>)</label>
               </div>
             </div>
-
+            <div class="flex w-full">
+              {
+                codigos.indexOf(codigo) === -1 ? <input className="w-full text-center p-2 rounded-full" onChange={(e) => promo(e)} placeholder='Codigo promocional' /> :      <input disabled='disabled' className="w-full text-center p-2 rounded-full" value='10% de descuento aplicado!'  placeholder='10% de descuento aplicado!' />
+              }
+            </div>
             <div className="w-full border-b border-gray-600 my-2"></div>
 
             <div className="w-full flex items-center justify-between">

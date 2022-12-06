@@ -22,6 +22,7 @@ const CreateContainer = () => {
     const [descripcion, setDescription] = useState('Escribe aqui la descripcion');
     const [caracteristicas, setCaracteristicas] = useState('Escribe aqui las caracteristicas');
     const [price, setPrice] = useState("");
+    const [oferta, setOferta] = useState(0);
     const [category, setCategory] = useState(null);
     const [imageAsset, setImageAsset] = useState(null);
     const [imageAsset1, setImageAsset1] = useState(null);
@@ -205,7 +206,7 @@ const CreateContainer = () => {
         precio: price,
         categoria: category,
         color: colores,
-
+        oferta: oferta
         /*  comentarios: [
              {
                  nombre: 'Florencia Moraes',
@@ -348,9 +349,15 @@ const CreateContainer = () => {
                 </div>
                 <div className='col-span-4'>
                     <div className='col-span-2 mb-2 text-booty'>
+                        <p className='font-semibold text-[14px] text-booty'>Oferta</p>
+                    </div>
+                    <input onChange={(e) => setOferta(e.target.value)} defaultValue={caracteristicas} value={oferta} className='outline-none  border-2 p-2 text-textColor w-full' name="comentarios"  />
+                </div>
+                <div className='col-span-4'>
+                    <div className='col-span-2 mb-2 text-booty'>
                         <p className='font-semibold text-[14px] text-booty'>Caracteristicas</p>
                     </div>
-                    <textarea onChange={(e) => setCaracteristicas(e.target.value)} defaultValue={caracteristicas} className='outline-none  border-2 p-2 text-textColor w-full h-full' name="comentarios" rows='3' ></textarea>
+                    <input onChange={(e) => setCaracteristicas(e.target.value)} defaultValue={caracteristicas} className='outline-none  border-2 p-2 text-textColor w-full' name="comentarios"  />
                 </div>
                 <div className='col-span-4'>
                     <div className='col-span-2 mb-2 text-booty'>

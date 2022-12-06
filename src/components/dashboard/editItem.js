@@ -36,7 +36,8 @@ const EditItem = ({ titlee }) => {
     const [colores, setColores] = useState([]);
     const [colorselect, setColorSelect] = useState(null);
     const [{ products, editar }, dispatch] = useStateValue();
-  
+    const [oferta, setOferta] = useState(0);
+
 
     React.useEffect(() => {
         setTitle(products.filter(a => a.id === editar)[0].name)
@@ -48,6 +49,7 @@ const EditItem = ({ titlee }) => {
         setCaracteristicas(products.filter(a => a.id === editar)[0].caracteristicas)
         setColorSelect(products.filter(a => a.id === editar)[0].color[0].name)
         setColor(products.filter(a => a.id === editar)[0].color[0].name)
+        setOferta(products.filter(a => a.id === editar)[0].oferta)
 
         setImageAsset(products.filter(a => a.id === editar)[0].color[0].images[0])
         setImageAsset1(products.filter(a => a.id === editar)[0].color[0].images[1])
@@ -320,6 +322,7 @@ const EditItem = ({ titlee }) => {
         precio: price,
         categoria: category,
         color: newArr,
+        oferta: oferta
     }
 
     /* console.log(dataa) */
@@ -356,7 +359,7 @@ const EditItem = ({ titlee }) => {
                 }, 4000)
             } else {
 
-
+console.log(dataa)
                 updateItem(dataa)
                 setIsLoading(false)
                 setFields(true)
@@ -438,11 +441,17 @@ const EditItem = ({ titlee }) => {
 
                             </div>
                             <div className='col-span-4'>
-                                <div className='col-span-2 mb-2 text-booty'>
-                                    <p className='font-semibold text-[14px] text-booty'>Caracteristicas</p>
-                                </div>
-                                <textarea onChange={(e) => setCaracteristicas(e.target.value)} defaultValue={caracteristicas} className='outline-none  border-2 p-2 text-textColor w-full h-full' name="comentarios" rows='3' ></textarea>
-                            </div>
+                    <div className='col-span-2 mb-2 text-booty'>
+                        <p className='font-semibold text-[14px] text-booty'>Oferta</p>
+                    </div>
+                    <input onChange={(e) => setOferta(e.target.value)} value={oferta} className='outline-none  border-2 p-2 text-textColor w-full' name="comentarios"  />
+                </div>
+                <div className='col-span-4'>
+                    <div className='col-span-2 mb-2 text-booty'>
+                        <p className='font-semibold text-[14px] text-booty'>Caracteristicas</p>
+                    </div>
+                    <input onChange={(e) => setCaracteristicas(e.target.value)} defaultValue={caracteristicas} className='outline-none  border-2 p-2 text-textColor w-full' name="comentarios"  />
+                </div>
                             <div className='col-span-4'>
                                 <div className='col-span-2 mb-2 text-booty'>
                                     <p className='font-semibold text-[14px] text-booty'>Descripcion</p>
