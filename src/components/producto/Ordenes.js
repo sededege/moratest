@@ -24,6 +24,31 @@ const Ordenes = () => {
     const [payment, setPayment] = React.useState("");
     const { orden } = useParams()
 
+    const pickup = (a) => {
+        if (a === 'malvin') {
+            return <p>
+                Av. Italia 4240. Apto 1910
+            </p>
+        } else if (a === 'trescruces') {
+            return <p>Av. Duvimioso Terra 2234</p>
+        } else {
+          return  <p>
+                Envio
+            </p>
+        }
+    }
+    const metodo = (a) => {
+        if (a === 'transferencia') {
+            return <p>
+                Florencia Moraes<br></br>
+                Banco ITAU 3614214
+            </p>
+        } else if (a === 'efectivo'){
+            return <p>Efectivo en el lugar</p>
+        } else {
+            return <p> Mercado Pago</p>
+        }
+    }
     const colores = (a) => {
         if (a === 'pendiente') {
             return 'text-yellow-400'
@@ -51,7 +76,7 @@ const Ordenes = () => {
                 'Nos comunicaremos contigo a la brevedad para coordinar el retiro!',
                 'success'
             )
-          
+
         }
         if (type.type === 'fail') {
             Swal.fire(
@@ -130,6 +155,9 @@ const Ordenes = () => {
 
     return (
         <div className='gap-6 flex mt-[10vh] px-5 flex-col md:px-20  '>
+            <h1 className='text-booty '>Pedidos</h1>
+
+
             {
 
                 orders != null ? orders.map((a, index) =>
@@ -239,6 +267,7 @@ const Ordenes = () => {
                                 <p className='font-light text-gray-400'>
                                     Status: {a.status}
                                 </p> */}
+                                <div className='flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center w-full text-center mt-5'>
                                 <Typography sx={{
 
                                     width: '55%',
@@ -246,7 +275,7 @@ const Ordenes = () => {
                                     fontSize: 'bold',
                                     marginTop: '10px'
                                 }}>
-                                    Pick up: <span className='font-bold'>{a.pickup}</span>
+                                    Pick up: <span className='font-bold'>{pickup(a.pickup)}</span>
                                 </Typography>
                                 <Typography sx={{
 
@@ -255,9 +284,9 @@ const Ordenes = () => {
                                     fontSize: 'bold',
 
                                 }}>
-                                    Metodo: <span className='font-bold'>{a.metodo}</span>
+                                    Metodo: <span className='font-bold'>{metodo(a.metodo)}</span>
                                 </Typography>
-                                <Typography  sx={{
+                                <Typography sx={{
 
                                     width: '55%',
                                     fontFamily: 'Poppins',
@@ -267,6 +296,7 @@ const Ordenes = () => {
                                 }}>
                                     Total: <span className='font-bold'>{a.total}</span>
                                 </Typography>
+                                </div>
                             </div>
                         </AccordionDetails>
                     </Accordion>

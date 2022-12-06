@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { getAllProductsItems } from '../utils/firebaseFunctions';
 import { RiFilter2Fill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import { AiFillFire } from 'react-icons/ai'
 
 const FiltrosHome = () => {
     const [filtros, setFiltro] = React.useState("new")
@@ -23,7 +24,7 @@ const FiltrosHome = () => {
         closed: { width: 0, height: 0, fontSize: '2px', opacity: 0 },
     }
     const variants2 = {
-        open: { width: 300, height: 400, opacity: 1  },
+        open: { width: 300, height: 400, opacity: 1 },
         closed: { width: 0, height: 0, opacity: 0 },
     }
 
@@ -68,9 +69,14 @@ const FiltrosHome = () => {
     }
 
     const categoria = (b) => {
-        console.log(products)
-
-        if (b === 'new') {
+        console.log(products2.filter(a => Number(a.oferta) === 0))
+        if (b === 'ofertas') {
+            dispatch({
+                type: actionType.SET_PRODUCTS,
+                products: products2.filter(a => Number(a.oferta) !== 0),
+            });
+        }
+        else if (b === 'new') {
             dispatch({
                 type: actionType.SET_PRODUCTS,
                 products: products2.sort(() => Math.random() - 0.5),
@@ -158,7 +164,17 @@ const FiltrosHome = () => {
                     </motion.div>
                 </div>
 
-
+                <ul ref={titleRef} className='flex overflow-x-auto gap-2 cursor-pointer h-[50px]  '>
+                    {
+                        categorias.map((a, index) =>
+                            <motion.li
+                                whileTap={{ scale: 0.3 }}
+                                key={index} onClick={() => categoria(a.param)} className={` ${filtros === a.param ? 'text-white bg-booty font-bold border-white border-2' : 'text-black'} : flex rounded-lg opacity-70  text-gray-400 text-[0.8rem] items-center p-4 cursor-pointer hover:border-2 bg-gray-100   hover:border-gray-200  border-2 border-white transition-all ease-in-out 2s`} >
+                                <p>{a.name}</p>
+                            </motion.li>
+                        )
+                    }
+                </ul>
                 {
 
                     <motion.div

@@ -83,7 +83,11 @@ const Products = () => {
                                 <div className='p-2 rounded-b-lg relative '>
                                     <div className='flex justify-between items-center'>
                                         <p className='font-regular text-textColor w-[200px] text-[1.rem]'>{a.name}</p>
+                                        {
+                                            a.oferta != 0 && <p className='md:hidden flex text-[12px] md:text-[14px] w-full font-bold bg-booty px-2 rounded-lg text-white'>{a.oferta} % OFF</p>
 
+                                        }
+                              
                                         {/*   {
 
                                             prueba && prueba[0].indexOf(a.id) !== -1 ? <AiFillHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' /> : <AiOutlineHeart onClick={() => agregar(a.id)} className='text-[3rem] text-red-300 ' />
@@ -91,11 +95,12 @@ const Products = () => {
                                         } */}
                                     </div>
 
+
                                     <div className='flex h-full justify-between  items-center '>
                                         {
                                             a.oferta != 0 ? <div className='flex gap-2 items-center'>
-                                                <p className='text-[1.2rem] text-black'>$ {Math.round((a.precio * (100 - (a.oferta))) / 100)}</p>
-                                                <p className='text-[0.9rem] text-gray-400 line-through		'>$ {a.precio}</p>
+                                                <p className='text-[1.4rem] md:text-[1.2rem] text-black'>$ {Math.round((a.precio * (100 - (a.oferta))) / 100)}</p>
+                                                <p className='text-[1rem] text-gray-400 line-through		'>$ {a.precio}</p>
 
                                             </div>
                                                 : <p className='text-[1.2rem] text-black'>$ {a.precio}</p>
@@ -110,12 +115,13 @@ const Products = () => {
 
                                         } */}
                                         {
-                                            a.oferta != 0 && <p className='text-[14px] font-bold bg-booty px-2 rounded-lg text-white'>{a.oferta} % OFF</p>
+                                            a.oferta != 0 && <p className='md:flex hidden text-[12px] md:text-[14px] font-bold bg-booty px-2 rounded-lg  text-white'>{a.oferta} % OFF</p>
 
                                         }
                                         {/*                                         <FiShoppingCart className='text-[1.4rem] text-booty  ' />
  */}                                    </div>
-
+                                   
+                                   
                                 </div>
                             </div>
                         </motion.div>

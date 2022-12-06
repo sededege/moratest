@@ -28,8 +28,9 @@ const MainContainer = () => {
     return (
         <div className='w-full flex h-screen md:px-20 mt-[10vh] '>
             <div className='gap-6 flex flex-col w-[100vw] md:w-full  h-[100vh]  px-5 md:px-0'>
-{/*                 <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
- */}                <CarrouselHome />
+                {/*                 <img src={Banner} className='rounded-lg h-[40vh] object-cover' alt='banner' />
+ */}
+                <CarrouselHome />
                 <FiltrosHome />
                 <AnimatePresence>
                     <motion.div>

@@ -13,11 +13,16 @@ const Filtros = () => {
 
     React.useEffect(() => {
         setProducts2(products)
-console.log(products)
     }, [products2])
 
     const categoria = (b) => {
-        if (products2 != "") {
+      
+        if (b === 'ofertas') {
+            dispatch({
+                type: actionType.SET_PRODUCTS,
+                products: products2.filter(a => a.oferta != 0),
+            });
+        }   else if (products2 != "") {
             dispatch({
                 type: actionType.SET_PRODUCTS,
                 products: b != 'todas' ? products2.filter(a => a.categoria === b) : products2,
@@ -28,18 +33,18 @@ console.log(products)
 
     const filtrocolor = (b) => {
         console.log(b)
-  
+
         if (products2 != "") {
-           /*  const colorr = products2.map(a => a.color.filter(c => c.name === b))
-            const results = colorr.filter(element => {
-                if (Object.keys(element).length !== 0) {
-                  return true;
-                }
-              
-                return false;
-              });
-              console.log(results[0])   */
-              console.log(products2.includes(b))
+            /*  const colorr = products2.map(a => a.color.filter(c => c.name === b))
+             const results = colorr.filter(element => {
+                 if (Object.keys(element).length !== 0) {
+                   return true;
+                 }
+               
+                 return false;
+               });
+               console.log(results[0])   */
+            console.log(products2.includes(b))
             dispatch({
                 type: actionType.SET_PRODUCTS,
                 products: b != 'todas' ? <></> : products2,
@@ -90,7 +95,7 @@ console.log(products)
             <div className='flex flex-col'>
                 <p className='font-semibold'>Color</p>
                 <div className='px-4 gap-1 flex flex-col'>
-{/*                     {
+                    {/*                     {
                         colores && colores.map(a => (
                             <div key={a.id} className='flex'>
                                 <p>{a.name}</p>
@@ -99,9 +104,9 @@ console.log(products)
                         ))
                     } */}
                     {
-                       products2 != "" ? products2.map(a =>
+                        products2 != "" ? products2.map(a =>
                             <div key={a.id} className='flex flex-col'>
-                                {a.color.map(b => <p onClick={() => filtrocolor(b.name)} className=''>{b.name}</p> )}
+                                {a.color.map(b => <p onClick={() => filtrocolor(b.name)} className=''>{b.name}</p>)}
                             </div>
                         ) : <></>
                     }

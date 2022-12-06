@@ -459,7 +459,7 @@ export const categorias = [
     
     {
         id: 10,
-        name: "New in",
+        name: "Nuevo",
         param: "new",
     },
     {
@@ -467,11 +467,7 @@ export const categorias = [
         name: "Todas",
         param: "todas",
     },
-    {
-        id: 6,
-        name: "Ofertas",
-        param: "ofertas",
-    },
+   
 
     {
         id: 1,
@@ -484,17 +480,21 @@ export const categorias = [
         name: "Short's",
         param: "Shorts",
     },
-    {
+   /*  {
         id: 3,
         name: "Tops",
         param: "Tops",
-    },
+    }, */
     {
         id: 5,
         name: "Calzas",
         param: "Calzas",
     },
-
+    {
+        id: 6,
+        name: "Ofertas",
+        param: "ofertas",
+    },
 
 
 ];

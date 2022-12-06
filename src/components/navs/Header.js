@@ -11,13 +11,13 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { useNavigate } from 'react-router-dom'
 import { GoListUnordered } from 'react-icons/go'
+import { BsFillPersonFill } from "react-icons/bs";
 const Header = () => {
 
   const history = useNavigate();
   const [{ user, cartShow, cartItems, dondeestoy }, dispatch] = useStateValue();
   const [isOpen, setIsOpen] = useState(false)
   const [isMenu, setIsMenu] = useState(false);
-
 
 
 
@@ -103,7 +103,7 @@ const Header = () => {
         </Link>
 
 
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4">
 
           <div className="relative flex items-center justify-center  cursor-pointer">
             {
@@ -137,13 +137,24 @@ const Header = () => {
 
           <div className="relative flex items-center gap-2">
             {user && (<p>Hola <span className="font-semibold">{user.displayName}</span>!</p>)}
-            <motion.img
+           {/*  <motion.img
               whileTap={{ scale: 0.6 }}
               src={user && user.photoURL != null ? user.photoURL : Avatar}
               className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
               alt="userprofile"
               onClick={login}
+            /> */}
+            <motion.div
+                          whileTap={{ scale: 0.6 }}
+className='drop-shadow-md '
+            >
+            <BsFillPersonFill 
+              className={`${user ? 'text-booty' : 'text-gray-400'} w-10 h-10 p-2  bg-white cursor-pointer rounded-full  `}
+              alt="userprofile"
+              onClick={login}
             />
+            </motion.div>
+          
             {isMenu && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.6 }}
@@ -219,13 +230,16 @@ const Header = () => {
               </div>
             )}
           </div>
-          <motion.img
-            whileTap={{ scale: 0.6 }}
-            src={user && user.photoURL != null ? user.photoURL : Avatar}
-            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
-            alt="userprofile"
-            onClick={login}
-          />
+          <motion.div
+                          whileTap={{ scale: 0.6 }}
+className='drop-shadow-md '
+            >
+            <BsFillPersonFill 
+              className={`${user ? 'text-booty' : 'text-gray-400'} w-10 h-10 p-2  bg-white cursor-pointer rounded-full  `}
+              alt="userprofile"
+              onClick={login}
+            />
+            </motion.div>
           {isMenu && (
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
@@ -252,20 +266,9 @@ const Header = () => {
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
-                  Menu
+                  Pedidos
                 </li>
-                <li
-                  className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-                  onClick={() => setIsMenu(false)}
-                >
-                  About Us
-                </li>
-                <li
-                  className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-                  onClick={() => setIsMenu(false)}
-                >
-                  Service
-                </li>
+                
               </ul>
 
               <p

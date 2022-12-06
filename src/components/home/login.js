@@ -161,7 +161,7 @@ const ShowLogin = () => {
                 setTimeout(() => {
                     setFields(false)
                     cerrarEdit()
-                }, 3000)
+                }, 1000)
 
             })
             .catch((error) => {
@@ -192,7 +192,7 @@ const ShowLogin = () => {
                 }
                 setTimeout(() => {
                     setFields(false)
-                }, 4000)
+                }, 3000)
             });
 
     };

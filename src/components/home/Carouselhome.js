@@ -68,7 +68,7 @@ const CarrouselHome = (c) => {
 
             
             <motion.div
-                className='h-[300px] hover:opacity-70 z-[10] cursor-pointer ' >
+                className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer ' >
                 <img className='rounded-lg w-full h-full object-cover   ' src={banner3} />
             </motion.div>
 

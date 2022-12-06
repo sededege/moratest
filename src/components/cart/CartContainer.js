@@ -19,7 +19,7 @@ const CartContainer = () => {
   const [pickup, setPickUp] = useState('efectivo')
   const [codigo, setCodigo] = useState('')
 
-  const codigos = ['FIOMORA10','VITOMORA10']
+  const codigos = ['FIOMORA10','VITOMORA10', 'MORA10']
   const navigate = useNavigate();
 
 
@@ -249,7 +249,7 @@ const CartContainer = () => {
           </div>
 
           {/* cart total section */}
-          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
+          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2 pb-[80px]">
 
             <div className="w-full  flex  flex-col">
               <p className="text-gray-400 text-lg">Medio de pago</p>

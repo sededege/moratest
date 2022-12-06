@@ -81,7 +81,7 @@ const Detalle = () => {
             colorselected: filtrocolorselect,
             size: selectedsize,
             unidades: cantidad,
-            precio: thisProduct.oferta != 0 ? Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100) : thisProduct.precio 
+            precio: thisProduct.oferta != 0 ? Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100) : thisProduct.precio
         }]
         setItems([...cartItems, itemselect])
 
@@ -130,7 +130,7 @@ const Detalle = () => {
             return 'bg-[#d4e693]'
         }
 
-       
+
     }
     const borderselect = (color) => {
         if (color === 'Negro') {
@@ -215,9 +215,9 @@ const Detalle = () => {
 
                                                     </div>
                                                     {
-                                            thisProduct.oferta != 0 && <div className='flex gap-4 items-center'><p className='text-[14px]  font-bold bg-booty px-2 rounded-lg text-white'>{thisProduct.oferta} % OFF</p></div>
+                                                        thisProduct.oferta != 0 && <div className='flex gap-4 items-center'><p className='text-[14px]  font-bold bg-booty px-2 rounded-lg text-white'>{thisProduct.oferta} % OFF</p></div>
 
-                                        }
+                                                    }
                                                     {/* <div className='flex gap-4'>
 
                                                         <Rating
@@ -348,16 +348,16 @@ const Detalle = () => {
                                                                 padding: 0
                                                             }}>
                                                                 <p className='font-light text-gray-400'>
-                                                                Medidas sin estirar*
-                                                                <img src={thisProduct.caracteristicas} alt='guia de talles'/>
-                                                                  
+                                                                    Medidas sin estirar*
+                                                                    <img src={thisProduct.caracteristicas} alt='guia de talles' />
+
                                                                 </p>
-                                                                
+
                                                             </div>
                                                         </AccordionDetails>
                                                     </Accordion>
                                                 </div>
-                                               {/*  <div className='flex flex-col gap-4'>
+                                                {/*  <div className='flex flex-col gap-4'>
                                                     <Accordion
                                                         sx={{
                                                             border: 'none',
@@ -449,19 +449,19 @@ const Detalle = () => {
                                                 <div className='flex gap-8 mt-10  items-center'>
                                                     <div className=''>
 
-                                                    {
-                                                        thisProduct.oferta != 0 ? <div className='flex gap-4 items-center'>
-                                                            <p className='text-black text-[2rem]'>$ {Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100)}</p>
-                                                            <p className='text-[1.2rem] text-gray-400 line-through		'>$ {thisProduct.precio}</p>
+                                                        {
+                                                            thisProduct.oferta != 0 ? <div className='flex gap-4 items-center'>
+                                                                <p className='text-black text-[2rem]'>$ {Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100)}</p>
+                                                                <p className='text-[1.2rem] text-gray-400 line-through		'>$ {thisProduct.precio}</p>
 
-                                                        </div>
-                                                        
-                                                        : <p className='text-black text-[2rem]'>$ {thisProduct.precio}</p>
+                                                            </div>
 
-                                                    }
+                                                                : <p className='text-black text-[2rem]'>$ {thisProduct.precio}</p>
+
+                                                        }
                                                     </div>
 
-{/* 
+                                                    {/* 
                                                     <motion.div
                                                         whileTap={{ scale: 0.75 }}
                                                         className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
@@ -492,8 +492,8 @@ const Detalle = () => {
             </div>
 
             {/*   mobile */}
-            <div className=' md:fixed md:hidden'>
-                <div className=' w-[100vw] flex  mt-[10vh] overflow-hidden'>
+            <div className=' md:fixed md:hidden pb-10 '>
+                <div className=' w-[100vw] flex  mt-[10vh] overflow-hidden '>
                     {/*                 <p className=' font-light w-full ml-3 text-gray-500'>Detalle del producto</p>
  */}                <nav className="flex p-2 ml-4" aria-label="Breadcrumb" >
                         <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -585,10 +585,10 @@ const Detalle = () => {
 
                                             <div className='flex flex-col gap-6'>
 
-                                                <div className='flex mt-4 justify-between items-center'>
+                                                <div className='flex mt-4 justify-between items-center gap-4'>
                                                     <div className=' flex flex-col gap-4'>
                                                         <p className='font-semibold text-textColor '>Color</p>
-                                                        <div className='flex gap-4'>
+                                                        <div className='flex gap-1'>
                                                             {
                                                                 thisProduct.color && thisProduct.color.map(a =>
                                                                     <div key={a.id} onClick={() => setFiltroColor(a.name)} className={` ${filtrocolorselect === a.name ? `border-2
@@ -603,7 +603,7 @@ const Detalle = () => {
                                                     <div className='flex flex-col gap-4 '>
 
                                                         <p className='font-semibold text-textColor mt-3'>Talle</p>
-                                                        <div className='gap-4 flex'>
+                                                        <div className='gap-2 flex'>
                                                             {/*  {
                                                         thisProduct.talles ? thisProduct.talles.map(a => (
                                                             a.stock > 0 ?
@@ -633,7 +633,7 @@ const Detalle = () => {
                                                     </div>
                                                     <div className='flex flex-col gap-4'>
                                                         <p className='font-semibold text-textColor mt-3'>Unidades</p>
-                                                        <div className='flex  gap-4'>
+                                                        <div className='flex  gap-2'>
                                                             <div onClick={cantidad > 1 && (() => setCantidad(cantidad - 1))} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
                                                                 <p className='cursor-pointer text-white font-bold'>-</p>
                                                             </div>
@@ -700,43 +700,7 @@ const Detalle = () => {
                                                         </AccordionDetails>
                                                     </Accordion>
                                                 </div>
-                                                <div className='flex flex-col '>
-                                                    <Accordion
-                                                        sx={{
-                                                            border: 'none',
-                                                            dropShadow: 'none',
-                                                            boxShadow: 'none',
-                                                            padding: 0,
 
-                                                        }}
-                                                        expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                                                        <AccordionSummary
-                                                            sx={{
-
-                                                                padding: 0,
-
-                                                            }}
-                                                            expandIcon={<ExpandMoreIcon />}
-                                                            aria-controls="panel1bh-content"
-                                                            id="panel1bh-header"
-                                                        >
-                                                            <Typography sx={{
-
-                                                                width: '55%',
-                                                                fontFamily: 'Poppins',
-                                                                fontSize: 'bold'
-
-                                                            }}>
-                                                                Comentarios
-                                                            </Typography>
-                                                        </AccordionSummary>
-                                                        <AccordionDetails>
-                                                            <div>
-                                                                <Comentarios comentarios={thisProduct.comentarios} />
-                                                            </div>
-                                                        </AccordionDetails>
-                                                    </Accordion>
-                                                </div>
                                                 <div className='flex flex-col gap-4'>
                                                     <Accordion
                                                         sx={{
@@ -787,25 +751,25 @@ const Detalle = () => {
                                                 </ul>
                                             </div> */}
                                             </div>
-                                            <div className='flex items-center '>
 
-                                                <div className='flex gap-8 mt-10  items-center'>
-                                                    <div className=''>
-                                                        <p className='text-purple-300 font-bold text-[1.5rem] w-[80px]'>$ {thisProduct.precio}</p>
-                                                    </div>
+                                                <div className='flex  mt-10 items-center justify-between'>
+                                                      {
+                                                        thisProduct.oferta != 0 ? <div className='flex gap-4 items-center'>
+                                                            <p className='text-black text-[2rem]'>$ {Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100)}</p>
+                                                            <p className='text-[1.2rem] text-gray-400 line-through		'>$ {thisProduct.precio}</p>
 
-                                                    <motion.div
-                                                        whileTap={{ scale: 0.75 }}
-                                                        className=' group  bg-gray-200 hover:bg-gray-400 p-3 items-center justify-center flex cursor-pointer rounded-lg'>
-                                                        <button className='text-gray-400 group-hover:text-white'>Añadir a deseados</button>
-                                                    </motion.div>
+                                                        </div>
+
+                                                            : <p className='text-black text-[2rem]'>$ {thisProduct.precio}</p>
+
+                                                    } 
+                                                   
                                                     <motion.div
                                                         whileTap={{ scale: 0.75 }}
                                                         onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
                                                         <span className='text-white group-hover:text-booty'>Añadir al carro</span>
                                                     </motion.div>
                                                 </div>
-                                            </div>
                                         </div> : <Comentarios comentarios={thisProduct.comentarios} />
                                 }
 
