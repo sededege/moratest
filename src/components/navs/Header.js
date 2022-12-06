@@ -258,16 +258,17 @@ className='drop-shadow-md '
               <ul className="flex flex-col ">
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-                  onClick={() => setIsMenu(false)}
+                  onClick={() =>  history(`/Home`)}
                 >
+
                   Home
                 </li>
-                <li
+                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-                  onClick={() => setIsMenu(false)}
+              onClick={() =>  history(`/ordenes/ver`)}
                 >
                   Pedidos
-                </li>
+                </li> 
                 
               </ul>
 

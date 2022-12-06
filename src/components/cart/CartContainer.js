@@ -68,8 +68,11 @@ const CartContainer = () => {
   const checkout = () => {
     if (checkbox === 'mercadopago') {
       mercadopago()
+     
     } else {
+      
       efectivo()
+    
     }
   }
 
@@ -112,7 +115,12 @@ const CartContainer = () => {
     }
 
     saveOrder(dataa)
+    
     navigate("/ordenes/gracias");
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: false,
+    });
 
   }
   const tallasfiltro = (a, b, c) => {
@@ -172,6 +180,7 @@ const CartContainer = () => {
         window.location.assign(data);
       });
 
+      
 
   }
 
