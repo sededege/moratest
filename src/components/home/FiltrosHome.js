@@ -70,7 +70,8 @@ const FiltrosHome = () => {
                         color: [a.color[i]],
                         id: a.id,
                         oferta: a.oferta,
-                        precio: a.precio
+                        precio: a.precio,
+                        name: a.name,
                     }
 
                     )
