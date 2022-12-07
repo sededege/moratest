@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { getAllProductsItems } from '../utils/firebaseFunctions';
 import { RiFilter2Fill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
-import { AiFillFire } from 'react-icons/ai'
+import { AiFillFire, AiOutlineBgColors } from 'react-icons/ai'
 
 const FiltrosHome = () => {
     const [filtros, setFiltro] = React.useState("new")
@@ -55,14 +55,38 @@ const FiltrosHome = () => {
     }, [products, colores2])
 
 
-    const filtrarcolor = (a) => {
-        console.log('hola')
+    const filtrarcolor = (b) => {
+        console.log(b)
+        /*         console.log(products2.filter(a => a.color[0].name === b))
+         */
+        let array = []
 
-        dispatch({
+        console.log(products2.filter(a => {
+            for (let i = 0; i < a.color.length; i++)
+                if (a.color[i].name === b) {
+                    array.push({
+                        caracteristicas: a.caracteristicas,
+                        categoria: a.categoria,
+                        color: [a.color[i]],
+                        id: a.id,
+                        oferta: a.oferta,
+                        precio: a.precio
+                    }
+
+                    )
+                }
+        }
+
+        ))
+
+        console.log(array)
+
+
+         dispatch({
             type: actionType.SET_PRODUCTS,
-            products: products2.filter(b => b.colores.indexOf(a) !== -1),
+            products: array,
         });
-
+ 
 
 
 
