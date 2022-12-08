@@ -395,7 +395,7 @@ console.log(dataa)
         <div >
             {
                 editar != null ? (
-                    <div className='gap-4 grid grid-cols-4 border h-[90vh] fixed mt-[10vh] ml-[10vw] w-[90vw] px-20 rounded-lg py-10  '>
+                    <div className='gap-4 grid grid-cols-4  h-[90vh] fixed mt-[10vh] ml-[10vw] w-[90vw] px-20 rounded-lg py-10  '>
                         <div className='col-span-2 px-10 py-5 flex flex-col justify-between'>
 
                             <div className='grid grid-cols-2 gap-4'>
@@ -448,7 +448,7 @@ console.log(dataa)
                 </div>
                 <div className='col-span-4'>
                     <div className='col-span-2 mb-2 text-booty'>
-                        <p className='font-semibold text-[14px] text-booty'>Caracteristicas</p>
+                        <p className='font-semibold text-[14px] text-booty'>Guia de talles (link)</p>
                     </div>
                     <input onChange={(e) => setCaracteristicas(e.target.value)} defaultValue={caracteristicas} className='outline-none  border-2 p-2 text-textColor w-full' name="comentarios"  />
                 </div>

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion'
 import { useStateValue } from "./components/context/StateProvider";
-import { getAllProductsItems } from "./components/utils/firebaseFunctions";
+import { getAllProductsItems, getAllOrders } from "./components/utils/firebaseFunctions";
 import { actionType } from "./components/context/reducer";
 import Dashboard from "./components/dashboard/Dashboard";
 import { getAllUsuarios } from "./components/utils/firebaseFunctions";
@@ -24,6 +24,7 @@ import Pre from "./components/utils/Pre";
 import ScrollToTop from "./components/utils/scrolltotop";
 import ShowLogin from "./components/home/login";
 import Footer from "./components/home/Footer";
+import Pedidos from "./components/dashboard/Pedidos";
 
 function App() {
   const [{ headerShow,dondeestoy, cartShow, editShow,favorite, loginShow, user, products}, dispatch] = useStateValue();
@@ -36,6 +37,13 @@ function App() {
         products: data
       })
     })
+    getAllOrders().then((data) => {
+      dispatch({
+          type: actionType.SET_ORDERS,
+          orders: data
+      })
+
+  })
   }, [])
 
 
@@ -106,8 +114,12 @@ function App() {
           <Route path='/Nuevoproducto' element={<CreateContainer />} />
           <Route path='/edititem' element={<EditItem />} />
           <Route path='/Ordenes/:type' element={<Ordenes />} />
+          <Route path='/Dashboard/Pedidos' element={<Pedidos/>} />
         </Routes>
-        <Footer/>
+        {
+          dondeestoy !== 'Dashboard' && (   <Footer/>)
+        } 
+     
 
       </main>
     </div>

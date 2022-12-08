@@ -19,8 +19,8 @@ const CreateContainer = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isLoading1, setIsLoading1] = useState(false);
     const [isLoading2, setIsLoading2] = useState(false);
-    const [descripcion, setDescription] = useState('Escribe aqui la descripcion');
-    const [caracteristicas, setCaracteristicas] = useState('Escribe aqui las caracteristicas');
+    const [descripcion, setDescription] = useState('Escribe aqui las caracteristicas');
+    const [caracteristicas, setCaracteristicas] = useState('pega el link de la guia de talles');
     const [price, setPrice] = useState("");
     const [oferta, setOferta] = useState(0);
     const [category, setCategory] = useState(null);
@@ -36,7 +36,7 @@ const CreateContainer = () => {
     const [colores, setColores] = useState([]);
 
 
-    const [ dispatch] = useStateValue();
+    const [{dondeestoy},dispatch] = useStateValue();
     const fetchData = async () => {
         await getAllFoodItems().then((data) => {
             dispatch({
@@ -46,6 +46,14 @@ const CreateContainer = () => {
         })
     }
 
+    React.useEffect(() => {
+        dispatch({
+            type: actionType.SET_DONDE_ESTOY,
+            dondeestoy: 'Dashboard'
+        })
+    }, [])
+
+    
     const deleteImage = () => {
         setIsLoading(true)
         const deleteRef = ref(storage, imageAsset)
@@ -303,7 +311,7 @@ const CreateContainer = () => {
     };
 
     return (
-        <div className='gap-4 grid grid-cols-4 border h-[90vh] fixed mt-[10vh] ml-[10vw] w-[90vw] px-20 rounded-lg py-10  '>
+        <div className='gap-4 grid grid-cols-4 h-[90vh] fixed mt-[10vh] ml-[10vw] w-[90vw] px-20 rounded-lg py-10  '>
             <div className='col-span-2 px-10 py-5 flex flex-col justify-between'>
                 <div className='grid grid-cols-2 gap-4'>
                     <div className='col-span-2'>
@@ -355,7 +363,7 @@ const CreateContainer = () => {
                 </div>
                 <div className='col-span-4'>
                     <div className='col-span-2 mb-2 text-booty'>
-                        <p className='font-semibold text-[14px] text-booty'>Caracteristicas</p>
+                        <p className='font-semibold text-[14px] text-booty'>Guia de talles</p>
                     </div>
                     <input onChange={(e) => setCaracteristicas(e.target.value)} defaultValue={caracteristicas} className='outline-none  border-2 p-2 text-textColor w-full' name="comentarios"  />
                 </div>

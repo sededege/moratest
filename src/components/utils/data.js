@@ -130,7 +130,7 @@ export const dashboard = [
 
   {
     id: 2,
-    name: "Variables",
+    name: "Pedidos",
     icon: "MdContactPage",
   },
 

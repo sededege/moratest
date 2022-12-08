@@ -2,11 +2,11 @@ import React from 'react'
 import ImageGallery from 'react-image-gallery';
 import { MdOutlineArrowLeft, MdOutlineArrowRight } from 'react-icons/md'
 import { motion } from 'framer-motion';
- 
+
 const Galeria = (a) => {
     const [images2, setImages2] = React.useState([])
     React.useEffect(() => {
-         if (a.images && a.filtrocolor) {
+        if (a.images && a.filtrocolor) {
             const colorgaleria = a.images.filter(d => d.name === a.filtrocolor)
             if (colorgaleria[0].images) {
                 setImages2("")
@@ -14,20 +14,20 @@ const Galeria = (a) => {
                     el != null && (setImages2(prevState => [...prevState, { original: el, thumbnail: el }]))
 
                 })
-            }  if (colorgaleria[0].video != ""){
+            } if (colorgaleria[0].video != "") {
                 colorgaleria[0].video.forEach((la, index) => {
-                    setImages2(prevState => [...prevState, { thumbnail: colorgaleria[0].miniaturavideo, renderItem: () => renderVideo(colorgaleria[0].video)}])
+                    setImages2(prevState => [...prevState, { thumbnail: colorgaleria[0].miniaturavideo, renderItem: () => renderVideo(colorgaleria[0].video) }])
                 })
-            } 
-        
-        } 
-       
+            }
+
+        }
+
 
     }, [a])
     const src =
         "https://i.imgur.com/AUhyLbb.mp4";
-    
-   
+
+
 
     const LeftNav = React.memo(({
         disabled,
@@ -69,8 +69,8 @@ const Galeria = (a) => {
             <div className='image-gallery-image video'>
                 <video controls width="100%" height='100%'>
                     {
-  a.images[0].video != "" &&
-                 <source className='video' src={a.images[0].video} type="video/mp4" />
+                        a.images[0].video != "" &&
+                        <source className='video' src={a.images[0].video} type="video/mp4" />
 
 
                     }
@@ -79,14 +79,14 @@ const Galeria = (a) => {
         );
     }
 
-   
+
 
 
     return (
-        <motion.div 
-        initial={{opacity: 0}}
-       animate={{opacity: 1}}
-       className='md:w-[40vw] w-[100vw] md:items-center flex flex-col justify-center'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className='md:w-[40vw] w-[100vw] md:items-center flex flex-col justify-center'>
             <ImageGallery
                 showPlayButton={false}
                 showFullscreenButton={false}

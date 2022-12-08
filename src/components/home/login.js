@@ -16,7 +16,7 @@ const ShowLogin = () => {
     const [pass, setPass] = React.useState(null)
     const [pass2, setPass2] = React.useState(null)
     const [puerta, setPuerta] = React.useState(null)
-    const [celular, setCelular] = React.useState("")
+    const [celular, setCelular] = React.useState(null)
     const [nombre, setNombre] = React.useState(null)
     const [apto, setApto] = React.useState(null)
     const [barrio, setBarrio] = React.useState(null)
@@ -153,6 +153,7 @@ const ShowLogin = () => {
                     type: actionType.SET_USER,
                     user: user.providerData[0],
                 });
+
                 localStorage.setItem("user", JSON.stringify(user.providerData[0]));
                 /*                 cerrarEdit()
                  */                /*                 console.log(user)
@@ -214,8 +215,9 @@ const ShowLogin = () => {
                             // ...
                             updateProfile(user, {
                                 displayName: nombre,
-                                phoneNumber: celular
+                             
                             });
+                          
                             const data = {
                                 id: `${Date.now()}`,
                                 alias: "",

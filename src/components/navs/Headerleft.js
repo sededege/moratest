@@ -47,6 +47,9 @@ const Headerleft = () => {
         else if (a === 'Ordenes') {
             history(`/Ordenes/ver`)
         }
+        else if (a === 'Pedidos') {
+            history(`/Dashboard/Pedidos`)
+        }
     }
 
     return (

@@ -204,9 +204,7 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
                                 <th>S</th>
                                 <th>M</th>
                                 <th>L</th>
-                                <th>S</th>
-                                <th>M</th>
-                                <th>L</th>
+                                
                                 <th>Precio</th>
                                 <th>Acciones</th>
                             </tr>
@@ -259,46 +257,7 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
                                                 <p key={index}>{b.tallas[2].stock}</p>
 
                                             )}</td>
-                                        <td className='text-textColor text-md font-semibold'>
-                                          {/*   {
-                                                asd.map(a =>
-                                                    a.talles.filter(b => b.size === 'S').reduce((acc, item) => acc + item.unidades, 0)
-                                                )
-
-                                                
-                                            }
- */}
-                                        </td>
-                                        <td className='text-textColor text-md font-semibold'>
-                                         {/*    {
-                                                asd.map((b, index) =>
-                                                    b.id === a.id && (
-                                                        <p key={index}>{b.talles[2].unidades}</p>)
-
-                                                )
-                                            } */}
-
-                                        </td>
-                                        <td className='text-textColor text-md font-semibold'>
-                                          {/*   {
-                                                asd.map((b, index) =>
-                                                    b.id === a.id && (
-                                                        <p key={index}>{b.talles[0].unidades}</p>)
-
-                                                )
-                                            }
- */}
-                                        </td>
-                                        {/*  <td className='text-textColor text-md font-semibold'>
-                                            {
-                                                newArr1.map((b) =>
-                                                    b.id === a.id ?
-                                                        <p key={index}>{b.size}</p> : console.log('nada')
-
-                                                )
-                                            }
-
-                                        </td> */}
+                                      
                                         <td className='text-textColor text-md font-semibold'>$ {a.precio}</td>
                                         <td className='text-black'>
                                             <div className='flex gap-2 items-center justify-center'>

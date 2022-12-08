@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion";
 import { useStateValue } from '../context/StateProvider';
 import { HiCubeTransparent } from 'react-icons/hi';
+import e from 'cors';
 const Carrousel = (c) => {
     const [{ favoritos }, dispatch] = useStateValue();
     const history = useNavigate();
@@ -102,26 +103,33 @@ const Carrousel = (c) => {
         }
     }
 
+
+    
+
     return (
         <Carousel
             showStatus={false}
             showThumbs={false}
             renderIndicator={(onClickHandler, isSelected, index, label) => {
-
-
+                const handleChange = (a) => {
+                    onClickHandler()
+                    console.log(a)
+                      };
                 return (
                     <>
                         {
                             index + 1 > 0 &&
                             <div
-                                onClick={onClickHandler}
+                                onClick={handleChange}
                                 onKeyDown={onClickHandler}
                                 value={index}
+                                onChange={handleChange}
                                 key={index}
                                 role="button"
                                 tabIndex={0}
                                 aria-label={`${label} ${index + 1}`}
                                 className={`ml-4 mt-2 ${isSelected ? `border-2 border-white ` : `border-gray-400 border-1`} ${colores(c.imagenes[index].name)}  h-4 w-4 rounded-full border-1`}>
+
 
                             </div>
                         }

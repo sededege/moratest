@@ -18,6 +18,10 @@ export const borrarproducto = async (id) => {
   await deleteDoc(doc(firestore, "products", id));
 
 };
+export const borrarorder = async (id) => {
+  await deleteDoc(doc(firestore, "orders", id));
+
+};
 
 
 
@@ -81,6 +85,14 @@ export const saveOrder = async (data) => {
     merge: true,
   });
 };
+
+export const updatePagado = async (dataa) => {
+  const productRef = doc(firestore, "orders", dataa.id)
+  await updateDoc(productRef, {
+    status: dataa.status,
+  });
+}
+
 export const saveUser = async (data) => {
 
   await setDoc(doc(firestore, "user", data.id), data, {

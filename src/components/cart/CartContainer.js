@@ -102,6 +102,7 @@ const CartContainer = () => {
         }`,
     })
     )
+    
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
@@ -111,7 +112,8 @@ const CartContainer = () => {
       pickup: pickup,
       total: tot,
       email: user.email,
-      name: user.displayName
+      name: user.displayName,
+     phone: users.filter(a => a.user === user.email)[0].cel
     }
 
     saveOrder(dataa)
@@ -121,6 +123,19 @@ const CartContainer = () => {
       type: actionType.SET_CART_SHOW,
       cartShow: false,
     });
+
+    const options = {
+      method: "POST",
+      body: JSON.stringify(dataa),
+      headers: new Headers({ 'content-type': 'application/json' }),
+    };
+
+    fetch("http://localhost:3000/ordencreada", options)
+    .then(response => response)
+    .then(data => {
+      console.log(data);
+    });
+
 
   }
   const tallasfiltro = (a, b, c) => {
