@@ -10,6 +10,7 @@ import { storage } from '../../firebase.config';
 import { saveItem } from '.././utils/firebaseFunctions';
 import { actionType } from "../../components/context/reducer";
 import { getAllFoodItems } from ".././utils/firebaseFunctions";
+
 const CreateContainer = () => {
 
     const [title, setTitle] = useState("");
@@ -36,7 +37,7 @@ const CreateContainer = () => {
     const [colores, setColores] = useState([]);
 
 
-    const [{dondeestoy},dispatch] = useStateValue();
+    const [{dondeestoy}, dispatch] = useStateValue();
     const fetchData = async () => {
         await getAllFoodItems().then((data) => {
             dispatch({

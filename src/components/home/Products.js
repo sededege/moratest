@@ -37,7 +37,6 @@ const Products = () => {
 
     const agregar = (a) => {
         if (prueba[0].indexOf(a) !== -1) {
-            console.log('toy')
             const eliminar = prueba[0].filter(b => b !== a)
             setPrueba([eliminar])
 

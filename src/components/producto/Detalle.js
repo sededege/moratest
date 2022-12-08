@@ -14,10 +14,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import mp from '../../components/img/mp.webp'
 import efectivo from '../../components/img/efectivo.png'
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 
 
 const Detalle = () => {
+    const location = useLocation();
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -56,7 +58,7 @@ const Detalle = () => {
         }
 
         if (thisProduct != "") {
-            setFiltroColor(thisProduct.color[0].name)
+            setFiltroColor(location.state)
         }
 
         dispatch({
@@ -752,24 +754,24 @@ const Detalle = () => {
                                             </div> */}
                                             </div>
 
-                                                <div className='flex  mt-10 items-center justify-between'>
-                                                      {
-                                                        thisProduct.oferta != 0 ? <div className='flex gap-4 items-center'>
-                                                            <p className='text-black text-[2rem]'>$ {Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100)}</p>
-                                                            <p className='text-[1.2rem] text-gray-400 line-through		'>$ {thisProduct.precio}</p>
+                                            <div className='flex  mt-10 items-center justify-between'>
+                                                {
+                                                    thisProduct.oferta != 0 ? <div className='flex gap-4 items-center'>
+                                                        <p className='text-black text-[2rem]'>$ {Math.round((thisProduct.precio * (100 - (thisProduct.oferta))) / 100)}</p>
+                                                        <p className='text-[1.2rem] text-gray-400 line-through		'>$ {thisProduct.precio}</p>
 
-                                                        </div>
+                                                    </div>
 
-                                                            : <p className='text-black text-[2rem]'>$ {thisProduct.precio}</p>
+                                                        : <p className='text-black text-[2rem]'>$ {thisProduct.precio}</p>
 
-                                                    } 
-                                                   
-                                                    <motion.div
-                                                        whileTap={{ scale: 0.75 }}
-                                                        onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
-                                                        <span className='text-white group-hover:text-booty'>Añadir al carro</span>
-                                                    </motion.div>
-                                                </div>
+                                                }
+
+                                                <motion.div
+                                                    whileTap={{ scale: 0.75 }}
+                                                    onClick={() => pedido(thisProduct)} className=' group  bg-booty p-3 items-center justify-center flex cursor-pointer rounded-lg hover:bg-white hover:border-booty border-2 border-booty hover:border-2 '>
+                                                    <span className='text-white group-hover:text-booty'>Añadir al carro</span>
+                                                </motion.div>
+                                            </div>
                                         </div> : <Comentarios comentarios={thisProduct.comentarios} />
                                 }
 
