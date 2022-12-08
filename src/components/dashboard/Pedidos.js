@@ -311,7 +311,7 @@ const Pedidos = () => {
     }
 
     return (
-        <div className='pb-20 mt-[10vh] md:ml-[10vw] w-[100vw]  md:w-[90vw]   rounded-lg py-10 '>
+        <div className='pb-20 mt-[10vh] md:ml-[14vw] w-[100vw]  md:w-[90vw]   rounded-lg py-10 '>
             <h1 className='text-booty text-center font-bold p-4 '>Pedidos</h1>
 
             <div className='px-5 flex-col grid md:grid-cols-3 gap-4 '>

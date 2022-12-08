@@ -18,8 +18,8 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('efectivo')
   const [pickup, setPickUp] = useState('efectivo')
   const [codigo, setCodigo] = useState('')
-
-  const codigos = ['FIOMORA10','VITOMORA10', 'MORA10']
+  const url = 'https://www.morafit.uy'
+  const codigos = ['FIOMORA10', 'VITOMORA10', 'MORA10']
   const navigate = useNavigate();
 
 
@@ -46,14 +46,14 @@ const CartContainer = () => {
        localStorage.setItem("cartItems", JSON.stringify([])); */
 
 
-       if (codigos.indexOf(codigo) === -1){
-       
-        let totalPrice = cartItems.reduce(function (accumulator, item) {
-          return accumulator + item[0].unidades * item[0].precio;
-        }, 0);
-        setTot(totalPrice);
-       }
-  
+    if (codigos.indexOf(codigo) === -1) {
+
+      let totalPrice = cartItems.reduce(function (accumulator, item) {
+        return accumulator + item[0].unidades * item[0].precio;
+      }, 0);
+      setTot(totalPrice);
+    }
+
 
 
 
@@ -68,21 +68,21 @@ const CartContainer = () => {
   const checkout = () => {
     if (checkbox === 'mercadopago') {
       mercadopago()
-     
+
     } else {
-      
+
       efectivo()
-    
+
     }
   }
 
   const promo = (e) => {
     setCodigo(e.target.value)
     console.log(codigos.indexOf(e.target.value))
-    if (codigos.indexOf(e.target.value) != -1){
-      setTot(tot*0.9)
-    } 
-   }
+    if (codigos.indexOf(e.target.value) != -1) {
+      setTot(tot * 0.9)
+    }
+  }
 
   const efectivo = () => {
 
@@ -102,7 +102,7 @@ const CartContainer = () => {
         }`,
     })
     )
-    
+
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
@@ -113,11 +113,11 @@ const CartContainer = () => {
       total: tot,
       email: user.email,
       name: user.displayName,
-     phone: users.filter(a => a.user === user.email)[0].cel
+      phone: users.filter(a => a.user === user.email)[0].cel
     }
 
     saveOrder(dataa)
-    
+
     navigate("/ordenes/gracias");
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -130,11 +130,11 @@ const CartContainer = () => {
       headers: new Headers({ 'content-type': 'application/json' }),
     };
 
-    fetch("http://localhost:3000/ordencreada", options)
-    .then(response => response)
-    .then(data => {
-      console.log(data);
-    });
+    fetch(`${url}/ordencreada`, options)
+      .then(response => response)
+      .then(data => {
+        console.log(data);
+      });
 
 
   }
@@ -189,13 +189,13 @@ const CartContainer = () => {
       headers: new Headers({ 'content-type': 'application/json' }),
     };
 
-    fetch("http://localhost:3000/checkout", options)
+    fetch(`${url}/checkout`, options)
       .then(response => response.text())
       .then(data => {
         window.location.assign(data);
       });
 
-      
+
 
   }
 
@@ -312,7 +312,7 @@ const CartContainer = () => {
             </div>
             <div class="flex w-full">
               {
-                codigos.indexOf(codigo) === -1 ? <input className="w-full text-center p-2 rounded-full" onChange={(e) => promo(e)} placeholder='Codigo promocional' /> :      <input disabled='disabled' className="w-full text-center p-2 rounded-full" value='10% de descuento aplicado!'  placeholder='10% de descuento aplicado!' />
+                codigos.indexOf(codigo) === -1 ? <input className="w-full text-center p-2 rounded-full" onChange={(e) => promo(e)} placeholder='Codigo promocional' /> : <input disabled='disabled' className="w-full text-center p-2 rounded-full" value='10% de descuento aplicado!' placeholder='10% de descuento aplicado!' />
               }
             </div>
             <div className="w-full border-b border-gray-600 my-2"></div>
