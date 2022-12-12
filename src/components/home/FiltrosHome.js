@@ -18,7 +18,6 @@ const FiltrosHome = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [colores2, setColores] = useState([])
     const [colores, setColores2] = useState([])
-    const [filtrocolorselect, setFiltroColor] = React.useState('')
 
 
 
@@ -159,11 +158,11 @@ const FiltrosHome = () => {
         console.log(array)
 
 
-        dispatch({
+         dispatch({
             type: actionType.SET_PRODUCTS,
             products: array,
         });
-
+ 
 
 
 
@@ -243,16 +242,7 @@ const FiltrosHome = () => {
                     <p>Color</p>
                     <ul>
                         {
-                            colores.map((a, index) =>
-                                <div key={index} onClick={() => setFiltroColor(a)} className={` ${filtrocolorselect === a ? `border-2
-                                ${borderselect(a.name)} rounded-full` : 'border-2 border-white rounded-full flex gap-2 '} `}>
-                                    <div className={` ${colorselect(a)} h-4 w-4 rounded-full border-2`}></div>
-                                    <p>{a}</p>
-                                </div>
-
-                            )
-
-
+                            colores.map(a => <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
                         }
 
                     </ul>
@@ -297,19 +287,18 @@ const FiltrosHome = () => {
                         <p className='font-bold'>Color</p>
                         <ul>
                             {
-                                colores.map((a, index) =>
-                                    <div key={index} onClick={() => setFiltroColor(a)} className={` ${filtrocolorselect === a ? `border-2
-                                ${borderselect(a.name)} rounded-full` : 'border-2 border-white rounded-full'} `}>
-                                        <div className={` ${colorselect(a)} h-4 w-4 rounded-full border-2`}></div>
-                                    </div>
-
+                                colores.map(a => 
+                                <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>
+                                
+                                
                                 )
 
-
+                                
                             }
 
                         </ul>
 
+                        <p className='font-bold'>Price</p>
 
 
                     </motion.div>
