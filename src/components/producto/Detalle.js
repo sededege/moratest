@@ -356,7 +356,7 @@ const Detalle = () => {
                                                                 padding: 0
                                                             }}>
                                                                 <p className='font-light text-gray-400'>
-                                                                    Medidas sin estirar*
+                                                                   
                                                                     <img src={thisProduct.caracteristicas} alt='guia de talles' />
 
                                                                 </p>

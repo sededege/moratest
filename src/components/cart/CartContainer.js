@@ -19,7 +19,9 @@ const CartContainer = () => {
   const [pickup, setPickUp] = useState('efectivo')
   const [codigo, setCodigo] = useState('')
   const url = 'https://node-mora-adbi7fdpf-sededege.vercel.app'
-  const codigos = ['FIOMORA10', 'VITOMORA10', 'MORA10']
+  const codigos = ['FIOMORA10', 'VITOMORA10', 'MORA10', 'MORA15']
+  const [descuento, setDescuento] = useState('')
+
   const navigate = useNavigate();
 
 
@@ -80,7 +82,8 @@ const CartContainer = () => {
     setCodigo(e.target.value)
     console.log(codigos.indexOf(e.target.value))
     if (codigos.indexOf(e.target.value) != -1) {
-      setTot(tot * 0.9)
+      setTot(tot * 0.85)
+      setDescuento(0.85)
     }
   }
 
@@ -113,7 +116,9 @@ const CartContainer = () => {
       total: tot,
       email: user.email,
       name: user.displayName,
-      phone: users.filter(a => a.user === user.email)[0].cel
+      phone: users.filter(a => a.user === user.email)[0].cel,
+      codigo: descuento
+
     }
 
     saveOrder(dataa)
@@ -159,7 +164,7 @@ const CartContainer = () => {
       category_id: item[0].item.categoria,
       quantity: parseInt(item[0].unidades),
       currency_id: 'UYU',
-      unit_price: parseInt(item[0].precio),
+      unit_price: descuento != '' ? parseInt(item[0].precio*descuento*1.1) : parseInt(item[0].precio*1.1),
       tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
       size: item[0].size,
       color: item[0].colorselected,
@@ -176,6 +181,7 @@ const CartContainer = () => {
       email: user.email,
       metodo: checkbox,
       pickup: pickup,
+      codigo: descuento
 
     }
 
@@ -194,8 +200,6 @@ const CartContainer = () => {
       .then(data => {
         window.location.assign(data);
       });
-
-
 
   }
 
@@ -283,7 +287,7 @@ const CartContainer = () => {
               </div>
               <div class="flex items-center rounded">
                 <input id="bordered-radio-2" type="radio" value="asdd" onClick={() => setCheckbox('mercadopago')} name="bordered-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-2" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Mercado pago </label>
+                <label for="bordered-radio-2" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Mercado pago (+10%) </label>
               </div>
               <div class="flex items-center rounded">
                 <input id="bordered-radio-3" type="radio" value="asdd" onClick={() => setCheckbox('transferencia')} name="bordered-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
