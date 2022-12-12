@@ -18,7 +18,7 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('efectivo')
   const [pickup, setPickUp] = useState('efectivo')
   const [codigo, setCodigo] = useState('')
-  const url = 'https://node-mora-adbi7fdpf-sededege.vercel.app'
+  const url = 'https://nodemora.herokuapp.com'
   const codigos = ['FIOMORA10', 'VITOMORA10', 'MORA10', 'MORA15']
   const [descuento, setDescuento] = useState('')
 
