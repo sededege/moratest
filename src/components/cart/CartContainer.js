@@ -316,7 +316,7 @@ const CartContainer = () => {
             </div>
             <div class="flex w-full">
               {
-                codigos.indexOf(codigo) === -1 ? <input className="w-full text-center p-2 rounded-full" onChange={(e) => promo(e)} placeholder='Codigo promocional' /> : <input disabled='disabled' className="w-full text-center p-2 rounded-full" value='10% de descuento aplicado!' placeholder='10% de descuento aplicado!' />
+                codigos.indexOf(codigo) === -1 ? <input className="w-full text-center p-2 rounded-full" onChange={(e) => promo(e)} placeholder='Codigo promocional' /> : <input disabled='disabled' className="w-full text-center p-2 rounded-full" value='10% de descuento aplicado!' placeholder='15% de descuento aplicado!' />
               }
             </div>
             <div className="w-full border-b border-gray-600 my-2"></div>
