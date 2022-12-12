@@ -18,6 +18,82 @@ const FiltrosHome = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [colores2, setColores] = useState([])
     const [colores, setColores2] = useState([])
+    const [filtrocolorselect, setFiltroColor] = React.useState('')
+
+
+
+    const colorselect = (color) => {
+        if (color === 'Negro') {
+            return 'bg-black'
+        }
+        if (color === 'Morado') {
+            return 'bg-[#c7acbf]'
+        }
+        if (color === 'Verde') {
+            return 'bg-green-100'
+        }
+        if (color === 'Gris') {
+            return 'bg-gray-400'
+        }
+        if (color === 'Purple') {
+            return 'bg-[#9c78a8]'
+        }
+        if (color === 'Blue') {
+            return 'bg-blue-500'
+        }
+        if (color === 'Rosado') {
+            return 'bg-[#da9bc1]'
+        }
+        if (color === 'Purpura') {
+            return 'bg-[#977baf]'
+        }
+        if (color === 'Camuflado') {
+            return 'bg-[#acbeaf]'
+        }
+        if (color === 'Turquesa') {
+            return 'bg-[#60ceb9]'
+        }
+        if (color === 'Verde-Fluor') {
+            return 'bg-[#d4e693]'
+        }
+
+
+    }
+    const borderselect = (color) => {
+        if (color === 'Negro') {
+            return 'border-black'
+        }
+        if (color === 'Morado') {
+            return 'border-[#c7acbf]'
+        }
+        if (color === 'Verde') {
+            return 'border-green-100'
+        }
+        if (color === 'Gris') {
+            return 'border-gray-400'
+        }
+        if (color === 'Purple') {
+            return 'border-[#9c78a8]'
+        }
+        if (color === 'Blue') {
+            return 'border-blue-500'
+        }
+        if (color === 'Rosado') {
+            return 'border-[#da9bc1]'
+        }
+        if (color === 'Purpura') {
+            return 'border-[#977baf]'
+        }
+        if (color === 'Camuflado') {
+            return 'border-[#acbeaf]'
+        }
+        if (color === 'Turquesa') {
+            return 'border-[#60ceb9]'
+        }
+        if (color === 'Verde-Fluor') {
+            return 'border-[#d4e693]'
+        }
+    }
 
     const variants = {
         open: { width: '100%', height: 400, opacity: 1 },
@@ -83,11 +159,11 @@ const FiltrosHome = () => {
         console.log(array)
 
 
-         dispatch({
+        dispatch({
             type: actionType.SET_PRODUCTS,
             products: array,
         });
- 
+
 
 
 
@@ -167,7 +243,16 @@ const FiltrosHome = () => {
                     <p>Color</p>
                     <ul>
                         {
-                            colores.map(a => <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
+                            colores.map((a, index) =>
+                                <div key={index} onClick={() => setFiltroColor(a)} className={` ${filtrocolorselect === a ? `border-2
+                                ${borderselect(a.name)} rounded-full` : 'border-2 border-white rounded-full flex gap-2 '} `}>
+                                    <div className={` ${colorselect(a)} h-4 w-4 rounded-full border-2`}></div>
+                                    <p>{a}</p>
+                                </div>
+
+                            )
+
+
                         }
 
                     </ul>
@@ -212,12 +297,19 @@ const FiltrosHome = () => {
                         <p className='font-bold'>Color</p>
                         <ul>
                             {
-                                colores.map(a => <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
+                                colores.map((a, index) =>
+                                    <div key={index} onClick={() => setFiltroColor(a)} className={` ${filtrocolorselect === a ? `border-2
+                                ${borderselect(a.name)} rounded-full` : 'border-2 border-white rounded-full'} `}>
+                                        <div className={` ${colorselect(a)} h-4 w-4 rounded-full border-2`}></div>
+                                    </div>
+
+                                )
+
+
                             }
 
                         </ul>
 
-                        <p className='font-bold'>Price</p>
 
 
                     </motion.div>

@@ -116,6 +116,9 @@ const Detalle = () => {
         if (color === 'Blue') {
             return 'bg-blue-500'
         }
+        if (color === 'Azul-Oscuro') {
+            return 'bg-blue-900'
+        }
         if (color === 'Rosado') {
             return 'bg-[#da9bc1]'
         }
@@ -167,6 +170,9 @@ const Detalle = () => {
         }
         if (color === 'Verde-Fluor') {
             return 'border-[#d4e693]'
+        }
+        if (color === 'Azul-Oscuro') {
+            return 'border-blue-900'
         }
     }
 

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion";
 import { useStateValue } from '../context/StateProvider';
 import banner1 from '../img/ban1.jpeg'
-import banner2 from '../img/ban2.jpeg'
+import banner2 from '../img/banner2.png'
 import banner3 from '../img/banner1.png'
 const CarrouselHome = (c) => {
     const [{ favoritos }, dispatch] = useStateValue();
@@ -51,7 +51,8 @@ const CarrouselHome = (c) => {
             showStatus={false}
             showThumbs={false}
             autoPlay={true}
-            
+            infiniteLoop={true}
+            interval={5000}
 
         >
 
@@ -70,6 +71,12 @@ const CarrouselHome = (c) => {
             <motion.div
                 className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer ' >
                 <img className='rounded-lg w-full h-full object-cover   ' src={banner3} />
+
+            </motion.div>
+            <motion.div
+                className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer ' >
+                <img className='rounded-lg w-full h-full object-cover   ' src={banner2} />
+
             </motion.div>
 
 

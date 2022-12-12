@@ -22,6 +22,7 @@ const Carrousel = (c) => {
     const navegar = (a,index) => {
        history(`/detalle/${a}`,{state: index});
     }
+    
     const colores = (color) => {
         if (color === 'Negro') {
             return 'bg-black'
@@ -41,6 +42,9 @@ const Carrousel = (c) => {
         if (color === 'Blue') {
             return 'bg-blue-500'
         }
+        if (color === 'Azul-Oscuro') {
+            return 'bg-blue-900'
+        }
         if (color === 'Rosado') {
             return 'bg-[#da9bc1]'
         }
@@ -56,12 +60,10 @@ const Carrousel = (c) => {
         if (color === 'Verde-Fluor') {
             return 'bg-[#d4e693]'
         }
-        if (color === 'Celeste') {
-            return 'bg-[#52a1da]'
-        }
 
 
     }
+   
     const borderselect = (color) => {
         console.log(color)
         if (color === 'NegroNegro') {
