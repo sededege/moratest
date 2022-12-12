@@ -18,7 +18,7 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('efectivo')
   const [pickup, setPickUp] = useState('efectivo')
   const [codigo, setCodigo] = useState('')
-  const url = 'https://www.morafit.uy'
+  const url = 'https://node-mora.vercel.app'
   const codigos = ['FIOMORA10', 'VITOMORA10', 'MORA10']
   const navigate = useNavigate();
 
@@ -130,12 +130,12 @@ const CartContainer = () => {
       headers: new Headers({ 'content-type': 'application/json' }),
     };
 
-    fetch(`${url}/ordencreada`, options)
+  /*   fetch(`${url}/ordencreada`, options)
       .then(response => response)
       .then(data => {
         console.log(data);
       });
-
+ */
 
   }
   const tallasfiltro = (a, b, c) => {
