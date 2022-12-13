@@ -59,7 +59,6 @@ const CartContainer = () => {
 
 
 
-
     if (users && user) {
       setDatos(users.filter(a => a.user === user.email))
     }
@@ -71,10 +70,12 @@ const CartContainer = () => {
     if (checkbox === 'mercadopago') {
       mercadopago()
 
-    } else {
+    } else if (checkbox === 'efectivo') {
 
       efectivo()
 
+    } else {
+      transferencia()
     }
   }
 
@@ -105,7 +106,7 @@ const CartContainer = () => {
         }`,
     })
     )
-
+    console.log(tot)
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
@@ -113,7 +114,7 @@ const CartContainer = () => {
       status: 'pendiente',
       metodo: checkbox,
       pickup: pickup,
-      total: tot,
+      total: pickup === 'envio' ? tot + 200 : tot,
       email: user.email,
       name: user.displayName,
       phone: users.filter(a => a.user === user.email)[0].cel,
@@ -135,12 +136,68 @@ const CartContainer = () => {
       headers: new Headers({ 'content-type': 'application/json' }),
     };
 
-  /*   fetch(`${url}/ordencreada`, options)
-      .then(response => response)
-      .then(data => {
-        console.log(data);
-      });
- */
+    /*   fetch(`${url}/ordencreada`, options)
+        .then(response => response)
+        .then(data => {
+          console.log(data);
+        });
+   */
+
+  }
+  const transferencia = () => {
+
+    const producto = cartItems.map(item =>
+    ({
+      id: item[0].item.id,
+      title: item[0].item.name,
+      description: item[0].item.descripcion,
+      category_id: item[0].item.categoria,
+      quantity: parseInt(item[0].unidades),
+      currency_id: 'UYU',
+      unit_price: parseInt(item[0].precio),
+      tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
+      size: item[0].size,
+      color: item[0].colorselected,
+      idorden: `${Date.now()
+        }`,
+    })
+    )
+    console.log(tot)
+    const dataa = {
+      id: Date.now().toString(),
+      creado: `${new Date()}`,
+      items: producto,
+      status: 'pendiente',
+      metodo: checkbox,
+      pickup: pickup,
+      total: pickup === 'envio' ? tot + 200 : tot,
+      email: user.email,
+      name: user.displayName,
+      phone: users.filter(a => a.user === user.email)[0].cel,
+      codigo: descuento
+
+    }
+
+    saveOrder(dataa)
+
+    navigate("/ordenes/graciastr");
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: false,
+    });
+
+    const options = {
+      method: "POST",
+      body: JSON.stringify(dataa),
+      headers: new Headers({ 'content-type': 'application/json' }),
+    };
+
+    /*   fetch(`${url}/ordencreada`, options)
+        .then(response => response)
+        .then(data => {
+          console.log(data);
+        });
+   */
 
   }
   const tallasfiltro = (a, b, c) => {
@@ -164,7 +221,7 @@ const CartContainer = () => {
       category_id: item[0].item.categoria,
       quantity: parseInt(item[0].unidades),
       currency_id: 'UYU',
-      unit_price: descuento != '' ? parseInt(item[0].precio*descuento*1.1) : parseInt(item[0].precio*1.1),
+      unit_price: descuento != '' ? parseInt(item[0].precio * descuento * 1.1) : parseInt(item[0].precio * 1.1),
       tallas: tallasfiltro(item[0].size, parseInt(item[0].unidades), item[0].item.id),
       size: item[0].size,
       color: item[0].colorselected,
@@ -172,30 +229,51 @@ const CartContainer = () => {
     })
     )
 
+    const envio = ({
+      id: '1',
+      title: 'Envio',
+      currency_id: 'UYU',
+      unit_price: 200,
+      quantity: 1,
+    })
+    /*     pickup === 'envio' && producto.push(envio)
+     */
+
+    const producto2 = [...producto, { ...envio }]
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
-      items: producto,
+      items: pickup === 'envio' ? producto2 : producto,
       status: 'pendiente',
       total: tot,
       email: user.email,
       metodo: checkbox,
       pickup: pickup,
       codigo: descuento
-
     }
 
+
     saveOrder(dataa)
+    console.log(dataa)
+
+    console.log('producto')
     console.log(producto)
+    console.log('envio')
 
-
+    console.log([...producto, { ...envio }])
     const options = {
       method: "POST",
       body: JSON.stringify(producto),
       headers: new Headers({ 'content-type': 'application/json' }),
     };
+    const options3 = {
+      method: "POST",
+      body: JSON.stringify(producto2),
+      headers: new Headers({ 'content-type': 'application/json' }),
+    };
 
-    fetch(`${url}/checkout`, options)
+
+    fetch(`${url}/checkout`, pickup === 'envio' ? options3 : options)
       .then(response => response.text())
       .then(data => {
         window.location.assign(data);
@@ -311,7 +389,8 @@ const CartContainer = () => {
               </div>
               <div class="flex items-center rounded">
                 <input id="bordered-radio-6" type="radio" value="asdd" onClick={() => setPickUp('envio')} name="bordered-radio1" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra <span className='underline cursor-pointer'>Ver zonas</span>)</label>
+                {/*                 <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra <span className='underline cursor-pointer'>Ver zonas</span>)</label>
+ */}                <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (+$200)</label>
               </div>
             </div>
             <div class="flex w-full">

@@ -32,8 +32,8 @@ const Ordenes = () => {
         } else if (a === 'trescruces') {
             return <p>Av. Duvimioso Terra 2234</p>
         } else {
-          return  <p>
-                Envio
+            return <p>
+                Envio (+$200)
             </p>
         }
     }
@@ -43,7 +43,7 @@ const Ordenes = () => {
                 Florencia Moraes<br></br>
                 Banco ITAU 3614214
             </p>
-        } else if (a === 'efectivo'){
+        } else if (a === 'efectivo') {
             return <p>Efectivo en el lugar</p>
         } else {
             return <p> Mercado Pago</p>
@@ -74,6 +74,14 @@ const Ordenes = () => {
             Swal.fire(
                 'Gracias por tu compra!',
                 'Nos comunicaremos contigo a la brevedad para coordinar el retiro!',
+                'success'
+            )
+
+        }
+        if (type.type === 'graciastr') {
+            Swal.fire(
+                'Gracias por tu compra!',
+                'Realiza la transferencia a los datos indicados en la orden y envia el comprobante a nuestro correo: morafit.uy@gmail.com o por whatsapp al 098 626 100!',
                 'success'
             )
 
@@ -133,7 +141,7 @@ const Ordenes = () => {
 
 
 
-       if (user != null) {
+        if (user != null) {
             getAllOrders().then((data) => {
                 dispatch({
                     type: actionType.SET_ORDERS,
@@ -143,8 +151,8 @@ const Ordenes = () => {
             })
 
 
-        } 
-       
+        }
+
         /* if (user != null) {
             getAllOrders().then((data) => {
                 dispatch({
@@ -282,34 +290,48 @@ const Ordenes = () => {
                                     Status: {a.status}
                                 </p> */}
                                 <div className='flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center w-full text-center mt-5'>
-                                <Typography sx={{
+                                    <Typography sx={{
 
-                                    width: '55%',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 'bold',
-                                    marginTop: '10px'
-                                }}>
-                                    Pick up: <span className='font-bold'>{pickup(a.pickup)}</span>
-                                </Typography>
-                                <Typography sx={{
+                                        width: '55%',
+                                        fontFamily: 'Poppins',
+                                        fontSize: 'bold',
+                                        marginTop: '10px'
+                                    }}>
+                                        Pick up: <span className='font-bold'>{pickup(a.pickup)}</span>
+                                    </Typography>
+                                    <Typography sx={{
 
-                                    width: '55%',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 'bold',
+                                        width: '55%',
+                                        fontFamily: 'Poppins',
+                                        fontSize: 'bold',
 
-                                }}>
-                                    Metodo: <span className='font-bold'>{metodo(a.metodo)}</span>
-                                </Typography>
-                                <Typography sx={{
+                                    }}>
+                                        Metodo: <span className='font-bold'>{metodo(a.metodo)}</span>
+                                    </Typography>
+                                    {
+                                        a.metodo === 'transferencia' &&
+                                        <Typography sx={{
 
-                                    width: '55%',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 'bold',
+                                            width: '55%',
+                                            fontFamily: 'Poppins',
+                                            fontSize: 'bold',
+
+                                        }}>
+                                            Enviar comprobante: <span className='font-bold'>morafit.uy@gmail.com</span>
+                                          <br></br>  <span className='font-bold'>098 626 100</span>
+                                        </Typography>
+                                    }
+
+                                    <Typography sx={{
+
+                                        width: '55%',
+                                        fontFamily: 'Poppins',
+                                        fontSize: 'bold',
 
 
-                                }}>
-                                    Total: <span className='font-bold'>{a.total}</span>
-                                </Typography>
+                                    }}>
+                                        Total: <span className='font-bold'>{a.total}</span>
+                                    </Typography>
                                 </div>
                             </div>
                         </AccordionDetails>
