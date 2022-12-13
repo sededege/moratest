@@ -16,7 +16,7 @@ const Ordenes = () => {
     const type = useParams()
     const Swal = require('sweetalert2')
     const [{ orders, user }, dispatch] = useStateValue()
-    console.log(orders)
+    console.log(user)
 
     const [expanded, setExpanded] = React.useState(false);
     const [ordenesuser, setOrdenesUser] = React.useState([]);
@@ -133,19 +133,33 @@ const Ordenes = () => {
 
 
 
-        if (user != null) {
+       if (user != null) {
             getAllOrders().then((data) => {
                 dispatch({
                     type: actionType.SET_ORDERS,
                     orders: user === null ? 'Inicie sesion para ver sus ordenes' : data.filter(a => a.email === user.email)
                 })
+
             })
 
-        }
+
+        } 
+       
+        /* if (user != null) {
+            getAllOrders().then((data) => {
+                dispatch({
+                    type: actionType.SET_ORDERS,
+                    orders: data.filter(a => a.email === user.email)
+                })
+            })
+
+        } */
 
 
+    }, [user, dataa, payment])
 
-    }, [ordenesuser, dataa, payment])
+    console.log(ordenesuser)
+
     /*  console.log(orders)
  
      console.log(dataa) */

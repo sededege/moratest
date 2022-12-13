@@ -11,7 +11,6 @@ import { useNavigate, useParams } from 'react-router';
 import { FiEye } from 'react-icons/fi';
 import Swal from 'sweetalert2'
 import { motion } from "framer-motion";
-
 const Pedidos = () => {
     const [{ orders, user }, dispatch] = useStateValue()
     const [expanded, setExpanded] = React.useState(false);
@@ -25,6 +24,13 @@ const Pedidos = () => {
     const [enabled, setEnabled] = React.useState(false);
 
     React.useEffect(() => {
+        getAllOrders().then((data) => {
+            dispatch({
+                type: actionType.SET_ORDERS,
+                orders: data
+            })
+
+        })
         console.log(orders)
         dispatch({
             type: actionType.SET_DONDE_ESTOY,

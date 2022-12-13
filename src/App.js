@@ -37,13 +37,13 @@ function App() {
         products: data
       })
     })
-    getAllOrders().then((data) => {
+   /*  getAllOrders().then((data) => {
       dispatch({
           type: actionType.SET_ORDERS,
           orders: data
       })
 
-  })
+  }) */
   }, [])
 
 
