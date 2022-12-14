@@ -50,15 +50,18 @@ const Detalle = () => {
         console.log(products)
         if (products && products.length > 0) {
             setThisProduct(products.find(prod => String(prod.id) === String(productId)))
-
-
         }
         if (items && items.length > 0) {
             addtocart();
         }
 
         if (thisProduct != "") {
-            setFiltroColor(location.state)
+            if (location.state != null){
+                setFiltroColor(location.state)
+
+            } else {
+               setFiltroColor(thisProduct.color[0].name)
+            }
         }
 
         dispatch({
