@@ -117,8 +117,8 @@ const CarrouselHome = (c) => {
             </motion.div> */}
             <motion.div
                 className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer relative' >
-                <button onClick={() => categoria()} className='absolute hidden md:flex z-[30] bg-purple-500 rounded-lg cursor-pointer px-10 md:ml-[calc(60%-50px)] p-1 bottom-[20px] text-white  font-bold'>Visitar</button>
-                <button onClick={() => categoria()} className='absolute md:hidden z-[50] right-16 bg-purple-500 rounded-lg cursor-pointer px-2 md:ml-[calc(60%-50px)] text-[0.8rem] p-1 bottom-[20px] text-white  font-bold'>Visitar</button>
+                <button onClick={() => categoria()} className='absolute hidden md:flex z-[30] bg-booty rounded-lg cursor-pointer px-10 md:ml-[calc(62%-50px)] p-1 bottom-[50px] text-white  font-bold'>Visitar</button>
+                <button onClick={() => categoria()} className='absolute md:hidden z-[50] right-16 bg-booty rounded-lg cursor-pointer px-2 md:ml-[calc(60%-50px)] text-[0.8rem] p-1 bottom-[30px] text-white  font-bold'>Visitar</button>
 
                 <img className='rounded-lg w-full h-full object-cover   ' src={banner1} />
             </motion.div>
