@@ -19,7 +19,7 @@ const CartContainer = () => {
   const [pickup, setPickUp] = useState('efectivo')
   const [codigo, setCodigo] = useState('')
   const url = 'https://nodemora.herokuapp.com'
-  const codigos = ['FIOMORA10', 'VITOMORA10', 'MORA10', 'MORA15']
+  const codigos = ['FIOMORA10']
   const [descuento, setDescuento] = useState('')
 
   const navigate = useNavigate();
