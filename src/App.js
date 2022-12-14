@@ -100,9 +100,9 @@ function App() {
           )}
         </AnimatePresence>
         <Header />
-         {
+          {
           dondeestoy === 'Dashboard' && (<Headerleft />)
-        } 
+        }  
         
         <Pre load={load} />
         <ScrollToTop />

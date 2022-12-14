@@ -33,7 +33,7 @@ const Dashboard = () => {
 
 
     return (
-        <div className='px-8 h-[90vh] mt-[10vh] w-full flex fixed gap-4'>
+        <div className='md:px-8 h-[90vh] md:mt-[10vh] w-full flex fixed gap-4'>
           
             <div className='flex flex-col w-[86vw] ml-[14vw]'>
                 <div className='flex gap-6 items-center justify-between'>

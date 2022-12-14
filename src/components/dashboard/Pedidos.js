@@ -6,13 +6,15 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { actionType } from '../context/reducer';
 import { useStateValue } from '../context/StateProvider';
-import { borrarorder, getAllOrders, updatePagado, updatePayment } from '../utils/firebaseFunctions';
+import { borrarorder, getAllOrders, getAllUsuarios, updatePagado, updatePayment } from '../utils/firebaseFunctions';
 import { useNavigate, useParams } from 'react-router';
 import { FiEye } from 'react-icons/fi';
 import Swal from 'sweetalert2'
 import { motion } from "framer-motion";
+import { FaBox} from 'react-icons/fa';
+
 const Pedidos = () => {
-    const [{ orders, user }, dispatch] = useStateValue()
+    const [{ orders, user, users }, dispatch] = useStateValue()
     const [expanded, setExpanded] = React.useState(false);
     const history = useNavigate();
     const [mercadopago, setMercadoPago] = React.useState('')
@@ -31,47 +33,39 @@ const Pedidos = () => {
             })
 
         })
-        console.log(orders)
         dispatch({
             type: actionType.SET_DONDE_ESTOY,
             dondeestoy: 'Dashboard'
         })
-        /*         orders && console.log(orders.map(a => new Date(a.creado).toLocaleDateString()))
-         */
-        /*    orders && orders.map(a => {
-               const dia = new Date(a.creado).toLocaleDateString()
-               colores2.indexOf(dia) === -1 ? setColores(prev => [...prev, dia]) : console.log('ya estoy')
-           }
-   
-           )
-           console.log('colores2')
-           console.log(colores2)
-    */
-        /* 
-                 orders && (orders.map(a =>
-                       a.color.map(b =>
-                           colores2.indexOf(b.name) === -1 ? setColores(prev => [...prev, b.name]) : console.log('ya estoy')
-           
-                       )))
-           
-                   let result = colores2.reduce((acc, item) => {
-                       if (!acc.includes(item)) {
-                           acc.push(item);
-                       }
-                       return acc;  */
-
-        /*     setEfectivo(orders.filter(a => a.metodo === 'efectivo'))
-            setTransferencia(orders.filter(a => a.metodo === 'mercadopago'))  */
-
         setMercadoPago(orders)
 
-    }, [orders])
-    /*   if (orders) {
-          setMercadoPago(orders.filter(a => a.metodo === 'mercadopago'))
-  
-      } */
+        getAllUsuarios().then((data) => {
+            dispatch({
+                type: actionType.SET_USERS,
+                users: data
+            })
+        })
 
+        console.log(users)
 
+    }, [])
+
+    const datos = (e) => {
+        console.log(e)
+
+        const datosmostrar = users.filter(a => a.user === e)
+        console.log(datosmostrar[0])
+        return <div>
+            <ul>
+                <li>Direccion: {datosmostrar[0].dire}</li>
+                <li>Puerta: {datosmostrar[0].puerta}</li>
+                <li>Barrio: {datosmostrar[0].barrio}</li>
+                <li>Apto: {datosmostrar[0].apto}</li>
+
+            </ul>
+        </div>
+
+    }
 
     const pickup = (a) => {
         if (a === 'malvin') {
@@ -184,34 +178,20 @@ const Pedidos = () => {
                                 id="panel1bh-header"
                             >
 
-                                <Typography className='flex items-center' sx={{
-
-                                    width: '55%',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 'bold',
-                                    items: 'center'
-
-                                }}>
-                                    <div className={`${colores(a.status)} h-4 w-4 rounded-full flex `}></div>
+                                <Typography className='flex items-center px-4' >
+                                    <span className={`${colores(a.status)} h-4 w-4 rounded-full flex `}></span>
                                 </Typography>
 
-                                <Typography className='hidden md:flex' sx={{
+                                {
+                                    a.pickup === 'envio' && <Typography className='flex items-center px-4' >
+                                        <FaBox className=' text-booty ' />
+                                    </Typography>
 
-                                    width: '55%',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 'bold',
-
-
-                                }}>
-                                    Total: <span className='font-bold'>{a.total}</span>
+                                }
+                                <Typography className='flex px-4 items-center' >
+                                    Total: <span className='font-normal'>{Math.round(a.total)}</span>
                                 </Typography>
-                                <Typography sx={{
-
-                                    width: '55%',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 'bold'
-
-                                }}>
+                                <Typography className='px-4'>
                                     {new Date(a.creado).toLocaleDateString().split("/", 2).join('/')}  {new Date(a.creado).toLocaleTimeString().split(":", 2).join(':')}
                                 </Typography>
                             </AccordionSummary>
@@ -226,7 +206,7 @@ const Pedidos = () => {
 
                                         {
                                             a.items.map((b, index) =>
-                                                <div className='flex bg-white shadow-md rounded-lg h-full p-4  gap-2 relative '>
+                                                <div key={index} className='flex bg-white shadow-md rounded-lg h-full p-4  gap-2 relative '>
                                                     <div className='flex flex-col'>
                                                         <h1>{b.title}</h1>
                                                         <p>Talle: {b.size}</p>
@@ -249,12 +229,9 @@ const Pedidos = () => {
                                     </div>
                                     <div className='flex   rounded-lg h-full p-4  gap-2 relative '>
                                         <div className=' absolute right-3' sx={{
-
                                             width: '55%',
                                             fontFamily: 'Poppins',
                                             fontSize: 'bold',
-
-
                                         }}>
                                             Total: <span className='font-bold'>{a.total}</span>
                                         </div>
@@ -264,11 +241,10 @@ const Pedidos = () => {
                                         <p>Nombre: {a.name}</p>
                                         <p>Celular: {a.phone}</p>
                                         <p>Email: {a.email}</p>
+                                        {
+                                            a.pickup === 'envio' && <p> {datos(a.email)}</p>
+                                        }
                                     </div>
-
-
-
-
                                     <div className='flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center w-full text-center mt-5'>
                                         <Typography sx={{
 
@@ -278,6 +254,7 @@ const Pedidos = () => {
                                             marginTop: '10px'
                                         }}>
                                             Pick up: <span className='font-bold text-[14px]'>{pickup(a.pickup)}</span>
+
                                         </Typography>
                                         <Typography sx={{
 
@@ -292,16 +269,13 @@ const Pedidos = () => {
                                     </div>
                                     <div className='flex gap-4 justify-center p-5'>
                                         <motion.div
-
                                             whileTap={{ scale: 0.75 }}>
                                             <button onClick={() => eliminarorder(a.id)} className='bg-red-500 py-2 px-4 rounded-lg text-white '>Borrar</button>
-
                                         </motion.div>
                                         <motion.div
                                             whileTap={{ scale: 0.75 }}>
                                             {
                                                 a.status === 'pendiente' ? <button onClick={() => pagado(a.id)} value={a.id} className='bg-green-300 py-2 px-4 rounded-lg text-white'>Pagado</button> : <button onClick={() => pendiente(a.id)} value={a.id} className='bg-yellow-300 py-2 px-4 rounded-lg text-white'>Pendiente</button>
-
                                             }
                                         </motion.div>
 
@@ -317,10 +291,10 @@ const Pedidos = () => {
     }
 
     return (
-        <div className='pb-20 mt-[10vh] md:ml-[14vw] w-[100vw]  md:w-[90vw]   rounded-lg py-10 '>
+        <div className='pb-20 mt-[10vh] md:ml-[16vw]   md:w-[80vw] rounded-lg py-10  '>
             <h1 className='text-booty text-center font-bold p-4 '>Pedidos</h1>
 
-            <div className='px-5 flex-col grid md:grid-cols-3 gap-4 '>
+            <div className=' flex-col grid md:grid-cols-3 gap-4 '>
 
                 <div className=' flex flex-col text-center gap-4'>
                     <h1>Mercado Pago</h1>
