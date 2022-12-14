@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import { actionType } from '../context/reducer'
 import { useStateValue } from '../context/StateProvider'
-import { categorias, colores, talla, material } from '../utils/databooty'
-import { useLocation } from "react-router-dom";
-import { useMemo } from 'react';
+import { categorias } from '../utils/databooty'
 import { getAllProductsItems } from '../utils/firebaseFunctions';
 import { RiFilter2Fill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
-import { AiFillFire, AiOutlineBgColors } from 'react-icons/ai'
 
 const FiltrosHome = () => {
     const [filtros, setFiltro] = React.useState("new")
     const [{ products }, dispatch] = useStateValue();
     const [products2, setProducts2] = useState("")
-    const { pathname } = useLocation();
     const titleRef = React.useRef()
     const [isOpen, setIsOpen] = useState(false)
     const [colores2, setColores] = useState([])
@@ -21,7 +17,7 @@ const FiltrosHome = () => {
 
 
 
-    const colorselect = (color) => {
+    /* const colorselect = (color) => {
         if (color === 'Negro') {
             return 'bg-black'
         }
@@ -92,7 +88,7 @@ const FiltrosHome = () => {
         if (color === 'Verde-Fluor') {
             return 'border-[#d4e693]'
         }
-    }
+    } */
 
     const variants = {
         open: { width: '100%', height: 400, opacity: 1 },
@@ -113,7 +109,7 @@ const FiltrosHome = () => {
 
         products && (products.map(a =>
             a.color.map(b =>
-                colores2.indexOf(b.name) === -1 ? setColores(prev => [...prev, b.name]) : console.log('ya estoy')
+                colores2.indexOf(b.name) === -1 && setColores(prev => [...prev, b.name])
 
             )))
 
@@ -125,18 +121,17 @@ const FiltrosHome = () => {
 
         }, [])
 
-        console.log(products2)
+
         setColores2(result)
     }, [products, colores2])
 
 
     const filtrarcolor = (b) => {
-        console.log(b)
-        /*         console.log(products2.filter(a => a.color[0].name === b))
-         */
+        setIsOpen(!isOpen)
+
         let array = []
 
-        console.log(products2.filter(a => {
+        products2.filter(a => {
             for (let i = 0; i < a.color.length; i++)
                 if (a.color[i].name === b) {
                     array.push({
@@ -148,28 +143,24 @@ const FiltrosHome = () => {
                         precio: a.precio,
                         name: a.name,
                     }
-
                     )
                 }
         }
-
-        ))
-
-        console.log(array)
+        )
 
 
-         dispatch({
+
+        dispatch({
             type: actionType.SET_PRODUCTS,
             products: array,
         });
- 
+
 
 
 
     }
 
     const categoria = (b) => {
-        console.log(products2.filter(a => Number(a.oferta) === 0))
         if (b === 'ofertas') {
             dispatch({
                 type: actionType.SET_PRODUCTS,
@@ -242,12 +233,11 @@ const FiltrosHome = () => {
                     <p>Color</p>
                     <ul>
                         {
-                            colores.map(a => <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
+                            colores.map((a, index) => <li key={index} className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
                         }
 
                     </ul>
 
-                    <p>Price</p>
 
                 </motion.div>
 
@@ -287,18 +277,17 @@ const FiltrosHome = () => {
                         <p className='font-bold'>Color</p>
                         <ul>
                             {
-                                colores.map(a => 
-                                <li className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>
-                                
-                                
+                                colores.map((a,index) =>
+                                    <li key={index}  className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>
+
+
                                 )
 
-                                
+
                             }
 
                         </ul>
 
-                        <p className='font-bold'>Price</p>
 
 
                     </motion.div>
@@ -314,10 +303,3 @@ const FiltrosHome = () => {
 export default FiltrosHome
 
 
-
-{/* <motion.div
-whileTap={{ scale: 0.75 }}
-onClick={() => setIsOpen(!isOpen)} className='md:hidden flex gap-2 items-center cursor-pointer bg-white rounded-lg shadow-lg p-4 hover:shadow-md   text-gray-400  '>
-<RiFilter2Fill />
-</motion.div>
- */}

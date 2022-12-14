@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 
 const Galeria = (a) => {
     const [images2, setImages2] = React.useState([])
+    
     React.useEffect(() => {
-        console.log(a.filtrocolor)
         if (a.images && a.filtrocolor) {
             const colorgaleria = a.images.filter(d => d.name === a.filtrocolor)
             if (colorgaleria[0].images) {

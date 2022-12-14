@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { getAllUsuarios, saveAddres, saveUser } from '../utils/firebaseFunctions';
-import { getAllFoodItems } from '../utils/firebaseFunctions';
 import { updateAddres } from '../utils/firebaseFunctions';
 import { motion } from 'framer-motion'
 import { actionType } from '../context/reducer';
@@ -157,7 +156,7 @@ const ShowLogin = () => {
                 localStorage.setItem("user", JSON.stringify(user.providerData[0]));
                 /*                 cerrarEdit()
                  */                /*                 console.log(user)
-                    */                // ...
+                   */                // ...
 
                 setTimeout(() => {
                     setFields(false)
@@ -215,9 +214,9 @@ const ShowLogin = () => {
                             // ...
                             updateProfile(user, {
                                 displayName: nombre,
-                             
+
                             });
-                          
+
                             const data = {
                                 id: `${Date.now()}`,
                                 alias: "",
@@ -304,7 +303,7 @@ const ShowLogin = () => {
     const variants = {
         open: { opacity: 1, x: 0 },
         closed: { opacity: 0, x: "-100%" },
-      }
+    }
 
 
     return (
@@ -314,7 +313,7 @@ const ShowLogin = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className='w-full h-full items-center flex justify-center fixed z-[120] top-0 bg-black bg-opacity-25 '>
-                
+
             {
                 registrar ?
                     <motion.form

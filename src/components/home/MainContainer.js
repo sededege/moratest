@@ -2,16 +2,12 @@ import React from 'react'
 import { useStateValue } from '.././context/StateProvider'
 import Products from './Products'
 import { actionType } from '.././context/reducer'
-import Banner from '../img/banner.jpg'
 import FiltrosHome from './FiltrosHome'
-import Footer from './Footer'
 import { AnimatePresence, motion } from 'framer-motion'
 import CarrouselHome from './Carouselhome'
 import { BsWhatsapp } from 'react-icons/bs'
-import { useNavigate } from 'react-router'
 
 const MainContainer = () => {
-    const history = useNavigate()
     const [{ cartShow }, dispatch] = useStateValue();
     const [scrollValue] = React.useState(0)
 

@@ -4,7 +4,6 @@ import { menu, dashboard } from '../utils/data'
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import { BsArrowRight } from 'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from "../img/logo.png";
 

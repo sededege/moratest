@@ -9,20 +9,17 @@ import { useStateValue } from '../context/StateProvider';
 import { getAllOrders, updatePayment } from '../utils/firebaseFunctions';
 import { useNavigate, useParams } from 'react-router';
 import { FiEye } from 'react-icons/fi';
-import Swal from 'sweetalert2'
 
 const Ordenes = () => {
     const history = useNavigate();
     const type = useParams()
     const Swal = require('sweetalert2')
     const [{ orders, user }, dispatch] = useStateValue()
-    console.log(user)
 
     const [expanded, setExpanded] = React.useState(false);
     const [ordenesuser, setOrdenesUser] = React.useState([]);
     const [dataa, setData] = React.useState("");
     const [payment, setPayment] = React.useState("");
-    const { orden } = useParams()
 
     const pickup = (a) => {
         if (a === 'malvin') {
@@ -166,7 +163,6 @@ const Ordenes = () => {
 
     }, [user, dataa, payment])
 
-    console.log(ordenesuser)
 
     /*  console.log(orders)
  
@@ -182,7 +178,7 @@ const Ordenes = () => {
 
             {
 
-                orders != null ? orders.map((a, index) =>
+               orders != null ? orders != "" ? orders.map((a, index) =>
                     <Accordion
                         key={index}
                         sx={{
@@ -336,7 +332,7 @@ const Ordenes = () => {
                             </div>
                         </AccordionDetails>
                     </Accordion>
-                ) : <p className='text-gray-400 items-center justify-center w-full text-center font-bold p-2 rounded-lg ' >Debes iniciar sesion!</p>
+                ) : <p className='text-gray-400 items-center justify-center w-full text-center font-bold p-2 rounded-lg ' >No tienes pedidos</p> : <p className='text-gray-400 items-center justify-center w-full text-center font-bold p-2 rounded-lg ' >Ingresa en tu cuenta para ver tus ordenes!</p>
             }
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -6,24 +6,17 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { actionType } from '../context/reducer';
 import { useStateValue } from '../context/StateProvider';
-import { borrarorder, getAllOrders, getAllUsuarios, updatePagado, updatePayment } from '../utils/firebaseFunctions';
-import { useNavigate, useParams } from 'react-router';
+import { borrarorder, getAllOrders, getAllUsuarios, updatePagado} from '../utils/firebaseFunctions';
+import { useNavigate} from 'react-router';
 import { FiEye } from 'react-icons/fi';
-import Swal from 'sweetalert2'
 import { motion } from "framer-motion";
 import { FaBox} from 'react-icons/fa';
 
 const Pedidos = () => {
-    const [{ orders, user, users }, dispatch] = useStateValue()
+    const [{ orders, users }, dispatch] = useStateValue()
     const [expanded, setExpanded] = React.useState(false);
     const history = useNavigate();
-    const [mercadopago, setMercadoPago] = React.useState('')
-    const [efectivo, setEfectivo] = React.useState('')
-    const [transferencia, setTransferencia] = React.useState('')
-    const [colores2, setColores] = React.useState([])
-    /*     const [colores1, setColores1] = useState([])
-     */
-    const [enabled, setEnabled] = React.useState(false);
+
 
     React.useEffect(() => {
         getAllOrders().then((data) => {
@@ -37,24 +30,17 @@ const Pedidos = () => {
             type: actionType.SET_DONDE_ESTOY,
             dondeestoy: 'Dashboard'
         })
-        setMercadoPago(orders)
-
         getAllUsuarios().then((data) => {
             dispatch({
                 type: actionType.SET_USERS,
                 users: data
             })
         })
-
-        console.log(users)
-
     }, [])
 
     const datos = (e) => {
-        console.log(e)
-
+      
         const datosmostrar = users.filter(a => a.user === e)
-        console.log(datosmostrar[0])
         return <div>
             <ul>
                 <li>Direccion: {datosmostrar[0].dire}</li>
@@ -109,7 +95,7 @@ const Pedidos = () => {
     }
 
     const pagado = (e) => {
-        console.log(e)
+
         const dataa = {
             id: e,
             status: 'Pagado'
@@ -123,7 +109,7 @@ const Pedidos = () => {
         })
     }
     const pendiente = (e) => {
-        console.log(e)
+
         const dataa = {
             id: e,
             status: 'pendiente'

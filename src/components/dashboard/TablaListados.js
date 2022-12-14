@@ -102,17 +102,8 @@ const arrayprueba = [
 ]
 
 const TablaListados = ({ data, filter, newitem, ventas }) => {
-    /*     console.log(ventas)
-      */
-    const [edit, setEdit] = React.useState(null)
-    const [ids, setIds] = React.useState([])
-    const [{ foodItems, editar, products, orders }, dispatch] = useStateValue();
-    const [modal, setModal] = React.useState(false)
-    const [ideliminar, setIdEliminar] = React.useState(null)
-    const [newItem, setNewItem] = React.useState(true)
-    const [newArr1, setNewArr1] = React.useState([])
-    const [asd, setAsd] = React.useState("")
 
+    const [ dispatch] = useStateValue();
     const history = useNavigate();
 
     const borrarproduct = (id) => {
@@ -123,13 +114,6 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
 
     React.useEffect(() => {
 
-
-
-        console.log('arrayprueba')
-        console.log(arrayprueba)
-
-
-
         const arrayHashmap = arrayprueba.reduce((obj, item) => {
             obj[item.idorden] ? obj[item.idorden].talles.push(...item.talles) : (obj[item.idorden] = { ...item });
             return obj;
@@ -137,33 +121,17 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
 
         const mergedArray = Object.values(arrayHashmap);
 
-        console.log(mergedArray);
+     
 
         const prueba = mergedArray.map(a =>
             a.talles.filter(b => b.size === 'S').reduce((acc, item) => acc + item.unidades, 0)
         )
 
-        console.log(prueba)
+  
 
-        setAsd(mergedArray)
-
-
+   
     }, [ventas])
 
-    /*  console.log('newArr1');
-     console.log(newArr1); */
-
-    /*  const reducedArr = newArr1.reduce((acc, cur) => {
-         acc[cur.id] ? acc[cur.id].quantity += cur.quantity : acc[cur.id] = cur;
-         return acc;
-       }, {});
-       
-       const output = Object.values(reducedArr);
-       console.log('out')
-       console.log(output);
- 
-     console.log(data)
-  */
     const fetchData = async () => {
         await getAllProductsItems().then((data) => {
             dispatch({
@@ -183,12 +151,7 @@ const TablaListados = ({ data, filter, newitem, ventas }) => {
     }
 
 
-    const suma = (a) => {
-        /*  console.log(a) */
-        if (a.size === 'M') {
-            return a.quantity
-        }
-    }
+  
 
     return (
         <div className='flex gap-6 '>

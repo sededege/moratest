@@ -6,7 +6,6 @@ import { categories } from '../utils/data'
 import { getAllOrders } from '../utils/firebaseFunctions'
 import { actionType } from '.././context/reducer'
 import TablaListados from './TablaListados'
-import Headerleft from '../navs/Headerleft'
 
 
 const Dashboard = () => {

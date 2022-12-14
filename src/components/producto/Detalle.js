@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useStateValue } from '.././context/StateProvider'
-import Rating from '@mui/material/Rating';
+/* import Rating from '@mui/material/Rating';
+ */
 import Typography from '@mui/material/Typography';
 import { actionType } from '.././context/reducer'
 import Galeria2 from './Galeria2';
@@ -47,7 +48,6 @@ const Detalle = () => {
 
 
     React.useEffect(() => {
-        console.log(products)
         if (products && products.length > 0) {
             setThisProduct(products.find(prod => String(prod.id) === String(productId)))
         }
@@ -58,7 +58,6 @@ const Detalle = () => {
         if (thisProduct != "") {
             if (location.state != null){
                 setFiltroColor(location.state)
-
             } else {
                setFiltroColor(thisProduct.color[0].name)
             }
@@ -68,10 +67,6 @@ const Detalle = () => {
             type: actionType.SET_DONDE_ESTOY,
             dondeestoy: 'Detalle'
         })
-
-
-
-
 
 
     }, [products, items, dispatch, productId, thisProduct])
@@ -273,18 +268,7 @@ const Detalle = () => {
 
                                                         <p className='font-semibold text-textColor'>Talle</p>
                                                         <div className='gap-4 flex'>
-                                                            {/*  {
-                                                        thisProduct.talles ? thisProduct.talles.map(a => (
-                                                            a.stock > 0 ?
-                                                                <div onClick={() => setSelectedSize(a.name)} className={` ${selectedsize === a.name ? 'text-white bg-booty' : 'bg-white border-2'}  flex cursor-pointer w-8 h-8 rounded-lg  items-center justify-center`}>
-                                                                    <p className='cursor-pointer  '>{a.name}</p>
-                                                                </div> : <div className='bg-gray-200 border-2 flex cursor-pointer w-8 h-8 rounded-lg  items-center justify-center'>
-                                                                    <p className='cursor-pointer text-gray-400'>{a.name}</p>
-                                                                </div>
-
-                                                        )) : <></>
-
-                                                    } */}
+                                                          
                                                             {
                                                                 thisProduct.color && filtrocolorselect ? thisProduct.color.filter(a => a.name === filtrocolorselect)[0].tallas.map(a => (
                                                                     a.stock > 0 ?
@@ -305,7 +289,7 @@ const Detalle = () => {
                                                         <div className='flex  gap-4'>
                                                             <motion.div
                                                                 whileTap={{ scale: 0.75 }}
-                                                                onClick={cantidad > 1 && (() => setCantidad(cantidad - 1))} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
+                                                                onClick={cantidad > 1 ? (() => setCantidad(cantidad - 1)) : undefined} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
                                                                 <p className='cursor-pointer text-white font-bold'>-</p>
                                                             </motion.div>
                                                             <motion.div className='flex cursor-pointer w-8 h-8 rounded-lg border-2 items-center justify-center'>
@@ -645,7 +629,7 @@ const Detalle = () => {
                                                     <div className='flex flex-col gap-4'>
                                                         <p className='font-semibold text-textColor mt-3'>Unidades</p>
                                                         <div className='flex  gap-2'>
-                                                            <div onClick={cantidad > 1 && (() => setCantidad(cantidad - 1))} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
+                                                            <div onClick={cantidad > 1 ? (() => setCantidad(cantidad - 1)) : undefined} className='flex cursor-pointer w-8 h-8 rounded-lg bg-booty items-center justify-center'>
                                                                 <p className='cursor-pointer text-white font-bold'>-</p>
                                                             </div>
                                                             <div className='flex cursor-pointer w-8 h-8 rounded-lg border-2 items-center justify-center'>

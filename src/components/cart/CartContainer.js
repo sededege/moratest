@@ -39,14 +39,6 @@ const CartContainer = () => {
     });
   }
   useEffect(() => {
-    /* 
-       dispatch({
-         type: actionType.SET_CARTITEMS,
-         cartItems: [],
-       });
-   
-       localStorage.setItem("cartItems", JSON.stringify([])); */
-
 
     if (codigos.indexOf(codigo) === -1) {
 
@@ -63,8 +55,11 @@ const CartContainer = () => {
       setDatos(users.filter(a => a.user === user.email))
     }
 
+    
 
-  }, [tot, flag, user, users, cartItems, checkbox]);
+
+  }, [tot, flag, user, users, cartItems, checkbox, codigo ]);
+
 
   const checkout = () => {
     if (checkbox === 'mercadopago') {
@@ -81,7 +76,6 @@ const CartContainer = () => {
 
   const promo = (e) => {
     setCodigo(e.target.value)
-    console.log(codigos.indexOf(e.target.value))
     if (codigos.indexOf(e.target.value) != -1) {
       setTot(tot * 0.85)
       setDescuento(0.85)
@@ -106,7 +100,7 @@ const CartContainer = () => {
         }`,
     })
     )
-    console.log(tot)
+    
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
@@ -130,18 +124,8 @@ const CartContainer = () => {
       cartShow: false,
     });
 
-    const options = {
-      method: "POST",
-      body: JSON.stringify(dataa),
-      headers: new Headers({ 'content-type': 'application/json' }),
-    };
+   
 
-    /*   fetch(`${url}/ordencreada`, options)
-        .then(response => response)
-        .then(data => {
-          console.log(data);
-        });
-   */
 
   }
   const transferencia = () => {
@@ -162,7 +146,6 @@ const CartContainer = () => {
         }`,
     })
     )
-    console.log(tot)
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
@@ -186,24 +169,11 @@ const CartContainer = () => {
       cartShow: false,
     });
 
-    const options = {
-      method: "POST",
-      body: JSON.stringify(dataa),
-      headers: new Headers({ 'content-type': 'application/json' }),
-    };
 
-    /*   fetch(`${url}/ordencreada`, options)
-        .then(response => response)
-        .then(data => {
-          console.log(data);
-        });
-   */
 
   }
   const tallasfiltro = (a, b, c) => {
-    console.log(a)
-    console.log(b)
-    console.log(c)
+    
     return {
       id: c,
       size: a,
@@ -254,13 +224,8 @@ const CartContainer = () => {
 
 
     saveOrder(dataa)
-    console.log(dataa)
+   
 
-    console.log('producto')
-    console.log(producto)
-    console.log('envio')
-
-    console.log([...producto, { ...envio }])
     const options = {
       method: "POST",
       body: JSON.stringify(producto),
@@ -344,9 +309,9 @@ const CartContainer = () => {
             {/* cart Item */}
             {cartItems &&
               cartItems.length > 0 &&
-              cartItems.map((item) => (
+              cartItems.map((item,index) => (
                 <CartItem
-                  key={item.id}
+                  key={index}
                   item={item}
                   setFlag={setFlag}
                   flag={flag}
@@ -359,17 +324,17 @@ const CartContainer = () => {
 
             <div className="w-full  flex  flex-col">
               <p className="text-gray-400 text-lg">Medio de pago</p>
-              <div class="flex items-center rounded">
+              <div className="flex items-center rounded">
                 <input id="bordered-radio-1" type="radio" value="efectivo" selected onClick={() => setCheckbox('efectivo')} name="bordered-radio" className="w-4 h-4 text-booty bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-1" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Efectivo</label>
+                <label htmlFor="bordered-radio-1" className="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Efectivo</label>
               </div>
-              <div class="flex items-center rounded">
+              <div className="flex items-center rounded">
                 <input id="bordered-radio-2" type="radio" value="asdd" onClick={() => setCheckbox('mercadopago')} name="bordered-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-2" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Mercado pago (+10%) </label>
+                <label htmlFor="bordered-radio-2" className="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Mercado pago (+10%) </label>
               </div>
-              <div class="flex items-center rounded">
+              <div className="flex items-center rounded">
                 <input id="bordered-radio-3" type="radio" value="asdd" onClick={() => setCheckbox('transferencia')} name="bordered-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-3" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Transferencia Bancaria</label>
+                <label htmlFor="bordered-radio-3" className="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Transferencia Bancaria</label>
               </div>
             </div>
 
@@ -379,21 +344,21 @@ const CartContainer = () => {
             </div> */}
             <div className="w-full  flex  flex-col">
               <p className="text-gray-400 text-lg">Pick Up</p>
-              <div class="flex items-center rounded">
+              <div className="flex items-center rounded">
                 <input id="bordered-radio-4" type="radio" value="efectivo" selected onClick={() => setPickUp('trescruces')} name="bordered-radio1" className="w-4 h-4 text-booty bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-4" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Retiro en Tres Cruces</label>
+                <label htmlFor="bordered-radio-4" className="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Retiro en Tres Cruces</label>
               </div>
-              <div class="flex items-center rounded">
+              <div className="flex items-center rounded">
                 <input id="bordered-radio-5" type="radio" value="asdd" onClick={() => setPickUp('malvin')} name="bordered-radio1" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="bordered-radio-5" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Retiro en Malvin</label>
+                <label htmlFor="bordered-radio-5" className="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Retiro en Malvin</label>
               </div>
-              <div class="flex items-center rounded">
+              <div className="flex items-center rounded">
                 <input id="bordered-radio-6" type="radio" value="asdd" onClick={() => setPickUp('envio')} name="bordered-radio1" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                 {/*                 <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra <span className='underline cursor-pointer'>Ver zonas</span>)</label>
- */}                <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (+$200)</label>
+ */}                <label htmlFor="bordered-radio-6" className="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (+$200)</label>
               </div>
             </div>
-            <div class="flex w-full">
+            <div className="flex w-full">
               {
                 codigos.indexOf(codigo) === -1 ? <input className="w-full text-center p-2 rounded-full" onChange={(e) => promo(e)} placeholder='Codigo promocional' /> : <input disabled='disabled' className="w-full text-center p-2 rounded-full" value='15% de descuento aplicado!' placeholder='15% de descuento aplicado!' />
               }
@@ -413,9 +378,9 @@ const CartContainer = () => {
               <p className="text-gray-400 text-lg">Dirección</p>
             </div>)}
             {
-              user ? datos && datos.length > 0 ? datos.map(a =>
+              user ? datos && datos.length > 0 ? datos.map((a,index) =>
                 pickup === 'envio' && (
-                  <div className="w-full flex items-center justify-between">
+                  <div key={index} className="w-full flex items-center justify-between">
 
                     <div className=" w-full">
                       <p className='text-gray-400 font-bold'>{a.alias}</p>

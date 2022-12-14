@@ -1,39 +1,4 @@
-import NG from '../img/cu4.png'
-import FT from '../img/f1.png'
-import Fi1 from '../img/fi1.png'
-import C3 from '../img/c3.png'
 
-export const data = [
-  {
-    id: 1,
-    name: 'Nuggets',
-    descripcion: 'Pollo rebozado',
-    precio: 399,
-    img: NG,
-  },
-  {
-    id: 2,
-    name: 'Frutillas',
-    descripcion: 'Frutillas frescas',
-    precio: 200,
-    img: FT,
-  },
-  {
-    id: 3,
-    name: 'Helado',
-    descripcion: 'Chocolate & Vainilla',
-    precio: 150,
-    img: Fi1,
-  },
-  {
-    id: 4,
-    name: 'Kebab',
-    descripcion: 'Plato mezclado de kebab',
-    precio: 409,
-    img: C3,
-  },
-
-]
 
 export const categories = [
   {

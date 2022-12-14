@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { MdAdd, MdLogout } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
-import { AiFillHeart } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { HiMenuAlt2, HiSearch } from 'react-icons/hi'
+import { HiSearch } from 'react-icons/hi'
 import Logo from "../img/logo.png";
-import Avatar from "../img/avatar.png";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
@@ -32,12 +30,7 @@ const Header = () => {
 
   }
 
-  const headerShow = () => {
-    dispatch({
-      type: actionType.SET_HEADER_SHOW,
-      headerShow: true,
-    });
-  }
+ 
 
   const login = async () => {
 
