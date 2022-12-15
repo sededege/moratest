@@ -19,7 +19,7 @@ const Pedidos = () => {
     const [expanded, setExpanded] = React.useState(false);
     const history = useNavigate();
     const [value, onChange] = React.useState(new Date());
-
+    console.log(new Date(value).toLocaleDateString().split("/", 2).join('/'))
 
     React.useEffect(() => {
         getAllOrders().then((data) => {
@@ -44,29 +44,8 @@ const Pedidos = () => {
 
 
 
-        const array1 = orders && orders.map(a =>
-        ({
-            id: new Date(a.creado).toLocaleDateString().split("/", 2).join('/'),
-            data: a
-        })
-        )
 
-        const groupBy = (array, key) => {
-            // Return the end result
-            return array1 && array.reduce((result, currentValue) => {
-                // If an array already present for key, push it to the array. Else create an array and push the object
-                (result[currentValue[key]] = result[currentValue[key]] || []).push(
-                    currentValue
-                );
-                // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
-                return result;
-            }, {}); // empty object is the initial value for result object
-        };
 
-        // Group by color as key to the person array
-        const personGroupedByColor = groupBy(array1, 'id');
-
-        console.log(personGroupedByColor)
 
     }, [])
 
@@ -179,8 +158,24 @@ const Pedidos = () => {
     };
 
     const Listas = (a) => {
+
+        const array1 = orders && a.lista.map(a =>
+        ({
+            id: new Date(a.creado).toLocaleDateString().split("/", 2).join('/'),
+            data: a
+        })
+        )
+
+       
         return (
             <>
+               {/*  {
+                   orders && pordias.map((a,index) =>
+                     
+                           <p>{a.id}</p> 
+                     
+                    )
+                } */}
                 {
 
                     orders && a.lista != "" ? a.lista.map((a, index) =>
@@ -318,11 +313,18 @@ const Pedidos = () => {
 
     }
 
+   /*  const ordersfilter = (a) => {
+        dispatch({
+            type: actionType.SET_ORDERS,
+            orders: orders.filter(a => new Date(a.creado).toLocaleDateString().split("/", 2).join('/') === new Date(value).toLocaleDateString().split("/", 2).join('/'))
+        })
+    } */
+
     return (
         <div className='pb-20 mt-[10vh] md:ml-[16vw]   md:w-[80vw] rounded-lg py-10  '>
-            <div>
-                <Calendar onChange={onChange} value={value} />
-            </div>
+          {/*   <div>
+                <Calendar onClick={ordersfilter()} onChange={onChange} value={value} />
+            </div> */}
             <h1 className='text-booty text-center font-bold p-4 '>Pedidos</h1>
 
             <div className=' flex-col grid md:grid-cols-3 gap-4 '>
