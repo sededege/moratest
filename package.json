@@ -29,6 +29,7 @@
     "process": "^0.11.10",
     "react": "^18.1.0",
     "react-animated-text-content": "^1.0.1",
+    "react-calendar": "^4.0.0",
     "react-carousel-responsive": "^0.0.31",
     "react-dom": "^18.1.0",
     "react-icons": "^4.3.1",

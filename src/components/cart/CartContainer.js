@@ -49,11 +49,11 @@ const CartContainer = () => {
     }
 
 
-
-
     if (users && user) {
       setDatos(users.filter(a => a.user === user.email))
     }
+
+
 
 
 
@@ -89,6 +89,14 @@ const CartContainer = () => {
 
   const efectivo = () => {
 
+    const envio = ({
+      id: '1',
+      title: 'Envio',
+      currency_id: 'UYU',
+      unit_price: tot > 3000 ? 0 : 200,
+      quantity: 1,
+    })
+    
     const producto = cartItems.map(item =>
     ({
       id: item[0].item.id,
@@ -105,11 +113,10 @@ const CartContainer = () => {
         }`,
     })
     )
-
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
-      items: producto,
+      items: pickup === 'envio' ? [...producto, { ...envio }] : producto,
       status: 'pendiente',
       metodo: checkbox,
       pickup: pickup,
@@ -129,11 +136,20 @@ const CartContainer = () => {
       cartShow: false,
     });
 
-
+   
 
 
   }
+
   const transferencia = () => {
+
+    const envio = ({
+      id: '1',
+      title: 'Envio',
+      currency_id: 'UYU',
+      unit_price: tot > 3000 ? 0 : 200,
+      quantity: 1,
+    })
 
     const producto = cartItems.map(item =>
     ({
@@ -154,7 +170,7 @@ const CartContainer = () => {
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
-      items: producto,
+      items: pickup === 'envio' ? [...producto, { ...envio }] : producto,
       status: 'pendiente',
       metodo: checkbox,
       pickup: pickup,
@@ -174,6 +190,7 @@ const CartContainer = () => {
       cartShow: false,
     });
 
+   
 
 
   }
@@ -208,7 +225,7 @@ const CartContainer = () => {
       id: '1',
       title: 'Envio',
       currency_id: 'UYU',
-      unit_price: 200,
+      unit_price: tot > 3000 ? 0 : 200,
       quantity: 1,
     })
     /*     pickup === 'envio' && producto.push(envio)

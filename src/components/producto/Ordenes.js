@@ -30,7 +30,7 @@ const Ordenes = () => {
             return <p>Av. Duvimioso Terra 2234</p>
         } else {
             return <p>
-                Envio (+$200)
+                Envio
             </p>
         }
     }
@@ -238,7 +238,7 @@ const Ordenes = () => {
 
 
                             }}>
-                                Total: <span className='font-bold'>{a.total}</span>
+                                Total: <span className='font-bold'>{prueba(a.items)}</span>
                             </Typography>
                             <Typography sx={{
 
