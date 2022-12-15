@@ -160,6 +160,75 @@ const FiltrosHome = () => {
 
     }
 
+    const filtrartalle = (b) => {
+        setIsOpen(!isOpen)
+        console.log(products2)
+        let array = []
+        if (b === 'S') {
+            products2.filter(a => {
+                for (let i = 0; i < a.color.length; i++)
+                    if (a.color[i].tallas[0].stock > 0) {
+                        array.push({
+                            caracteristicas: a.caracteristicas,
+                            categoria: a.categoria,
+                            color: [a.color[i]],
+                            id: a.id,
+                            oferta: a.oferta,
+                            precio: a.precio,
+                            name: a.name,
+                        }
+                        )
+                    }
+            }
+            )
+        }
+        else if (b === 'M') {
+            products2.filter(a => {
+                for (let i = 0; i < a.color.length; i++)
+                    if (a.color[i].tallas[1].stock > 0) {
+                        array.push({
+                            caracteristicas: a.caracteristicas,
+                            categoria: a.categoria,
+                            color: [a.color[i]],
+                            id: a.id,
+                            oferta: a.oferta,
+                            precio: a.precio,
+                            name: a.name,
+                        }
+                        )
+                    }
+            }
+            )
+        }
+        else if (b === 'L') {
+            products2.filter(a => {
+                for (let i = 0; i < a.color.length; i++)
+                    if (a.color[i].tallas[2].stock > 0) {
+                        array.push({
+                            caracteristicas: a.caracteristicas,
+                            categoria: a.categoria,
+                            color: [a.color[i]],
+                            id: a.id,
+                            oferta: a.oferta,
+                            precio: a.precio,
+                            name: a.name,
+                        }
+                        )
+                    }
+            }
+            )
+        }
+
+        dispatch({
+            type: actionType.SET_PRODUCTS,
+            products: array,
+        });
+
+
+
+
+    }
+
     const categoria = (b) => {
         if (b === 'ofertas') {
             dispatch({
@@ -230,14 +299,19 @@ const FiltrosHome = () => {
                     transition={{ ease: "easeIn", duration: 0.4 }}
                     variants={variants2}
                     className='absolute shadow-lg w-[30vw]  rounded-lg items-center p-5 bg-white  mt-[50px] z-20 right-0'>
-                    <p>Color</p>
+                    <p className='font-bold'>Color</p>
                     <ul>
                         {
                             colores.map((a, index) => <li key={index} className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>)
                         }
 
                     </ul>
-
+                    <p className='font-bold'>Talle</p>
+                    <ul className='flex gap-4'>
+                        <li className='hover:underline' onClick={() => filtrartalle('S')}>S</li>
+                        <li className='hover:underline' onClick={() => filtrartalle('M')}>M</li>
+                        <li className='hover:underline' onClick={() => filtrartalle('L')}>L</li>
+                    </ul>
 
                 </motion.div>
 
@@ -277,8 +351,8 @@ const FiltrosHome = () => {
                         <p className='font-bold'>Color</p>
                         <ul>
                             {
-                                colores.map((a,index) =>
-                                    <li key={index}  className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>
+                                colores.map((a, index) =>
+                                    <li key={index} className='hover:underline' onClick={() => filtrarcolor(a)}>{a}</li>
 
 
                                 )

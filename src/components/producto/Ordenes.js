@@ -67,6 +67,7 @@ const Ordenes = () => {
     };
 
     const prueba = (b) => {
+        console.log(b)
         const total = b.reduce(
             (prevValue, currentValue) => prevValue + currentValue.unit_price,
             0
