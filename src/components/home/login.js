@@ -200,9 +200,9 @@ const ShowLogin = () => {
     const register = async () => {
         console.log(email)
         console.log(pass)
-        if (email != "" && pass != "" && pass2 != "" && celular != "" && nombre != "") {
+        if (email != null && pass != null && pass2 != null && celular != null && nombre != null) {
             if (pass === pass2) {
-                if (celular.length === 9) {
+                if (celular && celular.length === 9) {
                     createUserWithEmailAndPassword(auth, email, pass)
                         .then((userCredential) => {
                             // Signed in 
@@ -214,7 +214,6 @@ const ShowLogin = () => {
                             // ...
                             updateProfile(user, {
                                 displayName: nombre,
-
                             });
 
                             const data = {

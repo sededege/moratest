@@ -66,7 +66,17 @@ const Ordenes = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const prueba = (b) => {
+        const total = b.reduce(
+            (prevValue, currentValue) => prevValue + currentValue.unit_price,
+            0
+          );
+
+        return total
+    }
+
     React.useEffect(() => {
+        console.log(orders)
         if (type.type === 'gracias') {
             Swal.fire(
                 'Gracias por tu compra!',
@@ -178,7 +188,7 @@ const Ordenes = () => {
 
             {
 
-               orders != null ? orders != "" ? orders.map((a, index) =>
+                orders != null ? orders != "" ? orders.map((a, index) =>
                     <Accordion
                         key={index}
                         sx={{
@@ -314,7 +324,7 @@ const Ordenes = () => {
 
                                         }}>
                                             Enviar comprobante: <span className='font-bold'>morafit.uy@gmail.com</span>
-                                          <br></br>  <span className='font-bold'>098 626 100</span>
+                                            <br></br>  <span className='font-bold'>098 626 100</span>
                                         </Typography>
                                     }
 
@@ -326,7 +336,9 @@ const Ordenes = () => {
 
 
                                     }}>
-                                        Total: <span className='font-bold'>{a.total}</span>
+
+
+                                        Total: <span className='font-bold'>{prueba(a.items)}</span>
                                     </Typography>
                                 </div>
                             </div>

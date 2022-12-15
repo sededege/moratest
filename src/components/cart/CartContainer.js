@@ -55,16 +55,19 @@ const CartContainer = () => {
       setDatos(users.filter(a => a.user === user.email))
     }
 
-    
 
 
-  }, [tot, flag, user, users, cartItems, checkbox, codigo ]);
+
+  }, [tot, flag, user, users, cartItems, checkbox, codigo]);
 
 
   const checkout = () => {
+   /*  console.log(datos.length)
+    if (pickup === 'envio' && datos.length === 0) {
+      alert('Carga la direccion')
+    } */
     if (checkbox === 'mercadopago') {
       mercadopago()
-
     } else if (checkbox === 'efectivo') {
 
       efectivo()
@@ -72,6 +75,8 @@ const CartContainer = () => {
     } else {
       transferencia()
     }
+
+
   }
 
   const promo = (e) => {
@@ -100,7 +105,7 @@ const CartContainer = () => {
         }`,
     })
     )
-    
+
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
@@ -124,7 +129,7 @@ const CartContainer = () => {
       cartShow: false,
     });
 
-   
+
 
 
   }
@@ -173,7 +178,7 @@ const CartContainer = () => {
 
   }
   const tallasfiltro = (a, b, c) => {
-    
+
     return {
       id: c,
       size: a,
@@ -224,7 +229,7 @@ const CartContainer = () => {
 
 
     saveOrder(dataa)
-   
+
 
     const options = {
       method: "POST",
@@ -309,7 +314,7 @@ const CartContainer = () => {
             {/* cart Item */}
             {cartItems &&
               cartItems.length > 0 &&
-              cartItems.map((item,index) => (
+              cartItems.map((item, index) => (
                 <CartItem
                   key={index}
                   item={item}
@@ -378,7 +383,7 @@ const CartContainer = () => {
               <p className="text-gray-400 text-lg">Dirección</p>
             </div>)}
             {
-              user ? datos && datos.length > 0 ? datos.map((a,index) =>
+              user ? datos && datos.length > 0 ? datos.map((a, index) =>
                 pickup === 'envio' && (
                   <div key={index} className="w-full flex items-center justify-between">
 
