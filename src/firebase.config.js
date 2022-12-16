@@ -17,10 +17,9 @@ const firebaseConfig = {
 const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig)
 
 
-const firestore = getFirestore(app, {
-  experimentalForceLongPolling: true, // this line
-  useFetchStreams: false, // and this line
-})
+const firestoreDB = initializeFirestore(firebaseApp)
+
+const firestore = getFirestore(app)
 
 const auth = getAuth(app)
 
