@@ -311,7 +311,7 @@ const ShowLogin = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className='w-full h-full items-center flex justify-center fixed z-[120] top-0 bg-black bg-opacity-25 '>
+            className='w-full h-full items-center flex justify-center fixed z-[1000] top-0 bg-black bg-opacity-25 '>
 
             {
                 registrar ?
