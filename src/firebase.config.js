@@ -15,10 +15,6 @@ const firebaseConfig = {
 };
 
 const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig)
-
-
-const firestoreDB = initializeFirestore(firebaseApp)
-
 const firestore = getFirestore(app)
 
 const auth = getAuth(app)

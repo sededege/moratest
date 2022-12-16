@@ -330,19 +330,19 @@ const Pedidos = () => {
             <div className=' flex-col grid md:grid-cols-3 gap-4 '>
 
                 <div className=' flex flex-col text-center gap-4'>
-                    <h1>Mercado Pago ({orders.filter(a => a.metodo === 'mercadopago').length})</h1>
+                    <h1>Mercado Pago ({orders && orders.filter(a => a.metodo === 'mercadopago').length})</h1>
                     {
-                        orders && <Listas lista={orders.filter(a => a.metodo === 'mercadopago')} />
+                        orders && <Listas lista={orders && orders.filter(a => a.metodo === 'mercadopago')} />
                     }
                 </div>
                 <div className='flex flex-col text-center gap-4'>
-                    <h1>Efectivo ({orders.filter(a => a.metodo === 'efectivo').length})</h1>
+                    <h1>Efectivo ({orders && orders.filter(a => a.metodo === 'efectivo').length})</h1>
                     {
                         orders && <Listas lista={orders.filter(a => a.metodo === 'efectivo')} />
                     }
                 </div>
                 <div className='flex flex-col text-center gap-4'>
-                    <h1>Transferencia ({orders.filter(a => a.metodo === 'transferencia').length})</h1>
+                    <h1>Transferencia ({orders && orders.filter(a => a.metodo === 'transferencia').length})</h1>
                     {
                         orders && <Listas lista={orders.filter(a => a.metodo === 'transferencia')} />
                     }
