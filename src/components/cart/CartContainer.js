@@ -15,12 +15,13 @@ const CartContainer = () => {
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
   const [datos, setDatos] = useState(true)
-  const [checkbox, setCheckbox] = useState('efectivo')
-  const [pickup, setPickUp] = useState('efectivo')
+  const [checkbox, setCheckbox] = useState('')
+  const [pickup, setPickUp] = useState('')
   const [codigo, setCodigo] = useState('')
   const url = 'https://nodemora.herokuapp.com'
   const codigos = ['FIOMORA10']
   const [descuento, setDescuento] = useState('')
+  const Swal = require('sweetalert2')
 
   const navigate = useNavigate();
 
@@ -62,19 +63,28 @@ const CartContainer = () => {
 
 
   const checkout = () => {
-   /*  console.log(datos.length)
-    if (pickup === 'envio' && datos.length === 0) {
-      alert('Carga la direccion')
-    } */
-    if (checkbox === 'mercadopago') {
-      mercadopago()
-    } else if (checkbox === 'efectivo') {
+    /*  console.log(datos.length)
+     if (pickup === 'envio' && datos.length === 0) {
+       alert('Carga la direccion')
+     } */
+    if (pickup !== '' && checkbox !== '') {
+      if (checkbox === 'mercadopago') {
+        mercadopago()
+      } else if (checkbox === 'efectivo') {
 
-      efectivo()
+        efectivo()
 
+      } else {
+        transferencia()
+      }
     } else {
-      transferencia()
+      Swal.fire(
+        'Error!',
+        'Debes seleccionar un medio de pago y una forma de entrega!',
+        'error'
+    )
     }
+
 
 
   }
@@ -96,7 +106,7 @@ const CartContainer = () => {
       unit_price: tot > 3000 ? 0 : 200,
       quantity: 1,
     })
-    
+
     const producto = cartItems.map(item =>
     ({
       id: item[0].item.id,
@@ -136,7 +146,7 @@ const CartContainer = () => {
       cartShow: false,
     });
 
-   
+
 
 
   }
@@ -190,7 +200,7 @@ const CartContainer = () => {
       cartShow: false,
     });
 
-   
+
 
 
   }
@@ -306,7 +316,7 @@ const CartContainer = () => {
       }}
 
 
-      className="fixed z-[90] top-0 right-0 w-[100vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
+      className="fixed z-[1000] top-0 right-0 w-[100vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
     >
       <div className="w-full  z-[10] flex items-center justify-between p-4 cursor-pointer">
         <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>
