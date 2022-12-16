@@ -7,10 +7,10 @@ import { AnimatePresence, m, motion } from 'framer-motion';
 import { actionType } from '../context/reducer';
 
 const Products = () => {
-    const [{ products, favorite }, dispatch] = useStateValue()
+    const [{ products}] = useStateValue()
     const [prueba, setPrueba] = React.useState("")
 
-    React.useEffect(() => {
+   /*  React.useEffect(() => {
         if (favorite && prueba === '') {
 
             setPrueba(favorite.map(a => a.favoritos))
@@ -27,7 +27,7 @@ const Products = () => {
 
         }
 
-    }, [products, prueba])
+    }, [products, prueba]) */
 
 
 
