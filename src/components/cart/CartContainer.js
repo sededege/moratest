@@ -18,7 +18,8 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('')
   const [pickup, setPickUp] = useState('')
   const [codigo, setCodigo] = useState('')
-  const url = 'https://nodemora.herokuapp.com'
+   const url = 'https://nodemora.herokuapp.com'
+   /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
   const codigos = ['FIOMORA10']
   const [descuento, setDescuento] = useState('')
   const Swal = require('sweetalert2')
@@ -140,6 +141,18 @@ const CartContainer = () => {
 
     saveOrder(dataa)
 
+    const options = {
+      method: "POST",
+      body: JSON.stringify(dataa),
+      headers: new Headers({ 'content-type': 'application/json' }),
+    };
+
+    fetch(`${url}/ordencreada`, options)
+    .then(response => response.text())
+    .then(data => {
+      console.log(data)
+    });
+    
     navigate("/ordenes/gracias");
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -193,7 +206,17 @@ const CartContainer = () => {
     }
 
     saveOrder(dataa)
+    const options = {
+      method: "POST",
+      body: JSON.stringify(dataa),
+      headers: new Headers({ 'content-type': 'application/json' }),
+    };
 
+    fetch(`${url}/ordencreada`, options)
+    .then(response => response.text())
+    .then(data => {
+      console.log(data)
+    });
     navigate("/ordenes/graciastr");
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -257,6 +280,17 @@ const CartContainer = () => {
 
     saveOrder(dataa)
 
+    const options4 = {
+      method: "POST",
+      body: JSON.stringify(dataa),
+      headers: new Headers({ 'content-type': 'application/json' }),
+    };
+
+    fetch(`${url}/ordencreada`, options4)
+    .then(response => response.text())
+    .then(data => {
+      console.log(data)
+    });
 
     const options = {
       method: "POST",
