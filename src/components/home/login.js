@@ -198,8 +198,6 @@ const ShowLogin = () => {
     };
 
     const register = async () => {
-        console.log(email)
-        console.log(pass)
         if (email != null && pass != null && pass2 != null && celular != null && nombre != null) {
             if (pass === pass2) {
                 if (celular && celular.length === 9) {
@@ -207,7 +205,6 @@ const ShowLogin = () => {
                         .then((userCredential) => {
                             // Signed in 
                             const user = userCredential.user;
-                            console.log(user)
                             setFields(true)
                             setMsg('Cuenta creada con éxito!')
                             setAlertStatus(true)
@@ -229,6 +226,7 @@ const ShowLogin = () => {
                             }
                             console.log(data)
                             saveUser(data)
+                            setRegistrar(false)
                         })
                         .catch((error) => {
                             const errorCode = error.code;

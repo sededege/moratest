@@ -18,15 +18,15 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('')
   const [pickup, setPickUp] = useState('')
   const [codigo, setCodigo] = useState('')
-   const url = 'https://nodemora.herokuapp.com'
-   /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
+  const url = 'https://nodemora.herokuapp.com'
+  /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
   const codigos = ['FIOMORA10']
   const [descuento, setDescuento] = useState('')
   const Swal = require('sweetalert2')
 
   const navigate = useNavigate();
-
-
+console.log('datos')
+console.log(datos)
 
   const showCart = () => {
     dispatch({
@@ -83,7 +83,7 @@ const CartContainer = () => {
         'Error!',
         'Debes seleccionar un medio de pago y una forma de entrega!',
         'error'
-    )
+      )
     }
 
 
@@ -148,11 +148,11 @@ const CartContainer = () => {
     };
 
     fetch(`${url}/ordencreada`, options)
-    .then(response => response.text())
-    .then(data => {
-      console.log(data)
-    });
-    
+      .then(response => response.text())
+      .then(data => {
+        console.log(data)
+      });
+
     navigate("/ordenes/gracias");
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -213,10 +213,10 @@ const CartContainer = () => {
     };
 
     fetch(`${url}/ordencreada`, options)
-    .then(response => response.text())
-    .then(data => {
-      console.log(data)
-    });
+      .then(response => response.text())
+      .then(data => {
+        console.log(data)
+      });
     navigate("/ordenes/graciastr");
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -287,10 +287,10 @@ const CartContainer = () => {
     };
 
     fetch(`${url}/ordencreada`, options4)
-    .then(response => response.text())
-    .then(data => {
-      console.log(data)
-    });
+      .then(response => response.text())
+      .then(data => {
+        console.log(data)
+      });
 
     const options = {
       method: "POST",
@@ -444,7 +444,7 @@ const CartContainer = () => {
               <p className="text-gray-400 text-lg">Dirección</p>
             </div>)}
             {
-              user ? datos && datos.length > 0 ? datos.map((a, index) =>
+              user && datos.length > 0 && datos[0].barrio != '' ? datos.map((a, index) =>
                 pickup === 'envio' && (
                   <div key={index} className="w-full flex items-center justify-between">
 
@@ -458,16 +458,17 @@ const CartContainer = () => {
                   </div>)
               )
 
-                : (
-                  <motion.button
-                    whileTap={{ scale: 0.8 }}
-                    type="button"
-                    onClick={() => abrirEdit()}
-                    className="w-full p-2 rounded-full bg-gradient-to-tr from-gray-200 to-gray-400 text-textColor text-lg my-2 hover:shadow-lg"
-                  >
-                    Cargar direccion
-                  </motion.button>
-                ) : <></>}
+                :
+
+                pickup === 'envio' && <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  type="button"
+                  onClick={() => abrirEdit()}
+                  className="w-full p-2 rounded-full bg-gradient-to-tr from-gray-200 to-gray-400 text-textColor text-lg my-2 hover:shadow-lg"
+                >
+                  Cargar direccion
+                </motion.button>
+            }
             {user ? (
               <motion.button
                 onClick={() => checkout()}

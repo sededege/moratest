@@ -105,7 +105,10 @@ function App() {
           dondeestoy === 'Dashboard' && (<Headerleft />)
         }  
         
+        <AnimatePresence>
         <Pre load={load} />
+        </AnimatePresence>
+
         <ScrollToTop />
         <Routes location={location} key={location.pathname}>
           <Route path='/*' element={<MainContainer />} />

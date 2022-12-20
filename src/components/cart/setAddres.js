@@ -18,10 +18,15 @@ const SetAddres = () => {
     const [fields, setFields] = useState(false);
     const [alertStatus, setAlertStatus] = useState("false");
     const [msg, setMsg] = useState(null);
+    const [cel, setCel] = useState(null);
 
-    const recargar = useCallback( () => {
+    const recargar = () => {
         if (users && user) {
             const existeusuario = users.filter(a => a.user === user.email);
+            console.log(existeusuario)
+            console.log(users)
+            console.log(user)
+
             setExisteUsuario(users.filter(a => a.user === user.email))
             if (existeusuario && existeusuario.length > 0) {
                 setUserExiste(true)
@@ -30,13 +35,21 @@ const SetAddres = () => {
                 setPuerta(existeusuario[0].puerta)
                 setApto(existeusuario[0].apto)
                 setBarrio(existeusuario[0].barrio)
+                setCel(existeusuario[0].cel)
+
             } else {
                 setUserExiste(false)
 
             }
         }
-     }, [ user, users]);
-    
+    }
+    React.useEffect(() => {
+
+        recargar()
+
+    }, [user, users])
+
+
 
 
     const cerrarEdit = () => {
@@ -67,6 +80,7 @@ const SetAddres = () => {
     const guardarEdit = () => {
         if (userexiste) {
             console.log(existeuser)
+            console.log('existe')
             const data = {
                 id: existeuser[0].id,
                 alias: alias,
@@ -75,46 +89,29 @@ const SetAddres = () => {
                 apto: apto,
                 barrio: barrio,
                 user: existeuser[0].user,
+                cel: existeuser[0].cel,
             }
             updateAddres(data)
             clearData()
             fetchUsers()
-            recargar()
             setFields(true)
             setMsg('Datos modificados')
             setAlertStatus(false)
             setTimeout(() => {
                 setFields(false)
-            }, 4000)
-
-        } else {
-            console.log('Creo nuevo')
-            const data = {
-                id: `${Date.now()}`,
-                alias: alias,
-                dire: dire,
-                puerta: puerta,
-                apto: apto,
-                barrio: barrio,
-                user: user.email,
-            }
-            saveAddres(data)
-            setFields(true)
-            setMsg('Datos guardados')
-            setAlertStatus(false)
-            setTimeout(() => {
-                setFields(false)
-            }, 4000)
-            clearData()
-            fetchUsers()
+            }, 2000)
+              setTimeout(() => {
+              cerrarEdit()
+            }, 2000)
             recargar()
+
         }
-        
+
     }
 
 
     return (
-        <div className='w-full h-full items-center flex justify-center fixed z-[120] top-0 bg-black bg-opacity-25 '>
+        <div className='w-full h-full items-center flex justify-center fixed z-[200] top-0 bg-black bg-opacity-25 '>
             <form className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg">
                 <div className="flex  flex-wrap -mx-3 mb-6">
                     {
