@@ -36,7 +36,7 @@ const Products = ({ productos }) => {
                                 </div>
                                 <div className='p-2 rounded-b-lg relative '>
                                     <div className='flex justify-between items-center'>
-                                        <p className='font-regular text-textColor w-[200px] text-[1.rem]'>{a.name}</p>
+                                        <p className='font-regular text-textColor w-[200px] text-[1.rem]'>{a.name} {a.color[0].name}</p>
                                         {
                                             a.oferta !== '0' && <p className='md:hidden flex text-[12px] md:text-[14px] w-full font-bold bg-booty px-2 rounded-lg text-white'>{a.oferta} % OFF</p>
 
