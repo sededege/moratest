@@ -36,13 +36,6 @@ function App () {
         products: data
       })
     })
-    /*  getAllOrders().then((data) => {
-       dispatch({
-           type: actionType.SET_ORDERS,
-           orders: data
-       })
-
-   }) */
   }, [])
 
   const fetchUsers = useCallback(() => {

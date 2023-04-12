@@ -75,7 +75,7 @@ const TablaListados = ({ data, ventas }) => {
                             {
                                 data && data.length > 0 ? data.map((a, index) =>
                                     <tr key={index} id={a.id} className='bg-bghome  hover:bg-white rounded-full ' >
-                                        <td className='items-center p-2 flex justify-center'><img className='w-10 items-center justify-center block ' src={a.color[0].images} /></td>
+                                        <td className='items-center p-2 flex justify-center'><img className='w-10 items-center justify-center block ' src={a.color[0]?.images} /></td>
                                         <td className='text-textColor text-lg'>{a.name}</td>
                                         <td className='text-textColor text-md'>{a.categoria}</td>
                                         <td className='text-textColor text-md '>{a.color.map((b, index) =>
