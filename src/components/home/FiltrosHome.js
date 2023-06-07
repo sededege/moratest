@@ -182,7 +182,7 @@ const FiltrosHome = ({ setCurrentPage }) => {
         <>
             {/*         escritorio
  */}            <div className='md:flex hidden justify-between relative' >
-                <h1 className=' items-center flex font-bold text-booty'>Catálogo</h1>
+                <p className=' items-center flex font-bold text-booty text-[1rem]'>Catálogo</p>
                 <ul ref={titleRef} className='flex overflow-auto gap-2 cursor-pointer h-[50px]  '>
                     {
                         categorias.map((a, index) =>
@@ -225,7 +225,7 @@ const FiltrosHome = ({ setCurrentPage }) => {
             {/*     mobile */}
             <div className='flex flex-col md:hidden justify-between relative' >
                 <div className='flex items-center justify-between mb-4'>
-                    <h1 className=' items-center flex'>Catalogo</h1>
+                    <p className=' items-center flex text-[1rem]'>Catalogo</p>
                     <motion.div
                         whileTap={{ scale: 0.75 }}
                         onClick={() => setIsOpen(!isOpen)} className='flex gap-2 items-center cursor-pointer bg-gray-100 rounded-md hover:shadow-md   text-gray-400  p-2'>
