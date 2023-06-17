@@ -20,7 +20,7 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('')
   const [pickup, setPickUp] = useState('')
   const [codigo, setCodigo] = useState('')
-  const url = 'https://nodemora.herokuapp.com'
+  const url = 'https://nodemoratest-e307c79d1de3.herokuapp.com'
   /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
   const codigos = ['FIOMORA10']
   const [descuento, setDescuento] = useState('')
@@ -123,14 +123,14 @@ const CartContainer = () => {
       if (pickup !== '' && checkbox !== '') {
         if (checkbox === 'mercadopago') {
           mercadopago()
-          onSubmit()
+         /*  onSubmit() */
         } else if (checkbox === 'efectivo') {
           efectivo()
-          onSubmit()
+       /*    onSubmit() */
           console.log(toSend)
         } else {
           transferencia()
-          onSubmit()
+      /*     onSubmit() */
         }
       } else {
         Swal.fire(
