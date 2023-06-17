@@ -99,10 +99,10 @@ const CartContainer = () => {
 
   const onSubmit = () => {
     send(
-      'service_ckxcjw4',
-      'template_wkl6eye',
+      'service_9022eik',
+      'template_h8f2pjg',
       toSend,
-      'x1pZtczNJ6zBgwSUF'
+      '6nMZvPwmx9KtZzOQm'
     )
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text)
@@ -123,14 +123,14 @@ const CartContainer = () => {
       if (pickup !== '' && checkbox !== '') {
         if (checkbox === 'mercadopago') {
           mercadopago()
-         /*  onSubmit() */
+          onSubmit()
         } else if (checkbox === 'efectivo') {
           efectivo()
-       /*    onSubmit() */
+          onSubmit()
           console.log(toSend)
         } else {
           transferencia()
-      /*     onSubmit() */
+          onSubmit()
         }
       } else {
         Swal.fire(
