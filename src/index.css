@@ -10,7 +10,9 @@ body {
     sans-serif;
 }
 
-
+.input {
+  background-color: white !important;
+}
 .swiper-button-next,
 .swiper-button-prev {
   background-color: white !important;

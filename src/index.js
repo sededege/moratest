@@ -7,12 +7,16 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { initialState } from './components/context/initialState'
 import reducer from './components/context/reducer'
 import { StateProvider } from './components/context/StateProvider'
+import { ThemeProvider } from '@material-tailwind/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Router>
     <StateProvider initialState={initialState} reducer={reducer}>
+    <ThemeProvider>
+
       <App />
+      </ThemeProvider>
     </StateProvider>
   </Router>
 )
