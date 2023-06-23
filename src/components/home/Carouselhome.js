@@ -6,7 +6,7 @@ import { Carousel } from 'react-responsive-carousel'
 import { motion } from 'framer-motion'
 import { useStateValue } from '../context/StateProvider'
 import banner1 from '../img/test.png'
-import banner2 from '../img/banner2.webp'
+import banner2 from '../img/test2.png'
 
 const CarrouselHome = (c) => {
   const [{ favoritos, products }, dispatch] = useStateValue()
@@ -51,48 +51,55 @@ const CarrouselHome = (c) => {
     );
   };
 
-  return (
+  return (<>
         <Carousel
             showStatus={false}
             showThumbs={false}
             autoPlay={false}
             infiniteLoop={true}
             interval={5000}
+            showIndicators={false}
            /*  renderArrowPrev={renderCustomPrevArrow}
             renderArrowNext={renderCustomNextArrow} */
+            className='md:flex hidden'
+
         >
 
-            {/*   {
-                c.imagenes.length > 0 && (c.imagenes.map((a, index) =>
-                    <motion.div
-                        key={index}
-                        className='h-[300px] hover:opacity-70 z-[10] cursor-pointer ' onClick={() => navegar(c.id)}>
-                        <img className='rounded-lg w-full h-full object-cover   ' src={a.images[0]} />
-
-                    </motion.div>
-                ))
-            } */}
-
-            {/*  <motion.div
-                className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer ' >
-                <img className='rounded-lg w-full h-full object-cover   ' src={banner3} />
-
-            </motion.div> */}
-            <motion.div
-                className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer relative' >
+         
+<motion.div
+                className='md:flex hidden h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer relative' >
               {/*   <button onClick={() => categoria()} className='absolute hidden md:flex z-[30] bg-booty rounded-lg cursor-pointer px-10 md:ml-[calc(62%-50px)] p-1 bottom-[50px] text-white  font-bold'>Visitar</button>
                 <button onClick={() => categoria()} className='absolute md:hidden z-[50] right-16 bg-booty rounded-lg cursor-pointer px-2 md:ml-[calc(60%-50px)] text-[0.8rem] p-1 bottom-[30px] text-white  font-bold'>Visitar</button> */}
 
                 <img alt='banner1' className='rounded-lg w-full h-full object-cover   ' src={banner1} />
             </motion.div>
-            {/* <motion.div
-                className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer  ' >
 
-                <img alt='banner2' className='rounded-lg w-full h-full object-cover   ' src={banner2} />
-
-            </motion.div> */}
-
+          
         </Carousel>
+        <Carousel
+            showStatus={false}
+            showThumbs={false}
+            autoPlay={false}
+            infiniteLoop={true}
+            interval={5000}
+            showIndicators={false}
+           /*  renderArrowPrev={renderCustomPrevArrow}
+            renderArrowNext={renderCustomNextArrow} */
+            className='md:hidden flex'
+        >
+
+
+<motion.div
+                className='md:hidden flex h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer relative' >
+              {/*   <button onClick={() => categoria()} className='absolute hidden md:flex z-[30] bg-booty rounded-lg cursor-pointer px-10 md:ml-[calc(62%-50px)] p-1 bottom-[50px] text-white  font-bold'>Visitar</button>
+                <button onClick={() => categoria()} className='absolute md:hidden z-[50] right-16 bg-booty rounded-lg cursor-pointer px-2 md:ml-[calc(60%-50px)] text-[0.8rem] p-1 bottom-[30px] text-white  font-bold'>Visitar</button> */}
+
+                <img alt='banner1' className='rounded-lg w-full h-full object-cover   ' src={banner2} />
+            </motion.div>
+
+          
+        </Carousel>
+        </>
   )
 }
 

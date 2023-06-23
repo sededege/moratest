@@ -27,6 +27,7 @@ import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { FaBox } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
+import { Delete, DeleteForeverOutlined } from "@mui/icons-material";
 /* import Listas from './Listas' */
 const Pedidos = () => {
   const [{ orders, users }, dispatch] = useStateValue();
@@ -226,6 +227,14 @@ const customAnimation = {
             <Fragment>
             <Accordion className="px-4 flex flex-col gap-4" open={open === index} animate={customAnimation}>
             <AccordionHeader onClick={() => handleOpen(index)}>
+       {/*      <motion.div whileTap={{ scale: 0.75 }}>
+                      <button
+                        onClick={() => eliminarorder(a.id)}
+                        className="bg-red-500 font-bold p-2  rounded-full text-white "
+                      >
+                      <DeleteForeverOutlined/>
+                      </button>
+                    </motion.div> */}
                 <p className="flex items-center px-4">
                   <span
                     className={`${colores(
