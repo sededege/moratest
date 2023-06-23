@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import { motion } from 'framer-motion'
 import { useStateValue } from '../context/StateProvider'
-import banner1 from '../img/banner1.png'
+import banner1 from '../img/test.png'
 import banner2 from '../img/banner2.webp'
 
 const CarrouselHome = (c) => {
@@ -31,6 +31,26 @@ const CarrouselHome = (c) => {
     })
   } */
 
+  const renderCustomPrevArrow = (onClickHandler, hasPrev, label) => {
+    return (
+      hasPrev && (
+        <button type="button" onClick={onClickHandler} aria-label={label}>
+          Custom Prev Button
+        </button>
+      )
+    );
+  };
+
+  const renderCustomNextArrow = (onClickHandler, hasNext, label) => {
+    return (
+      hasNext && (
+        <button type="button" className='absolute top-[90px] right-0' onClick={onClickHandler} aria-label={label}>
+          Custom Next Button
+        </button>
+      )
+    );
+  };
+
   return (
         <Carousel
             showStatus={false}
@@ -38,7 +58,8 @@ const CarrouselHome = (c) => {
             autoPlay={false}
             infiniteLoop={true}
             interval={5000}
-
+           /*  renderArrowPrev={renderCustomPrevArrow}
+            renderArrowNext={renderCustomNextArrow} */
         >
 
             {/*   {
@@ -64,12 +85,12 @@ const CarrouselHome = (c) => {
 
                 <img alt='banner1' className='rounded-lg w-full h-full object-cover   ' src={banner1} />
             </motion.div>
-            <motion.div
+            {/* <motion.div
                 className='h-[180px] md:h-[300px] hover:opacity-70 z-[10] cursor-pointer  ' >
 
                 <img alt='banner2' className='rounded-lg w-full h-full object-cover   ' src={banner2} />
 
-            </motion.div>
+            </motion.div> */}
 
         </Carousel>
   )

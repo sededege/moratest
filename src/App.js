@@ -71,7 +71,7 @@ function App () {
 
   return (
     <div className='w-screen h-screen bg-white'>
-      <main className="bg-white ">
+      <main >
         {
           loginShow && (<ShowLogin />)
         }

@@ -27,6 +27,7 @@ const EditItem = () => {
   const [imageAsset1, setImageAsset1] = useState(null)
   const [imageAsset2, setImageAsset2] = useState(null)
   const [color, setColor] = useState('Negro')
+  const [qtyXS, setXS] = useState('')
   const [qtyS, setS] = useState('')
   const [qtyM, setM] = useState('')
   const [qtyL, setL] = useState('')
@@ -52,9 +53,10 @@ const EditItem = () => {
     setImageAsset(products.filter(a => a.id === editar)[0].color[0].images[0])
     setImageAsset1(products.filter(a => a.id === editar)[0].color[0].images[1])
     setImageAsset2(products.filter(a => a.id === editar)[0].color[0].images[2])
-    setS(products.filter(a => a.id === editar)[0].color[0].tallas[0].stock)
-    setM(products.filter(a => a.id === editar)[0].color[0].tallas[1].stock)
-    setL(products.filter(a => a.id === editar)[0].color[0].tallas[2].stock)
+    setXS(products.filter(a => a.id === editar)[0].color[0].tallas[0]?.stock)
+    setS(products.filter(a => a.id === editar)[0].color[0].tallas[1]?.stock)
+    setM(products.filter(a => a.id === editar)[0].color[0].tallas[2]?.stock)
+    setL(products.filter(a => a.id === editar)[0].color[0].tallas[3]?.stock)
   }, [editar, products])
 
   const change = (index) => {
@@ -134,6 +136,11 @@ const EditItem = () => {
           imageAsset2
         ],
         tallas: [
+          {
+            id: 0,
+            name: 'XS',
+            stock: qtyXS
+          },
           {
             id: 1,
             name: 'S',
@@ -318,6 +325,7 @@ const EditItem = () => {
     setM('')
     setS('')
     setL('')
+    setXS('')
     setVideo('')
     setMiniaturaVideo('')
   }
@@ -651,6 +659,15 @@ const EditItem = () => {
                                         <p className='font-semibold text-[14px]'>Talles</p>
                                     </div>
                                     <div className="w-full py-2 border-b border-gray-300 flex justify-between items-center gap-2">
+                                    <p>XS</p>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={qtyXS}
+                                            onChange={(e) => setXS(e.target.value)}
+                                            placeholder="Qty"
+                                            className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
+                                        />
                                         <p>S</p>
                                         <input
                                             type="text"
@@ -669,7 +686,8 @@ const EditItem = () => {
                                             placeholder="Qty"
                                             className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
                                         />
-                                        <p>L</p>
+                                       
+                                         <p>L</p>
                                         <input
                                             type="text"
                                             required
@@ -685,7 +703,7 @@ const EditItem = () => {
                             <div className="flex items-center w-full">
                                 <button
                                     type="button"
-                                    className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
+                                    className="ml-0 cursor-pointer bg-black md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
                                     /*   onClick={saveDetails} */
                                     onClick={push}
                                 >
@@ -693,7 +711,7 @@ const EditItem = () => {
                                 </button>
                                 <button
                                     type="button"
-                                    className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
+                                    className="ml-0 cursor-pointer bg-green-400 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
                                     onClick={saveDetails}
                                 /*   onClick={push} */
                                 >

@@ -64,13 +64,13 @@ const Pedidos = () => {
     const datosmostrar = users.filter((a) => a.user === e);
     return (
       <div>
-        <ul>
+        <ul className="text-[1rem] text-black font-normal">
           <li>
-            <span className="font-semibold">Alias:</span>{" "}
+            <span className="font-bold">Alias:</span>{" "}
             {datosmostrar[0].alias}
           </li>
           <li>
-            <span className="font-semibold">Email:</span> {datosmostrar[0].user}
+            <span className="font-bold">Email:</span> {datosmostrar[0].user}
           </li>
           <li className="flex items-center gap-2 text-black w-full">
             <p>
@@ -332,7 +332,7 @@ const customAnimation = {
                     <motion.div whileTap={{ scale: 0.75 }}>
                       <button
                         onClick={() => eliminarorder(a.id)}
-                        className="bg-red-500 py-2 px-4 rounded-lg text-white "
+                        className="bg-red-500 font-bold py-2 px-4 rounded-lg text-white "
                       >
                         Borrar
                       </button>
@@ -342,7 +342,7 @@ const customAnimation = {
                         <button
                           onClick={() => pagado(a.id)}
                           value={a.id}
-                          className="bg-green-300 py-2 px-4 rounded-lg text-white"
+                          className="bg-green-300 font-bold py-2 px-4 rounded-lg text-white"
                         >
                           Pagado
                         </button>
@@ -350,7 +350,7 @@ const customAnimation = {
                         <button
                           onClick={() => pendiente(a.id)}
                           value={a.id}
-                          className="bg-yellow-300 py-2 px-4 rounded-lg text-white"
+                          className="bg-yellow-300 text-black font-bold py-2 px-4 rounded-lg "
                         >
                           Pendiente
                         </button>
