@@ -461,7 +461,7 @@ export const categorias = [
     param: 'new'
   },
   {
-    id: 6,
+    id: 222,
     name: 'Todas',
     param: 'todas'
   },
@@ -488,7 +488,7 @@ export const categorias = [
     param: 'Calzas'
   },
   {
-    id: 10,
+    id: 20,
     name: 'Tops',
     param: 'Tops'
   },
