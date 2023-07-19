@@ -78,6 +78,10 @@ const Detalle = () => {
     setItems([...cartItems, itemselect])
   }
 
+  React.useEffect(() => {
+    setSelectedSize(thisProduct && thisProduct.color && thisProduct?.color[0].tallas?.filter(a => a.stock > 0)[0].name)
+  }, [thisProduct])
+  
   const colorselect = (color) => {
     if (color === 'Negro') {
       return 'bg-black'
