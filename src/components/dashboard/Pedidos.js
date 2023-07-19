@@ -68,36 +68,36 @@ const Pedidos = () => {
         <ul className="text-[1rem] text-black font-normal">
           <li>
             <span className="font-bold">Alias:</span>{" "}
-            {datosmostrar[0].alias}
+            {datosmostrar[0]?.alias}
           </li>
           <li>
-            <span className="font-bold">Email:</span> {datosmostrar[0].user}
+            <span className="font-bold">Email:</span> {datosmostrar[0]?.user}
           </li>
           <li className="flex items-center gap-2 text-black w-full">
             <p>
               <span className="font-semibold">Celular:</span>{" "}
-              {datosmostrar[0].cel}
+              {datosmostrar[0]?.cel}
             </p>
             <motion.div whileTap={{ scale: 0.75 }}>
-              <a href={`https://wa.me/+598${datosmostrar[0].cel}`}>
+              <a href={`https://wa.me/+598${datosmostrar[0]?.cel}`}>
                 <BsWhatsapp className=" w-6 h-6 text-[0.8rem] text-green-400" />
               </a>
             </motion.div>
           </li>
           <li>
             <span className="font-semibold">Direccion:</span>{" "}
-            {datosmostrar[0].dire}
+            {datosmostrar[0]?.dire}
           </li>
           <li>
             <span className="font-semibold">Puerta:</span>{" "}
-            {datosmostrar[0].puerta}
+            {datosmostrar[0]?.puerta}
           </li>
           <li>
             <span className="font-semibold">Barrio:</span>{" "}
-            {datosmostrar[0].barrio}
+            {datosmostrar[0]?.barrio}
           </li>
           <li>
-            <span className="font-semibold">Apto:</span> {datosmostrar[0].apto}
+            <span className="font-semibold">Apto:</span> {datosmostrar[0]?.apto}
           </li>
         </ul>
       </div>

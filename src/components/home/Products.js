@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 const Products = ({ productos }) => {
   const [{ products }] = useStateValue()
-  
+  console.log(productos)
 
   return (
         <div className=' grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-5 gap-5'>
