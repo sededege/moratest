@@ -13,9 +13,11 @@ import { BsFillPersonFill } from 'react-icons/bs'
 
 const Header = () => {
   const history = useNavigate()
-  const [{ user, cartShow, cartItems, dondeestoy }, dispatch] = useStateValue()
+  const [{ user, cartShow, cartItems, dondeestoy, products }, dispatch] = useStateValue()
   const [isOpen, setIsOpen] = useState(false)
   const [isMenu, setIsMenu] = useState(false)
+  const [products2, setProducts2] = useState("");
+const [text, setText] = useState(null)
 
   const abrirEdit = () => {
     dispatch({
@@ -46,6 +48,19 @@ const Header = () => {
     })
   }
 
+  const handleKeyPress = (event) => {
+    setProducts2(products)
+    if (event.key === 'Enter') {
+      console.log(products2)
+      console.log(text)
+      dispatch({
+        type: actionType.SET_PRODUCTS,
+        products: products2.filter(a => a.name.toLowerCase().includes(text.toLowerCase())),
+      });
+    }
+  };
+
+
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
@@ -74,7 +89,9 @@ const Header = () => {
                   animate={isOpen ? 'open' : 'closed'}
                   transition={{ ease: 'easeIn', duration: 0.4 }}
                   variants={variants}
-
+                  onKeyPress={handleKeyPress}
+                  value={text}
+                  onChange={e => setText(e.target.value)}
                   className="placeholder:italic p-5 block h-11 rounded-full  shadow-lg   focus:outline-none focus:border-gray-400 focus:ring-gray-100 focus:ring-1 sm:text-sm" placeholder="Buscador..." type="text" name="search" />
               </label>
             </div>

@@ -66,12 +66,13 @@ const Ordenes = () => {
   }
 
   const prueba = (b) => {
-    console.log(b)
+    console.log('prueba',b)
     const total = b.reduce(
-      (prevValue, currentValue) => prevValue + currentValue.unit_price,
+      (prevValue, currentValue) => prevValue + (currentValue.unit_price*currentValue.quantity),
       0
     )
 
+    
     return total
   }
 

@@ -141,7 +141,8 @@ export const updateAddres = async (data) => {
     dire: data.dire,
     puerta: data.puerta,
     apto: data.apto,
-    barrio: data.barrio
+    barrio: data.barrio,
+    notas: data.notas
     /*     user: data.user,
  */ })
 }

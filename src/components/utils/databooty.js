@@ -450,7 +450,7 @@ export const databooty = [
 
 export const categorias = [
 
-  {
+  /* {
     id: 100,
     name: 'Hot Sales',
     param: 'sales'
@@ -459,7 +459,7 @@ export const categorias = [
     id: 10,
     name: 'Nuevo',
     param: 'new'
-  },
+  }, */
   {
     id: 222,
     name: 'Todas',
