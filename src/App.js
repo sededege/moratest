@@ -31,9 +31,15 @@ function App () {
 
   const fetchData = useCallback(() => {
     getAllProductsItems().then((data) => {
+      const newArray = [...data];
+      // Shuffle the array using Fisher-Yates (Knuth) shuffle algorithm
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
       dispatch({
         type: actionType.SET_PRODUCTS,
-        products: data
+        products: newArray
       })
     })
   }, [])
