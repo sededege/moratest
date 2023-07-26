@@ -43,7 +43,7 @@ const Products = ({ productos }) => {
                                         }
                                     </div>
 
-                                    <div className='flex h-full justify-between  items-center mt-2 '>
+                                    <div className='flex h-full justify-between  items-center '>
                                         {
                                             a.oferta !== '0'
                                               ? <div className='flex gap-2 items-center'>

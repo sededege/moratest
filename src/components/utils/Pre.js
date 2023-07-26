@@ -2,7 +2,8 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 function Pre (props) {
-  return <motion.div className='transition 1s ease-in-out'
+  
+  return <motion.div 
 
     id={props.load ? 'preloader' : 'preloader-none'}>
 

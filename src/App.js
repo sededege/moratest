@@ -69,7 +69,7 @@ function App () {
   useEffect(() => {
     setTimeout(() => {
       upadateLoad(false)
-    }, 1000)
+    }, 2000)
 
     fetchData()
     fetchUsers()
