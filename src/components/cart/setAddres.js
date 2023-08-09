@@ -194,7 +194,6 @@ const SetAddres = () => {
               id="grid-zip"
               type="text"
               name="text-input"
-              pattern="[A-Za-z]+"
               placeholder="Pocitos"
             />
           </div>
