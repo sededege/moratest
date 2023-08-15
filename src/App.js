@@ -24,6 +24,7 @@ import ScrollToTop from './components/utils/scrolltotop'
 import ShowLogin from './components/home/login'
 import Pedidos from './components/dashboard/Pedidos'
 import Usuarios from './components/dashboard/Usuarios'
+import Armatuoutfit from './components/home/Armatuoutfit'
 
 function App () {
   const [{ dondeestoy, cartShow, editShow, loginShow, user }, dispatch] = useStateValue()
@@ -105,6 +106,7 @@ function App () {
           <Route path='/Favoritos' element={<Favoritos />} />
           <Route path='/Dashboard' element={<Dashboard />} />
           <Route path='/Nuevoproducto' element={<CreateContainer />} />
+          <Route path='/armatuoutfit' element={<Armatuoutfit/>} />
           <Route path='/edititem' element={<EditItem />} />
           <Route path='/Ordenes/:type' element={<Ordenes />} />
           <Route path='/Dashboard/Pedidos' element={<Pedidos />} />

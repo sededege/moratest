@@ -227,7 +227,7 @@ const Detalle = () => {
                                                     </div> */}
                                                 </div>
                                                 <div className='flex flex-col gap-6 mr-10'>
-                                                    <p className='font-normal text-[0.9rem] text-gray-400'>{thisProduct.descripcion}</p>
+                                                    <p className='font-normal text-[0.9rem] text-gray-600'>{thisProduct.descripcion}</p>
                                                 </div>
                                             </div>
 

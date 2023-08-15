@@ -61,7 +61,7 @@ const Pedidos = () => {
     return total;
   };
 
-  const datos = (e) => {
+  const datos = (e,b) => {
     const datosmostrar = users.filter((a) => a.user === e);
     return (
       <div>
@@ -99,6 +99,9 @@ const Pedidos = () => {
           <li>
             <span className="font-semibold">Apto:</span> {datosmostrar[0]?.apto}
           </li>
+          <li>
+            <span className="font-semibold">Notas:</span> {b}
+          </li>
         </ul>
       </div>
     );
@@ -118,7 +121,8 @@ const Pedidos = () => {
       return (
         <p>
           Florencia Moraes<br></br>
-          Banco ITAU 3614214
+          Banco ITAU 3614214 <br></br>
+          Giro Abitab - Redpagos: 5.196.099-4
         </p>
       );
     } else if (a === "efectivo") {
@@ -309,7 +313,7 @@ const customAnimation = {
                     </div>
                   </div>
 
-                  <div className=" p-4 ">{<p> {datos(a.email)}</p>}</div>
+                  <div className=" p-4 ">{<p> {datos(a.email, a.notas)}</p>}</div>
                   <div className="flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center w-full text-center mt-5">
                     <p
                       sx={{

@@ -20,6 +20,7 @@ const CartContainer = () => {
   const [checkbox, setCheckbox] = useState('')
   const [pickup, setPickUp] = useState('')
   const [codigo, setCodigo] = useState('')
+  const [notas, setNotas] = useState('')
   const url = 'https://nodemoratest-e307c79d1de3.herokuapp.com'
   /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
   const codigos = ['FIOMORA10']
@@ -50,6 +51,7 @@ const CartContainer = () => {
       editShow: true
     })
   }
+  console.log(notas)
 
   const mensaje = (a) => {
     return `  
@@ -60,7 +62,8 @@ const CartContainer = () => {
     talle: ${a.map(a => a.size)} \n
     color: ${a.map(a => a.color)} \n
     precio: ${a.map(a => a.unit_price)} \n
-    total: ${tot}
+    total: ${tot},
+    notas: ${notas}
       `
   }
   useEffect(() => {
@@ -95,7 +98,7 @@ const CartContainer = () => {
       message: mensaje(producto),
       reply_to: 'test'
     })
-  }, [tot, flag, user, users, cartItems, checkbox, codigo])
+  }, [tot, flag, user, users, cartItems, checkbox, codigo, notas])
 
   const onSubmit = () => {
     send(
@@ -187,7 +190,8 @@ const CartContainer = () => {
       email: user.email,
       name: user && user.displayName,
       phone: users.filter((a) => a.user === user.email)[0].cel,
-      codigo: descuento
+      codigo: descuento,
+      notas: notas
     }
 
     saveOrder(dataa)
@@ -246,9 +250,9 @@ const CartContainer = () => {
       email: user.email,
       name: user && user.displayName,
       phone: users.filter((a) => a.user === user.email)[0].cel,
-      codigo: descuento
+      codigo: descuento,
+      notas: notas
     }
-
     saveOrder(dataa)
     const options = {
       method: 'POST',
@@ -309,7 +313,8 @@ const CartContainer = () => {
       email: user.email,
       metodo: checkbox,
       pickup,
-      codigo: descuento
+      codigo: descuento,
+      notas: notas
     }
 
     saveOrder(dataa)
@@ -393,7 +398,7 @@ const CartContainer = () => {
         // eslint-disable-next-line multiline-ternary
         <div className="w-full h-full bg-white rounded-t-[2rem] flex flex-col">
           {/* cart Items section */}
-          <div className="w-full h-[20vh] md:h-[40vh] px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
+          <div className="w-full h-[20vh] md:h-[40vh] px-6 py-4 flex flex-col gap-1 overflow-y-scroll scrollbar-none">
             {/* cart Item */}
             {cartItems &&
               cartItems.length > 0 &&
@@ -457,7 +462,7 @@ const CartContainer = () => {
                   htmlFor="bordered-radio-3"
                   className="py-2 ml-2 w-full text-sm font-medium text-white"
                 >
-                  Transferencia Bancaria
+                  Transferencia Bancaria / Giro Abitab-RedPagos
                 </label>
               </div>
             </div>
@@ -508,13 +513,18 @@ const CartContainer = () => {
                 </label>
               </div>
             </div>
-            <div className="flex w-full">
+            <div className="flex flex-col gap-2 w-full">
+            <textarea
+                  className="w-full text-center p-2 rounded-lg h-[100px]"
+                  onChange={(e) => setNotas(e.target.value)}
+                  placeholder="Nota del pedido - (En caso de comprar un conjunto, especificar el talle de la parte superior)"
+                />
               {codigos.indexOf(codigo) === -1
                 ? (
                 <input
                   className="w-full text-center p-2 rounded-full"
                   onChange={(e) => promo(e)}
-                  placeholder="Codigo promocional"
+                  placeholder="Código promocional"
                 />
                   )
                 : (
