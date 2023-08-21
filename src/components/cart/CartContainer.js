@@ -148,8 +148,8 @@ const CartContainer = () => {
   const promo = (e) => {
     setCodigo(e.target.value)
     if (codigos.indexOf(e.target.value) !== -1) {
-      setTot(tot * 0.85)
-      setDescuento(0.85)
+      setTot(tot * 0.9)
+      setDescuento(0.9)
     }
   }
 
@@ -531,8 +531,8 @@ const CartContainer = () => {
                 <input
                   disabled="disabled"
                   className="w-full text-center p-2 rounded-full"
-                  value="15% de descuento aplicado!"
-                  placeholder="15% de descuento aplicado!"
+                  value="10% de descuento aplicado!"
+                  placeholder="10% de descuento aplicado!"
                 />
                   )}
             </div>
