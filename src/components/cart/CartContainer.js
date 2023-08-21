@@ -23,7 +23,7 @@ const CartContainer = () => {
   const [notas, setNotas] = useState('')
   const url = 'https://nodemoratest-e307c79d1de3.herokuapp.com'
   /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
-  const codigos = ['FIOMORA10']
+  const codigos = ['FIOMORA10', 'MORA10']
   const [descuento, setDescuento] = useState('')
   const Swal = require('sweetalert2')
   const tallasfiltro = (a, b, c) => {
