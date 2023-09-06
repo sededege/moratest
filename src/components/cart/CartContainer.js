@@ -62,7 +62,8 @@ const CartContainer = () => {
     talle: ${a.map(a => a.size)} \n
     color: ${a.map(a => a.color)} \n
     precio: ${a.map(a => a.unit_price)} \n
-    total: ${tot},
+    descuento: ${a.map(a => a.unit_price)} \n
+    total: ${a.descuento ? tot*a.descuento : tot},
     notas: ${notas}
       `
   }
@@ -237,7 +238,8 @@ const CartContainer = () => {
       ),
       size: item[0].size,
       color: item[0].colorselected,
-      idorden: `${Date.now()}`
+      idorden: `${Date.now()}`,
+      descuento: descuento
     }))
     const dataa = {
       id: Date.now().toString(),

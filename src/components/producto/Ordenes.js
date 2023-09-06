@@ -64,7 +64,8 @@ const Ordenes = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const prueba = (b) => {
+  const prueba = (b,d) => {
+console.log(d)
     console.log("prueba", b);
     const total = b.reduce(
       (prevValue, currentValue) =>
@@ -72,7 +73,7 @@ const Ordenes = () => {
       0
     );
 
-    return total;
+    return d ? total*d : total;
   };
 
   React.useEffect(() => {
@@ -169,6 +170,7 @@ const Ordenes = () => {
 
      console.log(dataa) */
 
+     console.log(orders)
   return (
     <div className="gap-6 flex mt-[10vh] px-5 flex-col md:px-20  ">
       <h1 className="text-booty ">Pedidos</h1>
@@ -221,7 +223,7 @@ const Ordenes = () => {
                     fontSize: "bold",
                   }}
                 >
-                  Total: <span className="font-bold">{prueba(a.items)}</span>
+                  Total: <span className="font-bold">{Math.floor(prueba(a.items, a.codigo))}</span>
                 </Typography>
 
                 <Typography
@@ -332,6 +334,19 @@ const Ordenes = () => {
                       Notas:{" "}
                       <span className="font-bold">{a?.notas}</span>
                     </Typography>
+                    {
+                      a.codigo &&    <Typography
+                      sx={{
+                        width: "55%",
+                        fontFamily: "Poppins",
+                        fontSize: "bold",
+                      }}
+                    >
+                      Descuento:{" "}
+                      <span className="font-bold">{100-(a.codigo*100)}%</span>
+                    </Typography>
+                    }
+                  
                     <Typography
                       sx={{
                         width: "55%",
@@ -340,7 +355,7 @@ const Ordenes = () => {
                       }}
                     >
                       Total:{" "}
-                      <span className="font-bold">{prueba(a.items)}</span>
+                      <span className="font-bold">{Math.floor(prueba(a.items, a.codigo))}</span>
                     </Typography>
                   </div>
                 </div>

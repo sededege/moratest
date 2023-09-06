@@ -52,16 +52,17 @@ const Pedidos = () => {
     });
   }, []);
 
-  const prueba = (b) => {
+  const prueba = (b,d) => {
+
     const total = b.reduce(
       (prevValue, currentValue) => prevValue + currentValue.unit_price,
       0
     );
 
-    return total;
+    return d ? total*d : total;
   };
 
-  const datos = (e,b) => {
+  const datos = (e,b,c) => {
     const datosmostrar = users.filter((a) => a.user === e);
     return (
       <div>
@@ -101,6 +102,9 @@ const Pedidos = () => {
           </li>
           <li>
             <span className="font-semibold">Notas:</span> {b}
+          </li>
+          <li>
+            <span className="font-semibold">Descuento:</span> {100-(c*100)}%
           </li>
         </ul>
       </div>
@@ -255,7 +259,7 @@ const customAnimation = {
                 <p className="flex px-4 items-center">
                   Total:{" "}
                   <span className="font-normal">
-                    {Math.round(prueba(a.items))}
+                    {Math.round(prueba(a.items, a.codigo))}
                   </span>
                 </p>
                 <p className="px-4 text-[0.9rem]">
@@ -309,11 +313,11 @@ const customAnimation = {
                       }}
                     >
                       Total:{" "}
-                      <span className="font-bold">{prueba(a.items)}</span>
+                      <span className="font-bold">{prueba(a.items, a.codigo)}</span>
                     </div>
                   </div>
 
-                  <div className=" p-4 ">{<p> {datos(a.email, a.notas)}</p>}</div>
+                  <div className=" p-4 ">{<p> {datos(a.email, a.notas, a.codigo)}</p>}</div>
                   <div className="flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center w-full text-center mt-5">
                     <p
                       sx={{
