@@ -35,18 +35,18 @@ const Products = ({ productos }) => {
                 </AnimatePresence>
               </div>
               <div className="p-2 rounded-b-lg relative ">
-                <div className="flex justify-between items-center ">
+                <div className="flex flex-col text-center md:text-left md:flex-row justify-between items-center ">
                   <div className="flex flex-col ">
                     <p className="font-regular text-gray-700 font-semibold w-[200px] text-[0.9rem]">
                       {a.name}{" "}
                     </p>
-                    <p className="font-regular text-gray-500 w-[200px] text-[0.8rem] mb-1">
+                    <p className="font-regular text-gray-500 w-full md:w-[200px]  text-[0.8rem] mb-1">
                       Color: {a.color[0].name}{" "}
                     </p>
                   </div>
 
                   {a.oferta !== "0" && (
-                    <p className="md:hidden flex text-[12px] md:text-[14px] w-full font-bold bg-booty px-2 rounded-lg text-white">
+                    <p className="md:hidden text-center justify-center mb-1 mt-1 flex text-[12px] md:text-[14px] w-full font-bold bg-booty px-2 rounded-lg text-white">
                       {a.oferta} % OFF
                     </p>
                   )}
@@ -54,7 +54,7 @@ const Products = ({ productos }) => {
 
                 <div className="flex h-full justify-between  items-center ">
                   {a.oferta !== "0" ? (
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center text-center">
                       <p className="text-[1.2rem] md:text-[1.2rem] text-booty font-semibold">
                         $ {Math.round((a.precio * (100 - a.oferta)) / 100)}
                       </p>
@@ -63,10 +63,10 @@ const Products = ({ productos }) => {
                       </p>
                     </div>
                   ) : (
-                    <p className="text-[1.2rem]  text-booty">$ {a.precio}</p>
+                    <p className="text-[1.2rem]   w-full text-center md:text-left text-booty">$ {a.precio}</p>
                   )}
                   {a.oferta !== "0" && (
-                    <p className="md:flex hidden text-[12px] md:text-[14px] font-bold bg-booty px-2 rounded-lg  text-white">
+                    <p className="md:flex hidden  text-[12px] md:text-[14px] font-bold bg-booty px-2 rounded-lg  text-white">
                       {a.oferta} % OFF
                     </p>
                   )}
