@@ -1,81 +1,89 @@
 /* eslint-disable no-unreachable-loop */
 /* eslint-disable multiline-ternary */
-import React, { useEffect, useState } from 'react'
-import { MdOutlineKeyboardBackspace, MdModeEdit } from 'react-icons/md'
-import { RiRefreshFill } from 'react-icons/ri'
-import { motion } from 'framer-motion'
-import { useStateValue } from '../context/StateProvider'
-import { actionType } from '../context/reducer'
-import EmptyCart from '../img/emptyCart.svg'
-import CartItem from './CartItem'
-import { saveOrder } from '../utils/firebaseFunctions'
-import { useNavigate } from 'react-router-dom'
-import { send } from 'emailjs-com'
+import React, { useEffect, useState } from "react";
+import { MdOutlineKeyboardBackspace, MdModeEdit } from "react-icons/md";
+import { RiRefreshFill } from "react-icons/ri";
+import { AiOutlineArrowDown, AiOutlineArrowUp  } from "react-icons/ai";
+import { motion } from "framer-motion";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
+import EmptyCart from "../img/emptyCart.svg";
+import CartItem from "./CartItem";
+import { saveOrder } from "../utils/firebaseFunctions";
+import { useNavigate } from "react-router-dom";
+import { send } from "emailjs-com";
 
 const CartContainer = () => {
-  const [{ cartShow, cartItems, user, users }, dispatch] = useStateValue()
-  const [flag, setFlag] = useState(1)
-  const [tot, setTot] = useState(0)
-  const [datos, setDatos] = useState(true)
-  const [checkbox, setCheckbox] = useState('')
-  const [pickup, setPickUp] = useState('')
-  const [codigo, setCodigo] = useState('')
-  const [notas, setNotas] = useState('')
-  const url = 'https://nodemoratest-e307c79d1de3.herokuapp.com'
+  const [{ cartShow, cartItems, user, users }, dispatch] = useStateValue();
+  const [flag, setFlag] = useState(1);
+  const [tot, setTot] = useState(0);
+  const [datos, setDatos] = useState(true);
+  const [checkbox, setCheckbox] = useState("");
+  const [pickup, setPickUp] = useState("");
+  const [codigo, setCodigo] = useState("");
+  const [notas, setNotas] = useState("");
+  const url = "https://nodemoratest-e307c79d1de3.herokuapp.com";
   /* const url = 'https://d036-2800-a4-1439-3300-94bd-a7fa-a0f8-a6c0.sa.ngrok.io' */
-  const codigos = ['FIOMORA10', 'MORA10']
-  const [descuento, setDescuento] = useState('')
-  const Swal = require('sweetalert2')
+  const codigos = ["FIOMORA10", "MORA10"];
+  const [descuento, setDescuento] = useState("");
+  const Swal = require("sweetalert2");
   const tallasfiltro = (a, b, c) => {
     return {
       id: c,
       size: a,
-      unidades: b
-    }
-  }
+      unidades: b,
+    };
+  };
   /* console.log(cartItems.map(a => a[0])) */
 
-  const [toSend, setToSend] = React.useState('')
+  const [toSend, setToSend] = React.useState("");
 
-  const navigate = useNavigate()
+  const variants = {
+    open: {  bottom: 0, position: 'absolute', opacity: 100},
+    closed: { bottom:(-450), position: 'absolute', },
+  };
+
+  const [isOpen, setIsOpen] = useState("open");
+
+  const navigate = useNavigate();
 
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
-      cartShow: !cartShow
-    })
-  }
+      cartShow: !cartShow,
+    });
+  };
   const abrirEdit = () => {
     dispatch({
       type: actionType.SET_EDIT_SHOW,
-      editShow: true
-    })
-  }
-  console.log(notas)
+      editShow: true,
+    });
+  };
+  console.log(notas);
 
   const mensaje = (a) => {
     return `  
     Retiro: ${pickup} \n
     Metodo: ${checkbox} \n
-    producto: ${a.map(a => a.title)} \n
-    cantidad: ${a.map(a => a.quantity)} \n
-    talle: ${a.map(a => a.size)} \n
-    color: ${a.map(a => a.color)} \n
-    precio: ${a.map(a => a.unit_price)} \n
-    descuento: ${a.map(a => a.unit_price)} \n
-    total: ${a.descuento ? tot*a.descuento : tot},
+    producto: ${a.map((a) => a.title)} \n
+    cantidad: ${a.map((a) => a.quantity)} \n
+    talle: ${a.map((a) => a.size)} \n
+    color: ${a.map((a) => a.color)} \n
+    precio: ${a.map((a) => a.unit_price)} \n
+    descuento: ${a.map((a) => a.unit_price)} \n
+    total: ${a.descuento ? tot * a.descuento : tot},
     notas: ${notas}
-      `
-  }
+      `;
+  };
   useEffect(() => {
     if (codigos.indexOf(codigo) === -1) {
       const totalPrice = cartItems.reduce(function (accumulator, item) {
-        return accumulator + item[0].unidades * item[0].precio
-      }, 0)
-      setTot(totalPrice)
+        return accumulator + item[0].unidades * item[0].precio;
+      }, 0);
+      setTot(totalPrice);
     }
     if (users && user) {
-      setDatos(users.filter((a) => a.user === user.email))
+      setDatos(users.filter((a) => a.user === user.email));
     }
     const producto = cartItems.map((item) => ({
       id: item[0].item.id,
@@ -83,153 +91,7 @@ const CartContainer = () => {
       description: item[0].item.descripcion,
       category_id: item[0].item.categoria,
       quantity: parseInt(item[0].unidades),
-      currency_id: 'UYU',
-      unit_price: parseInt(item[0].precio),
-      tallas: tallasfiltro(
-        item[0].size,
-        parseInt(item[0].unidades),
-        item[0].item.id
-      ),
-      size: item[0].size,
-      color: item[0].colorselected,
-      idorden: `${Date.now()}`
-    }))
-    setToSend({
-      from_name: user && user.displayName,
-      message: mensaje(producto),
-      reply_to: 'test'
-    })
-  }, [tot, flag, user, users, cartItems, checkbox, codigo, notas])
-
-  const onSubmit = () => {
-    send(
-      'service_9022eik',
-      'template_h8f2pjg',
-      toSend,
-      '6nMZvPwmx9KtZzOQm'
-    )
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text)
-      })
-      .catch((err) => {
-        console.log('FAILED...', err)
-      })
-  }
-
-  const checkout = () => {
-    if (pickup === 'envio' && checkbox === 'efectivo') {
-      Swal.fire(
-        'Error!',
-        'No puedes seleccionar envío y pago en efectivo juntos!',
-        'error'
-      )
-    } else {
-      if (pickup !== '' && checkbox !== '') {
-        if (checkbox === 'mercadopago') {
-          mercadopago()
-          onSubmit()
-        } else if (checkbox === 'efectivo') {
-          efectivo()
-          onSubmit()
-          console.log(toSend)
-        } else {
-          transferencia()
-          onSubmit()
-        }
-      } else {
-        Swal.fire(
-          'Error!',
-          'Debes seleccionar un medio de pago y una forma de entrega!',
-          'error'
-        )
-      }
-    }
-  }
-
-  const promo = (e) => {
-    setCodigo(e.target.value)
-    if (codigos.indexOf(e.target.value) !== -1) {
-      setTot(tot * 0.9)
-      setDescuento(0.9)
-    }
-  }
-
-  const efectivo = () => {
-    const envio = {
-      id: '1',
-      title: 'Envio',
-      currency_id: 'UYU',
-      unit_price: tot > 3000 ? 0 : 200,
-      quantity: 1
-    }
-
-    const producto = cartItems.map((item) => ({
-      id: item[0].item.id,
-      title: item[0].item.name,
-      description: item[0].item.descripcion,
-      category_id: item[0].item.categoria,
-      quantity: parseInt(item[0].unidades),
-      currency_id: 'UYU',
-      unit_price: parseInt(item[0].precio),
-      tallas: tallasfiltro(
-        item[0].size,
-        parseInt(item[0].unidades),
-        item[0].item.id
-      ),
-      size: item[0].size,
-      color: item[0].colorselected,
-      idorden: `${Date.now()}`
-    }))
-    const dataa = {
-      id: Date.now().toString(),
-      creado: `${new Date()}`,
-      items: pickup === 'envio' ? [...producto, { ...envio }] : producto,
-      status: 'pendiente',
-      metodo: checkbox,
-      pickup,
-      total: pickup === 'envio' ? tot + 200 : tot,
-      email: user.email,
-      name: user && user.displayName,
-      phone: users.filter((a) => a.user === user.email)[0].cel,
-      codigo: descuento,
-      notas: notas
-    }
-
-    saveOrder(dataa)
-
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(dataa),
-      headers: new Headers({ 'content-type': 'application/json' })
-    }
-
-    fetch(`${url}/ordencreada`, options)
-      .then((response) => response.text())
-      .then((data) => {})
-
-    navigate('/ordenes/gracias')
-    dispatch({
-      type: actionType.SET_CART_SHOW,
-      cartShow: false
-    })
-  }
-
-  const transferencia = () => {
-    const envio = {
-      id: '1',
-      title: 'Envio',
-      currency_id: 'UYU',
-      unit_price: tot > 3000 ? 0 : 200,
-      quantity: 1
-    }
-
-    const producto = cartItems.map((item) => ({
-      id: item[0].item.id,
-      title: item[0].item.name,
-      description: item[0].item.descripcion,
-      category_id: item[0].item.categoria,
-      quantity: parseInt(item[0].unidades),
-      currency_id: 'UYU',
+      currency_id: "UYU",
       unit_price: parseInt(item[0].precio),
       tallas: tallasfiltro(
         item[0].size,
@@ -239,39 +101,179 @@ const CartContainer = () => {
       size: item[0].size,
       color: item[0].colorselected,
       idorden: `${Date.now()}`,
-      descuento: descuento
-    }))
+    }));
+    setToSend({
+      from_name: user && user.displayName,
+      message: mensaje(producto),
+      reply_to: "test",
+    });
+  }, [tot, flag, user, users, cartItems, checkbox, codigo, notas]);
+
+  const onSubmit = () => {
+    send("service_9022eik", "template_h8f2pjg", toSend, "6nMZvPwmx9KtZzOQm")
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+      })
+      .catch((err) => {
+        console.log("FAILED...", err);
+      });
+  };
+
+  const checkout = () => {
+    if (pickup === "envio" && checkbox === "efectivo") {
+      Swal.fire(
+        "Error!",
+        "No puedes seleccionar envío y pago en efectivo juntos!",
+        "error"
+      );
+    } else {
+      if (pickup !== "" && checkbox !== "") {
+        if (checkbox === "mercadopago") {
+          mercadopago();
+          onSubmit();
+        } else if (checkbox === "efectivo") {
+          efectivo();
+          onSubmit();
+          console.log(toSend);
+        } else {
+          transferencia();
+          onSubmit();
+        }
+      } else {
+        Swal.fire(
+          "Error!",
+          "Debes seleccionar un medio de pago y una forma de entrega!",
+          "error"
+        );
+      }
+    }
+  };
+
+  const promo = (e) => {
+    setCodigo(e.target.value);
+    if (codigos.indexOf(e.target.value) !== -1) {
+      setTot(tot * 0.9);
+      setDescuento(0.9);
+    }
+  };
+
+  const efectivo = () => {
+    const envio = {
+      id: "1",
+      title: "Envio",
+      currency_id: "UYU",
+      unit_price: tot > 3000 ? 0 : 200,
+      quantity: 1,
+    };
+
+    const producto = cartItems.map((item) => ({
+      id: item[0].item.id,
+      title: item[0].item.name,
+      description: item[0].item.descripcion,
+      category_id: item[0].item.categoria,
+      quantity: parseInt(item[0].unidades),
+      currency_id: "UYU",
+      unit_price: parseInt(item[0].precio),
+      tallas: tallasfiltro(
+        item[0].size,
+        parseInt(item[0].unidades),
+        item[0].item.id
+      ),
+      size: item[0].size,
+      color: item[0].colorselected,
+      idorden: `${Date.now()}`,
+    }));
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
-      items: pickup === 'envio' ? [...producto, { ...envio }] : producto,
-      status: 'pendiente',
+      items: pickup === "envio" ? [...producto, { ...envio }] : producto,
+      status: "pendiente",
       metodo: checkbox,
       pickup,
-      total: pickup === 'envio' ? tot + 200 : tot,
+      total: pickup === "envio" ? tot + 200 : tot,
       email: user.email,
       name: user && user.displayName,
       phone: users.filter((a) => a.user === user.email)[0].cel,
       codigo: descuento,
-      notas: notas
-    }
-    saveOrder(dataa)
+      notas: notas,
+    };
+
+    saveOrder(dataa);
+
     const options = {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(dataa),
-      headers: new Headers({ 'content-type': 'application/json' })
-    }
+      headers: new Headers({ "content-type": "application/json" }),
+    };
 
     fetch(`${url}/ordencreada`, options)
       .then((response) => response.text())
-      .then((data) => {
-      })
-    navigate('/ordenes/graciastr')
+      .then((data) => {});
+
+    navigate("/ordenes/gracias");
     dispatch({
       type: actionType.SET_CART_SHOW,
-      cartShow: false
-    })
-  }
+      cartShow: false,
+    });
+  };
+
+  const transferencia = () => {
+    const envio = {
+      id: "1",
+      title: "Envio",
+      currency_id: "UYU",
+      unit_price: tot > 3000 ? 0 : 200,
+      quantity: 1,
+    };
+
+    const producto = cartItems.map((item) => ({
+      id: item[0].item.id,
+      title: item[0].item.name,
+      description: item[0].item.descripcion,
+      category_id: item[0].item.categoria,
+      quantity: parseInt(item[0].unidades),
+      currency_id: "UYU",
+      unit_price: parseInt(item[0].precio),
+      tallas: tallasfiltro(
+        item[0].size,
+        parseInt(item[0].unidades),
+        item[0].item.id
+      ),
+      size: item[0].size,
+      color: item[0].colorselected,
+      idorden: `${Date.now()}`,
+      descuento: descuento,
+    }));
+    const dataa = {
+      id: Date.now().toString(),
+      creado: `${new Date()}`,
+      items: pickup === "envio" ? [...producto, { ...envio }] : producto,
+      status: "pendiente",
+      metodo: checkbox,
+      pickup,
+      total: pickup === "envio" ? tot + 200 : tot,
+      email: user.email,
+      name: user && user.displayName,
+      phone: users.filter((a) => a.user === user.email)[0].cel,
+      codigo: descuento,
+      notas: notas,
+    };
+    saveOrder(dataa);
+    const options = {
+      method: "POST",
+      body: JSON.stringify(dataa),
+      headers: new Headers({ "content-type": "application/json" }),
+    };
+
+    fetch(`${url}/ordencreada`, options)
+      .then((response) => response.text())
+      .then((data) => {});
+    navigate("/ordenes/graciastr");
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: false,
+    });
+  };
 
   const mercadopago = () => {
     const producto = cartItems.map((item) => ({
@@ -280,9 +282,9 @@ const CartContainer = () => {
       description: item[0].item.descripcion,
       category_id: item[0].item.categoria,
       quantity: parseInt(item[0].unidades),
-      currency_id: 'UYU',
+      currency_id: "UYU",
       unit_price:
-        descuento !== ''
+        descuento !== ""
           ? parseInt(item[0].precio * descuento * 1.1)
           : parseInt(item[0].precio * 1.1),
       tallas: tallasfiltro(
@@ -292,80 +294,79 @@ const CartContainer = () => {
       ),
       size: item[0].size,
       color: item[0].colorselected,
-      idorden: `${Date.now()}`
-    }))
+      idorden: `${Date.now()}`,
+    }));
 
     const envio = {
-      id: '1',
-      title: 'Envio',
-      currency_id: 'UYU',
+      id: "1",
+      title: "Envio",
+      currency_id: "UYU",
       unit_price: tot > 3000 ? 0 : 200,
-      quantity: 1
-    }
+      quantity: 1,
+    };
     /*     pickup === 'envio' && producto.push(envio)
      */
 
-    const producto2 = [...producto, { ...envio }]
+    const producto2 = [...producto, { ...envio }];
     const dataa = {
       id: Date.now().toString(),
       creado: `${new Date()}`,
-      items: pickup === 'envio' ? producto2 : producto,
-      status: 'pendiente',
+      items: pickup === "envio" ? producto2 : producto,
+      status: "pendiente",
       total: tot,
       email: user.email,
       metodo: checkbox,
       pickup,
       codigo: descuento,
-      notas: notas
-    }
+      notas: notas,
+    };
 
-    saveOrder(dataa)
+    saveOrder(dataa);
 
     const options4 = {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(dataa),
-      headers: new Headers({ 'content-type': 'application/json' })
-    }
+      headers: new Headers({ "content-type": "application/json" }),
+    };
 
     fetch(`${url}/ordencreada`, options4)
       .then((response) => response.text())
-      .then((data) => {
-      })
+      .then((data) => {});
 
     const options = {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(producto),
-      headers: new Headers({ 'content-type': 'application/json' })
-    }
+      headers: new Headers({ "content-type": "application/json" }),
+    };
     const options3 = {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(producto2),
-      headers: new Headers({ 'content-type': 'application/json' })
-    }
+      headers: new Headers({ "content-type": "application/json" }),
+    };
 
-    fetch(`${url}/checkout`, pickup === 'envio' ? options3 : options)
+    fetch(`${url}/checkout`, pickup === "envio" ? options3 : options)
       .then((response) => response.text())
       .then((data) => {
-        window.location.assign(data)
-      })
-  }
+        window.location.assign(data);
+      });
+  };
 
   const comprar = async () => {
     !user &&
       dispatch({
         type: actionType.SET_LOGIN_SHOW,
-        loginShow: true
-      })
-  }
+        loginShow: true,
+      });
+  };
 
   const clearCart = () => {
     dispatch({
       type: actionType.SET_CARTITEMS,
-      cartItems: []
-    })
+      cartItems: [],
+    });
 
-    localStorage.setItem('cartItems', JSON.stringify([]))
-  }
+    localStorage.setItem("cartItems", JSON.stringify([]));
+  };
 
   return (
     <motion.div
@@ -374,9 +375,9 @@ const CartContainer = () => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 500 }}
       transition={{
-        type: 'spring',
+        type: "spring",
         stiffness: 400,
-        damping: 40
+        damping: 40,
       }}
       className="fixed z-[120] top-0 right-0 w-[100vw] md:w-[26vw] h-screen bg-white drop-shadow-md flex flex-col"
     >
@@ -415,16 +416,40 @@ const CartContainer = () => {
           </div>
 
           {/* cart total section */}
-          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2 pb-[80px]">
+          <motion.div
+            animate={isOpen ? "open" : "closed"}
+            transition={{ ease: "easeIn", duration: 0.4 }}
+            variants={variants}
+            className="w-full flex-1 bg-cartTotal overflow-auto rounded-t-xl flex flex-col items-center justify-evenly px-8 py-2 pb-[80px]"
+          >
             <div className="w-full  flex  flex-col">
+            <div className="flex  justify-between">
+
+         
               <p className="text-gray-400 text-lg">Medio de pago</p>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-gray-800 text-sm mt-2 flex gap-2 items-center bg-white rounded-full px-2"
+              >
+              
+                {
+                  !isOpen ?  
+                 <> <p>Expandir</p>
+                  <AiOutlineArrowUp /> </> : 
+                  
+                  <><p>Cerrar</p>
+                  <AiOutlineArrowDown/></>
+                }
+              
+              </button>
+              </div>
               <div className="flex items-center rounded">
                 <input
                   id="bordered-radio-1"
                   type="radio"
                   value="efectivo"
                   selected
-                  onClick={() => setCheckbox('efectivo')}
+                  onClick={() => setCheckbox("efectivo")}
                   name="bordered-radio"
                   className="w-4 h-4 text-booty bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -440,7 +465,7 @@ const CartContainer = () => {
                   id="bordered-radio-2"
                   type="radio"
                   value="asdd"
-                  onClick={() => setCheckbox('mercadopago')}
+                  onClick={() => setCheckbox("mercadopago")}
                   name="bordered-radio"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -448,7 +473,7 @@ const CartContainer = () => {
                   htmlFor="bordered-radio-2"
                   className="py-2 ml-2 w-full text-sm font-medium text-white"
                 >
-                  Mercado pago (+10%){' '}
+                  Mercado pago (+10%){" "}
                 </label>
               </div>
               <div className="flex items-center rounded">
@@ -456,7 +481,7 @@ const CartContainer = () => {
                   id="bordered-radio-3"
                   type="radio"
                   value="asdd"
-                  onClick={() => setCheckbox('transferencia')}
+                  onClick={() => setCheckbox("transferencia")}
                   name="bordered-radio"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -481,7 +506,7 @@ const CartContainer = () => {
                   type="radio"
                   value="efectivo"
                   selected
-                  onClick={() => setPickUp('trescruces')}
+                  onClick={() => setPickUp("trescruces")}
                   name="bordered-radio1"
                   className="w-4 h-4 text-booty bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -501,12 +526,12 @@ const CartContainer = () => {
                   id="bordered-radio-6"
                   type="radio"
                   value="asdd"
-                  onClick={() => setPickUp('envio')}
+                  onClick={() => setPickUp("envio")}
                   name="bordered-radio1"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-transparent  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 {/*                 <label for="bordered-radio-6" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Envío (Costo extra <span className='underline cursor-pointer'>Ver zonas</span>)</label>
-                 */}{' '}
+                 */}{" "}
                 <label
                   htmlFor="bordered-radio-6"
                   className="py-2 ml-2 w-full text-sm font-medium text-white"
@@ -516,27 +541,25 @@ const CartContainer = () => {
               </div>
             </div>
             <div className="flex flex-col gap-2 w-full">
-            <textarea
-                  className="w-full text-center p-2 rounded-lg h-[100px]"
-                  onChange={(e) => setNotas(e.target.value)}
-                  placeholder="Nota del pedido - (En caso de comprar un conjunto, especificar el talle de la parte superior)"
-                />
-              {codigos.indexOf(codigo) === -1
-                ? (
+              <textarea
+                className="w-full text-center p-2 rounded-lg h-[100px]"
+                onChange={(e) => setNotas(e.target.value)}
+                placeholder="Nota del pedido - (En caso de comprar un conjunto, especificar el talle de la parte superior)"
+              />
+              {codigos.indexOf(codigo) === -1 ? (
                 <input
                   className="w-full text-center p-2 rounded-full"
                   onChange={(e) => promo(e)}
                   placeholder="Código promocional"
                 />
-                  )
-                : (
+              ) : (
                 <input
                   disabled="disabled"
                   className="w-full text-center p-2 rounded-full"
                   value="10% de descuento aplicado!"
                   placeholder="10% de descuento aplicado!"
                 />
-                  )}
+              )}
             </div>
             <div className="w-full border-b border-gray-600 my-2"></div>
 
@@ -545,15 +568,15 @@ const CartContainer = () => {
               <p className="text-gray-200 text-xl font-semibold">${tot}</p>
             </div>
 
-            {pickup === 'envio' && (
+            {pickup === "envio" && (
               <div className="w-full flex items-center justify-between">
                 <p className="text-gray-400 text-lg">Dirección</p>
               </div>
             )}
-            {user && datos.length > 0 && datos[0].barrio !== ''
+            {user && datos.length > 0 && datos[0].barrio !== ""
               ? datos.map(
-                (a, index) =>
-                  pickup === 'envio' && (
+                  (a, index) =>
+                    pickup === "envio" && (
                       <div
                         key={index}
                         className="w-full flex items-center justify-between"
@@ -566,7 +589,7 @@ const CartContainer = () => {
                         </div>
                         <div>
                           <div className="bg-yellow-200 p-2 rounded-full cursor-pointer  shadow-md">
-                            {' '}
+                            {" "}
                             <MdModeEdit
                               onClick={() => abrirEdit()}
                               className=" text-textColor "
@@ -574,9 +597,9 @@ const CartContainer = () => {
                           </div>
                         </div>
                       </div>
-                  )
-              )
-              : pickup === 'envio' && (
+                    )
+                )
+              : pickup === "envio" && (
                   <motion.button
                     whileTap={{ scale: 0.8 }}
                     type="button"
@@ -585,9 +608,8 @@ const CartContainer = () => {
                   >
                     Cargar direccion
                   </motion.button>
-              )}
-            {user
-              ? (
+                )}
+            {user ? (
               <motion.button
                 onClick={() => checkout()}
                 whileTap={{ scale: 0.8 }}
@@ -596,8 +618,7 @@ const CartContainer = () => {
               >
                 Check Out
               </motion.button>
-                )
-              : (
+            ) : (
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
@@ -606,8 +627,8 @@ const CartContainer = () => {
               >
                 Ingresa para comprar!
               </motion.button>
-                )}
-          </div>
+            )}
+          </motion.div>
         </div>
       ) : (
         <div className="w-full h-full flex flex-col items-center justify-center gap-6">
@@ -618,7 +639,7 @@ const CartContainer = () => {
         </div>
       )}
     </motion.div>
-  )
-}
+  );
+};
 
-export default CartContainer
+export default CartContainer;

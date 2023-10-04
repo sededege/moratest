@@ -14,7 +14,7 @@ import { getAllProductsItems } from "../utils/firebaseFunctions";
 const MainContainer = () => {
   const [{ cartShow, products, dondeestoy }, dispatch] = useStateValue();
   const [scrollValue] = useState(0);
-console.log(products)
+
   useEffect(() => {
     dispatch({
       type: actionType.SET_DONDE_ESTOY,

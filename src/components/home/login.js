@@ -337,7 +337,7 @@ const ShowLogin = () => {
           key={registrar}
           animate={registrar ? "open" : "closed"}
           variants={variants}
-          className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg"
+          className="w-full fixed z-[99]   max-w-lg p-10 bg-white rounded-lg"
         >
           <div className="flex  flex-wrap -mx-3 mb-6">
             {fields && (
@@ -471,11 +471,11 @@ const ShowLogin = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full fixed z-[99]  max-w-lg p-10 bg-white rounded-lg"
+          className="w-[calc(100vw-20px)] fixed z-[99]  max-w-lg p-10  md:p-10 bg-white rounded-lg"
         >
-          <div className="flex  flex-wrap -mx-3 mb-6">
+          <div className="flex  flex-wrap -mx-3 mb-2">
             <div className="w-full px-3 mb-6 md:mb-0">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold ">
                 Email *
               </label>
               <input
@@ -544,22 +544,24 @@ const ShowLogin = () => {
                     </div>
 
                 </div> */}
-          <div className="justify-between gap-2 flex items-center mt-4">
+          <div className="justify-between gap-2 flex flex-col mt-4 ">
+           <div className="flex">
             <button
               onClick={() => setRegistrar(true)}
-              className="relative  items-center justify-center ml-100  text-sm cursor-pointer text-sky-700 underline py-1 px-2 rounded"
+              className="relative   items-center justify-center  text-sm  cursor-pointer text-blue-400 underline  rounded"
               type="button"
             >
               Registrate
             </button>
             <button
               onClick={() => RestorePasswordButton()}
-              className="relative  items-center justify-center ml-100  text-sm cursor-pointer text-sky-700 underline py-1 px-2 rounded"
+              className="relative  items-center justify-center  text-sm cursor-pointer text-blue-400 underline py-1 ml-4 rounded"
               type="button"
             >
               Restablecer Contraseña
             </button>
-            <div className="gap-6 flex">
+            </div>
+            <div className="gap-6 flex justify-end mt-4">
               <button
                 onClick={cerrarEdit}
                 className="relative  items-center justify-center ml-100 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
