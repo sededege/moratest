@@ -43,7 +43,7 @@ const CartContainer = () => {
     closed: { bottom:(-450), position: 'absolute', },
   };
 
-  const [isOpen, setIsOpen] = useState("open");
+  const [isOpen, setIsOpen] = useState("closed");
 
   const navigate = useNavigate();
 
@@ -417,7 +417,7 @@ const CartContainer = () => {
 
           {/* cart total section */}
           <motion.div
-            animate={isOpen ? "open" : "closed"}
+            animate={ isOpen ? "open" : "closed"}
             transition={{ ease: "easeIn", duration: 0.4 }}
             variants={variants}
             className="w-full flex-1 bg-cartTotal overflow-auto rounded-t-xl flex flex-col items-center justify-evenly px-8 py-2 pb-[80px]"

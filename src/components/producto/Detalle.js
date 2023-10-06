@@ -129,6 +129,9 @@ const Detalle = () => {
     if (color === "Turquesa") {
       return "bg-[#60ceb9]";
     }
+    if (color === "Marron") {
+      return "bg-[#804000]";
+    }
     if (color === "Verde-Fluor") {
       return "bg-[#d4e693]";
     }
