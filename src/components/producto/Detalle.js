@@ -135,8 +135,23 @@ const Detalle = () => {
     if (color === "Verde-Fluor") {
       return "bg-[#d4e693]";
     }
+    if (color === "Celeste") {
+      return "bg-[#51D1F6]";
+    }
+    if (color === "Carmesi") {
+      return "bg-[#dc143c]";
+    }
   };
   const borderselect = (color) => {
+    if (color === "Marron") {
+      return "border-[#804000]";
+    }
+    if (color === "Carmesi") {
+      return "border-[#dc143c]";
+    }
+    if (color === "Celeste") {
+      return "border-[#51D1F6]";
+    }
     if (color === "Negro") {
       return "border-black";
     }
