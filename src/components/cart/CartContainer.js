@@ -162,7 +162,7 @@ const CartContainer = () => {
       id: "1",
       title: "Envio",
       currency_id: "UYU",
-      unit_price: tot > 3000 ? 0 : 200,
+      unit_price: tot > 3000 ? 0 : 220,
       quantity: 1,
     };
 
@@ -190,7 +190,7 @@ const CartContainer = () => {
       status: "pendiente",
       metodo: checkbox,
       pickup,
-      total: pickup === "envio" ? tot + 200 : tot,
+      total: pickup === "envio" ? tot + 220 : tot,
       email: user.email,
       name: user && user.displayName,
       phone: users.filter((a) => a.user === user.email)[0].cel,
@@ -222,7 +222,7 @@ const CartContainer = () => {
       id: "1",
       title: "Envio",
       currency_id: "UYU",
-      unit_price: tot > 3000 ? 0 : 200,
+      unit_price: tot > 3000 ? 0 : 220,
       quantity: 1,
     };
 
@@ -251,7 +251,7 @@ const CartContainer = () => {
       status: "pendiente",
       metodo: checkbox,
       pickup,
-      total: pickup === "envio" ? tot + 200 : tot,
+      total: pickup === "envio" ? tot + 220 : tot,
       email: user.email,
       name: user && user.displayName,
       phone: users.filter((a) => a.user === user.email)[0].cel,
@@ -301,7 +301,7 @@ const CartContainer = () => {
       id: "1",
       title: "Envio",
       currency_id: "UYU",
-      unit_price: tot > 3000 ? 0 : 200,
+      unit_price: tot > 3000 ? 0 : 220,
       quantity: 1,
     };
     /*     pickup === 'envio' && producto.push(envio)
@@ -536,7 +536,7 @@ const CartContainer = () => {
                   htmlFor="bordered-radio-6"
                   className="py-2 ml-2 w-full text-sm font-medium text-white"
                 >
-                  Envío (+$200)
+                  Envío (+$220)
                 </label>
               </div>
             </div>

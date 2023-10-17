@@ -25,7 +25,7 @@ const Ordenes = () => {
     if (a === "malvin") {
       return <p>Av. Italia 4240. Apto 1910</p>;
     } else if (a === "trescruces") {
-      return <p>Av. Duvimioso Terra 2234</p>;
+      return <p>Bv. Artigas 1927</p>;
     } else {
       return <p>Envio</p>;
     }
@@ -144,13 +144,15 @@ console.log(d)
     }
 
     if (user != null) {
+      console.log(user)
       getAllOrders().then((data) => {
+        console.log(data)
         dispatch({
           type: actionType.SET_ORDERS,
           orders:
             user === null
               ? "Inicie sesion para ver sus ordenes"
-              : data.filter((a) => a.email === user.email),
+              : data.filter((a) => a.email === user?.email),
         });
       });
     }
