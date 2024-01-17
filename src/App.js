@@ -6,6 +6,7 @@ import {
   Routes,
   useLocation
 } from 'react-router-dom'
+import imagen from './asdf.png'
 import { AnimatePresence } from 'framer-motion'
 import { useStateValue } from './components/context/StateProvider'
 import { getAllProductsItems, getAllUsuarios } from './components/utils/firebaseFunctions'
@@ -94,7 +95,9 @@ function App () {
         {
           dondeestoy === 'Dashboard' && (<Headerleft />)
         }
-
+<div  className='bg-[#d1afdc] w-full h-full flex items-center justify-center fixed top-0 z-[999999999]'>
+  <img src={imagen} className='w-full h-full object-contain' alt='asd'/>
+</div>
         <AnimatePresence>
           <Pre load={load} />
         </AnimatePresence>
