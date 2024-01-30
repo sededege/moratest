@@ -498,6 +498,16 @@ export const categorias = [
     param: 'Remeras'
   },
   {
+    id: 457,
+    name: 'Bikinis',
+    param: 'Bikinis'
+  },
+  {
+    id: 459,
+    name: 'Accesorios',
+    param: 'Accesorios'
+  },
+  {
     id: 6,
     name: 'Ofertas',
     param: 'ofertas'

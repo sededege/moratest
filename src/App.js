@@ -95,9 +95,9 @@ function App () {
         {
           dondeestoy === 'Dashboard' && (<Headerleft />)
         }
-<div  className='bg-[#d1afdc] w-full h-full flex items-center justify-center fixed top-0 z-[999999999]'>
+{/* <div  className='bg-[#d1afdc] w-full h-full flex items-center justify-center fixed top-0 z-[999999999]'>
   <img src={imagen} className='w-full h-full object-contain' alt='asd'/>
-</div>
+</div> */}
         <AnimatePresence>
           <Pre load={load} />
         </AnimatePresence>
