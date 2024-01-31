@@ -29,6 +29,7 @@ const CreateContainer = () => {
   const [imageAsset1, setImageAsset1] = useState(null)
   const [imageAsset2, setImageAsset2] = useState(null)
   const [color, setColor] = useState('Negro')
+  const [qtyXs, setXs] = useState('')
   const [qtyS, setS] = useState('')
   const [qtyM, setM] = useState('')
   const [qtyL, setL] = useState('')
@@ -150,9 +151,6 @@ const CreateContainer = () => {
     })
   }
 
-  const update = (e) => {
-    setL(e.target.value)
-  }
   const push = () => {
     console.log(colores)
     if (colores.filter(a => a.name === color) !== '') {
@@ -172,6 +170,12 @@ const CreateContainer = () => {
           miniaturavideo
         ],
         tallas: [
+          {
+            id: 0,
+            name: 'XS',
+            stock: qtyXs,
+            ventas: 0
+          },
           {
             id: 1,
             name: 'S',
@@ -586,6 +590,15 @@ const CreateContainer = () => {
                             <p className='font-semibold text-[14px]'>Talles</p>
                         </div>
                         <div className="w-full py-2 border-b border-gray-300 flex justify-between items-center gap-2">
+                            <p>XS</p>
+                            <input
+                                type="text"
+                                required
+                                value={qtyXs}
+                                onChange={(e) => setXs(e.target.value)}
+                                placeholder="Qty"
+                                className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
+                            />
                             <p>S</p>
                             <input
                                 type="text"
@@ -609,7 +622,7 @@ const CreateContainer = () => {
                                 type="text"
                                 required
                                 value={qtyL}
-                                onChange={(e) => update(e)}
+                                onChange={(e) => setL(e.target.value)}
                                 placeholder="Qty"
                                 className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
                             />
