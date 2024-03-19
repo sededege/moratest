@@ -25,7 +25,7 @@ const Ordenes = () => {
     if (a === "malvin") {
       return <p>Av. Italia 4240. Apto 1910</p>;
     } else if (a === "trescruces") {
-      return <p>Bv. Artigas 1927</p>;
+      return <p>Duvimioso Terra 2234</p>;
     } else {
       return <p>Envio</p>;
     }
