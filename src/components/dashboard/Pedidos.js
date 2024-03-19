@@ -115,7 +115,7 @@ const Pedidos = () => {
     if (a === "malvin") {
       return <p>Av. Italia 4240. Apto 1910</p>;
     } else if (a === "trescruces") {
-      return <p>Av. Duvimioso Terra 2234</p>;
+      return <p>Duvimioso Terra 2234</p>;
     } else {
       return <p>Envio</p>;
     }
