@@ -25,10 +25,10 @@ const SendMessages = () => {
     e.preventDefault()
     if (mobileNumber.length < 1) {
       setNumberEmptyError(true)
-      setTimeout(() => setNumberEmptyError(false), 3000)
+      setTimeout(() => setNumberEmptyError(false), 3500)
     } else if (message.length < 1) {
       setMessageEmptyError(true)
-      setTimeout(() => setMessageEmptyError(false), 3000)
+      setTimeout(() => setMessageEmptyError(false), 3500)
     } else {
 
       // TODO: Enter code here

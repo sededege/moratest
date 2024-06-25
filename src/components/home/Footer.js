@@ -9,7 +9,7 @@ const Footer = () => {
       </div>
       <div className='flex'>
         <p className='md:ml-20 text-gray-300 text-[0.9rem]'>
-          *** Envío gratis en compras mayores a $3000! ***
+          *** Envío gratis en compras mayores a $3500! ***
         </p>
       </div>
       <div className='flex gap-2 items-center'>

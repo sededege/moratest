@@ -162,7 +162,7 @@ const CartContainer = () => {
       id: "1",
       title: "Envio",
       currency_id: "UYU",
-      unit_price: tot > 3000 ? 0 : 220,
+      unit_price: tot > 3500 ? 0 : 220,
       quantity: 1,
     };
 
@@ -222,7 +222,7 @@ const CartContainer = () => {
       id: "1",
       title: "Envio",
       currency_id: "UYU",
-      unit_price: tot > 3000 ? 0 : 220,
+      unit_price: tot > 3500 ? 0 : 220,
       quantity: 1,
     };
 
@@ -301,7 +301,7 @@ const CartContainer = () => {
       id: "1",
       title: "Envio",
       currency_id: "UYU",
-      unit_price: tot > 3000 ? 0 : 220,
+      unit_price: tot > 3500 ? 0 : 220,
       quantity: 1,
     };
     /*     pickup === 'envio' && producto.push(envio)

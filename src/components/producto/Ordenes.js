@@ -119,7 +119,7 @@ console.log(d)
     };
 
     if (dataa === "") {
-      fetch(`http://localhost:3000/Ordenes${window.location.search}`, options)
+      fetch(`http://localhost:3500/Ordenes${window.location.search}`, options)
         .then((response) => response.text())
         .then((data) => {
           setData(JSON.parse(data));

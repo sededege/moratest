@@ -194,7 +194,7 @@ const ShowLogin = () => {
         }
         setTimeout(() => {
           setFields(false);
-        }, 3000);
+        }, 3500);
       });
   };
 
