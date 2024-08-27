@@ -141,6 +141,12 @@ const Detalle = () => {
     if (color === "Carmesi") {
       return "bg-[#dc143c]";
     }
+     if (color === "Beige") {
+      return "bg-[#EDE8D0]";
+    }
+     if (color === "Rosa Claro") {
+      return "bg-[#f6c8c7]";
+    }
   };
   const borderselect = (color) => {
     if (color === "Marron") {
@@ -187,6 +193,12 @@ const Detalle = () => {
     }
     if (color === "Azul-Oscuro") {
       return "border-blue-900";
+    }
+      if (color === "Beige") {
+      return "bg-[#EDE8D0]";
+    }
+     if (color === "Rosa Claro") {
+      return "bg-[#f6c8c7]";
     }
   };
 
