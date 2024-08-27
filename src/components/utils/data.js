@@ -169,5 +169,13 @@ export const colors = [
     id: 15,
     name: 'Carmesi'
   },
+  {
+    id: 16,
+    name: 'Beige'
+  },
+   {
+    id: 17,
+    name: 'Rosa Claro'
+  },
 
 ]
